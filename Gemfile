@@ -24,6 +24,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'sass'
 # Bower for rails
 gem 'bower-rails'
+# Caches templates to allow angular use them without asset pipeline.
+gem 'angular-rails-templates'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
