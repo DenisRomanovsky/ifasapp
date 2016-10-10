@@ -1,0 +1,6 @@
+development:
+  GMAIL_USERNAME: 'd.romanovskybox@gmail.com'
+  GMAIL_APP_SPECIFIC_PASSWORD: 'vbfbqnkugvsglxno'
+test:
+  GMAIL_USERNAME: 'd.romanovskybox@gmail.com'
+  GMAIL_APP_SPECIFIC_PASSWORD: 'vbfbqnkugvsglxno'
