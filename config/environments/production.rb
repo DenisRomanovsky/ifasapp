@@ -76,6 +76,20 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.consider_all_requests_local = true # TODO: REMOVE THIS BEFORE DEPLOYING TO PROD!!!
+
+  # Some email notifications.
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = {:host => 'yourdomain.com'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :tls => true,
+      :address => "smtp.gmail.com",
+      :port => 587,
+      :domain => "gmail.com",
+      :authentication => :login,
+      :user_name => "d.romanovskybox@gmail.com",
+      :password => "balongas"
+  }
+
+  config.consider_all_requests_local = true # Uncomment to allow error page display in prod.
 end

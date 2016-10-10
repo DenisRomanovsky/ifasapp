@@ -26,6 +26,8 @@ group :development, :test do
 end
 
 group :development do
+  # Catches email. See 1080 port to check em all.
+  gem 'mailcatcher'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end
@@ -34,4 +36,3 @@ end
 gem 'activeadmin', github: 'activeadmin'
 # Auth stuff.
 gem 'devise'
-
