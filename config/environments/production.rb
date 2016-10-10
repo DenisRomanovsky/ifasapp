@@ -82,13 +82,13 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {:host => 'yourdomain.com'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :tls => true,
-      :address => "smtp.gmail.com",
-      :port => 587,
-      :domain => "gmail.com",
-      :authentication => :login,
-      :user_name => "d.romanovskybox@gmail.com",
-      :password => "balongas"
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => "gmail.com",
+      :user_name            => "d.romanovskybox@gmail.com",
+      :password             => "balongas",
+      :authentication       => 'plain',
+      :enable_starttls_auto => true
   }
 
   config.consider_all_requests_local = true # Uncomment to allow error page display in prod.
