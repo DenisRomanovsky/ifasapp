@@ -82,14 +82,15 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {:host => 'yourdomain.com'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
+      :address              => 'smtp.gmail.com',
       :port                 => 587,
-      :domain               => "gmail.com",
-      :user_name            => "d.romanovskybox@gmail.com",
-      :password             => "balongas",
-      :authentication       => 'plain',
+      :domain               => 'gmail.com',
+      :user_name            => 'd.romanovskybox@gmail.com',
+      :password             => 'balongas',
+      :authentication       => :login,
       :enable_starttls_auto => true
   }
+  # TODO: Be sure move this to secrets or smthing like this.
 
   config.consider_all_requests_local = true # Uncomment to allow error page display in prod.
 end
