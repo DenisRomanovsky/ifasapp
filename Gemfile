@@ -36,3 +36,4 @@ end
 gem 'activeadmin', github: 'activeadmin'
 # Auth stuff.
 gem 'devise'
+gem 'sass'
