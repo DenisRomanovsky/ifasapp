@@ -20,6 +20,8 @@
   ],
   "dependencies": {
     "angular": "latest",
-    "bootstrap-sass-official": "latest"
+    "bootstrap-sass-official": "latest",
+    "angular-resource": "latest",
+    "angular-route": "latest"
   }
 }

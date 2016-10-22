@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010143319) do
+ActiveRecord::Schema.define(version: 20161021134015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,12 +49,39 @@ ActiveRecord::Schema.define(version: 20161010143319) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "offers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "status_cd"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "offers", ["organization_id"], name: "index_offers_on_organization_id", using: :btree
+  add_index "offers", ["status_cd"], name: "index_offers_on_status_cd", using: :btree
+  add_index "offers", ["user_id"], name: "index_offers_on_user_id", using: :btree
+
   create_table "recipes", force: :cascade do |t|
     t.string   "name"
     t.text     "instructions"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  create_table "user_infos", force: :cascade do |t|
+    t.string   "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone_number"
+    t.integer  "city_id"
+    t.integer  "user_status_cd"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_infos", ["user_id"], name: "index_user_infos_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -37,3 +37,5 @@ gem 'activeadmin', github: 'activeadmin'
 # Auth stuff.
 gem 'devise'
 gem 'sass'
+# Prepopulate cache of Angular with assets. Fixes issues with asset pipeline.
+gem 'angular-rails-templates'
