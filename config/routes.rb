@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   root to: 'home#index'
-  get 'search/:search_term' => 'home#search_offers'
+  get 'search/' => 'home#search_offers'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
