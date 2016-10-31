@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021134015) do
+ActiveRecord::Schema.define(version: 20161031092359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,26 +49,70 @@ ActiveRecord::Schema.define(version: 20161021134015) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "offers", force: :cascade do |t|
+  create_table "auction_mechanisms", force: :cascade do |t|
+    t.integer  "auction_id"
+    t.integer  "mechanism_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "auction_mechanisms", ["auction_id"], name: "index_auction_mechanisms_on_auction_id", using: :btree
+
+  create_table "auctions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "status_cd"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "offers", ["organization_id"], name: "index_offers_on_organization_id", using: :btree
-  add_index "offers", ["status_cd"], name: "index_offers_on_status_cd", using: :btree
-  add_index "offers", ["user_id"], name: "index_offers_on_user_id", using: :btree
+  add_index "auctions", ["organization_id"], name: "index_auctions_on_organization_id", using: :btree
+  add_index "auctions", ["status_cd"], name: "index_auctions_on_status_cd", using: :btree
+  add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
 
-  create_table "recipes", force: :cascade do |t|
-    t.string   "name"
-    t.text     "instructions"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+  create_table "bids", force: :cascade do |t|
+    t.float    "price"
+    t.integer  "auction_mechanism_id"
+    t.text     "description"
+    t.integer  "user_id"
+    t.integer  "auction_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "bids", ["auction_id"], name: "index_bids_on_auction_id", using: :btree
+  add_index "bids", ["user_id"], name: "index_bids_on_user_id", using: :btree
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "mechanism_categories", force: :cascade do |t|
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mechanism_subcategories", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "mechanism_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mechanisms", force: :cascade do |t|
+    t.integer  "mechanism_category_id"
+    t.integer  "mechanism_subcategory_id"
+    t.string   "description"
+    t.text     "long_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "mechanisms", ["mechanism_category_id", "mechanism_subcategory_id"], name: "by_category_subcategory", using: :btree
 
   create_table "user_infos", force: :cascade do |t|
     t.string   "user_id"
@@ -79,6 +123,7 @@ ActiveRecord::Schema.define(version: 20161021134015) do
     t.integer  "user_status_cd"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "unp"
   end
 
   add_index "user_infos", ["user_id"], name: "index_user_infos_on_user_id", using: :btree

@@ -1,6 +1,6 @@
-class CreateOffersTable < ActiveRecord::Migration
+class CreateAuctionsTable < ActiveRecord::Migration
   def change
-    create_table :offers do |t|
+    create_table :auctions do |t|
       t.integer :user_id
       t.integer :organization_id
       t.datetime :start_time
@@ -10,8 +10,8 @@ class CreateOffersTable < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :offers, :user_id
-    add_index :offers, :organization_id
-    add_index :offers, :status_cd
+    add_index :auctions, :user_id
+    add_index :auctions, :organization_id
+    add_index :auctions, :status_cd
   end
 end
