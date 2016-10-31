@@ -59,6 +59,8 @@ GEM
       railties (>= 4.2, < 6)
       sprockets (>= 3.0, < 5)
       tilt
+    apipie-rails (0.3.7)
+      json
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (6.0.3)
@@ -235,6 +237,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   angular-rails-templates
+  apipie-rails
   byebug
   coffee-rails (~> 4.1.0)
   devise
