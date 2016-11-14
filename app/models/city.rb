@@ -1,2 +1,2 @@
-class Bid < ActiveRecord::Base
+class City < ActiveRecord::Base
 end

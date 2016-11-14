@@ -1,7 +1,10 @@
-#require 'task_helpers/notification_test_helper'
 require 'csv'
+################################################
+# DO NOT USE AFTER FIRST PROD EVENT.
+# This script totally changes the ids of
+# categories. If needed - modify manually.
+################################################
 namespace :categories do
-  #include NotificationTestHelper
 
   desc 'Scans through categories.csv and updates db.'
   task update: :environment do
