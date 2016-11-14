@@ -1,0 +1,21 @@
+%header.row
+  %h1{class: "text-center col-md-6 col-md-offset-3"}
+    Найти чё-нить
+%section.row
+  %form
+    %div{class: "form-group col-md-6 col-md-offset-3"}
+      %input{'ng-model' => "keywords", name: "keywords", type: "text", class: "form-control"}
+
+    %div{class: "form-group col-md-6 col-md-offset-3 text-center"}
+      %button{'ng-click'=>"search(keywords)", class: "btn btn-primary btn-lg"}
+        Найти
+%hr
+%section.row{'ng-if'=>"offers"}
+  %ul.ist-unstyled
+    %li{'ng-repeat'=>"offer in offers"}
+      %section{class: "well col-md-6 col-md-offset-3"}
+        %h1{class: "h3 col-md-6 text-right", style: "margin-top: 0"}
+          %a{href:"#"}
+            {{offer.name}}
+%button{'ng-click'=>"go_to_edit(1)", class: "btn btn-primary btn-lg"}
+  Редактировать профиль

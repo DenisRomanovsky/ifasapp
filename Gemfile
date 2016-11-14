@@ -42,3 +42,5 @@ gem 'sass'
 gem 'angular-rails-templates'
 # Use api-pie as the main api gem.
 gem 'apipie-rails'
+# haml
+gem 'haml'

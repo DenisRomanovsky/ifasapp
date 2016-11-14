@@ -11,6 +11,10 @@ receta.config([ '$routeProvider',
     .when('/',
       templateUrl: "home.html"
       controller: 'RecipesController'
+    )    
+    .when('/user_info/:id',
+      templateUrl: "user_info.html"
+      controller: 'UserInfoController'
     )
 ])
 
