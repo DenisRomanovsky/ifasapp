@@ -4,6 +4,6 @@ controllers.controller("UserInfoController", ($scope, $routeParams, $location, $
   id = $routeParams.id
   res.get({id: id}, (resp) ->
     console.log(resp))
+  res.create = () ->
+    a = 4;
 )
-create() ->
-  a = 4;
