@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
 # Use pg as the database for Active Record
@@ -38,9 +37,5 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'devise'
 # One more sass gem for angular.
 gem 'sass'
-# Pre-populate cache of Angular with assets. Fixes issues with asset pipeline.
-gem 'angular-rails-templates'
-# Use api-pie as the main api gem.
-gem 'apipie-rails'
 # haml
 gem 'haml'
