@@ -35,7 +35,9 @@ end
 gem 'activeadmin', github: 'activeadmin'
 # Auth stuff.
 gem 'devise'
-# One more sass gem for angular.
-gem 'sass'
 # haml
 gem 'haml'
+# Cool bootstrap forms.
+gem 'bootstrap_form'
+# Bootstrap itself.
+gem 'bootstrap-sass', '~> 3.3.6'

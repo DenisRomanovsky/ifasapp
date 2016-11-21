@@ -1,0 +1,15 @@
+.row
+  .span3
+    .well
+      %div
+        %ul.nav.nav-list
+          - @categories.each do |mech_category, mech_subcategories|
+            %li
+              %label.tree-toggle.nav-header
+                = mech_category.description
+              %ul.nav.nav-list.tree{style: 'display: none;'}
+                - mech_subcategories.each do |mech_subcategory|
+                  %li
+                    %a{href:'#'}
+                      = mech_subcategory.description
+= javascript_include_tag('categories_tree')
