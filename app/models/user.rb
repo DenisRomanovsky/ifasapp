@@ -4,5 +4,5 @@ class User < ActiveRecord::Base
 
   belongs_to :user_info
   has_many :offers
-  validates_uniqueness_of :user_info_id
+  validates_uniqueness_of :user_info_id, allow_nil: true
 end
