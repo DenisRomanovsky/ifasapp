@@ -4,7 +4,14 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   root to: 'home#index'
-  get 'search/' => 'home#search_offers'
+
+  resource :user_info, only: [:edit, :update]
+
+  resource :auctions do
+    resource :bids, only: [:create, :new]
+  end
+
+  resource :mechanisms
 
 
   # The priority is based upon order of creation: first created -> highest priority.

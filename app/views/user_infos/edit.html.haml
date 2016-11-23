@@ -1,0 +1,7 @@
+= bootstrap_form_for(@user_info) do |f|
+    = f.text_field :first_name
+    = f.text_field :last_name
+    = f.text_field :unp
+    = f.phone_field :phone_number
+    = f.collection_select :city_id, City.all, :id, :name, prompt: true
+    = f.submit "Сохранить"

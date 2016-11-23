@@ -1,0 +1,7 @@
+- if current_user.present?
+  - if current_page?(edit_user_info_path)
+    - css_class = 'active'
+  - else
+    - css_class = 'inactive'
+
+  %li{:class => css_class}= link_to 'Профиль', edit_user_info_path
