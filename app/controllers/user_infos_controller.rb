@@ -4,7 +4,11 @@ class UserInfosController < ApplicationController
 
   def edit
     return unless current_user
-    @user_info = UserInfo.where(user_id: current_user.id).first_or_create
+    if current_user.user_info_id.present?
+    @user_info = current_user.user_info
+    else
+      current_user.create_user_info
+    end
   end
 
   def update

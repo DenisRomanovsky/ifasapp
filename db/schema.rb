@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114131502) do
+ActiveRecord::Schema.define(version: 20161123125514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,7 +119,6 @@ ActiveRecord::Schema.define(version: 20161114131502) do
   add_index "mechanisms", ["mechanism_category_id", "mechanism_subcategory_id"], name: "by_category_subcategory", using: :btree
 
   create_table "user_infos", force: :cascade do |t|
-    t.string   "user_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone_number"
@@ -129,8 +128,6 @@ ActiveRecord::Schema.define(version: 20161114131502) do
     t.datetime "updated_at"
     t.string   "unp"
   end
-
-  add_index "user_infos", ["user_id"], name: "index_user_infos_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -149,9 +146,11 @@ ActiveRecord::Schema.define(version: 20161114131502) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "user_info_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["user_info_id"], name: "index_users_on_user_info_id", using: :btree
 
 end

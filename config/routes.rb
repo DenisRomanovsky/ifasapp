@@ -5,14 +5,13 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
 
-  resource :user_info, only: [:edit, :update]
+  resources :user_infos, only: [:edit, :update]
 
-  resource :auctions do
-    resource :bids, only: [:create, :new]
-  end
+  resources :auctions
 
-  resource :mechanisms
+  resources :bids, only: [:create, :new]
 
+  resources :mechanisms
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

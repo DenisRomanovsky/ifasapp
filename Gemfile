@@ -41,3 +41,5 @@ gem 'haml'
 gem 'bootstrap_form'
 # Bootstrap itself.
 gem 'bootstrap-sass', '~> 3.3.6'
+# Russian bears, sluts and Vodka
+gem 'russian'
