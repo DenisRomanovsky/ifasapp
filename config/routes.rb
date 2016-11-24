@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
 
-  resources :user_infos, only: [:edit, :update]
+  resources :user_infos, only: [:update]
+  get 'user_info/edit' => 'user_infos#edit'
 
   resources :auctions
 

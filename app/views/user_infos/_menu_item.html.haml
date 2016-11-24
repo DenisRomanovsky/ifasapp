@@ -1,7 +1,7 @@
 - if current_user.present?
-  - if current_user.user_info_id.present? && current_page?(edit_user_info_path(current_user.user_info_id))
+  - if current_page?(user_info_edit_path)
     - css_class = 'active'
   - else
     - css_class = 'inactive'
 
-  %li{:class => css_class}= link_to 'Профиль', edit_user_info_path(current_user.user_info_id || 0)
+  %li{:class => css_class}= link_to 'Профиль', user_info_edit_path

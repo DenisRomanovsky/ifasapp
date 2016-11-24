@@ -1,0 +1,2 @@
+- if current_user.present?
+  %li{:class => 'inactive'}= link_to 'Выйти', destroy_user_session_path
