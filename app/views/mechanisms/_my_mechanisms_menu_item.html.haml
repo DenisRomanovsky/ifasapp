@@ -1,0 +1,7 @@
+- if current_user.present?
+  - if current_page?(mechanisms_path)
+    - css_class = 'active'
+  - else
+    - css_class = 'inactive'
+
+  %li{:class => css_class}= link_to 'Моя техника', mechanisms_path

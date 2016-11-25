@@ -1,0 +1,5 @@
+= bootstrap_form_for(@mechanism) do |f|
+  = f.text_field :description
+  = f.text_area :long_description
+  = f.collection_select :mechanism_subcategory_id, MechanismSubcategory.all, :id, :description, prompt: true
+  = f.submit "Сохранить"
