@@ -2,4 +2,5 @@
   = f.datetime_select :start_time
   = f.datetime_select :end_time
   = f.text_area :description
+  = f.hidden_field(:mechanism_subcategory_id, value: params[:mech_subcategory] || @auction.mechanism_subcategory_id)
   = f.submit "Сохранить"

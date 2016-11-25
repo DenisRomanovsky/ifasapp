@@ -37,13 +37,13 @@ class AuctionsController < ApplicationController
   end
 
   def index
-    @auctions = Auction.where(user_id: current_user.id)
+    @auctions = Auction.where(user_id: current_user.id).includes(:mechanism_subcategory)
   end
 
   private
 
   def auction_params
-    params.require(:auction).permit(:start_time, :end_time, :description)
+    params.require(:auction).permit(:start_time, :end_time, :description, :mechanism_subcategory_id)
   end
 
 end
