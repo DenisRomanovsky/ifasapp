@@ -17,7 +17,7 @@ class UserInfosController < ApplicationController
     if @user_info.update_attributes(user_info_params)
       redirect_to root_path, flash: { alert: 'Изменения сохранены.' }
     else
-      redirect_to user_info_edit_path
+      render action: 'edit', user_info: params[:user_info]
     end
   end
 

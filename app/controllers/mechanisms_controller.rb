@@ -19,7 +19,7 @@ class MechanismsController < ApplicationController
     if @mechanism.save
       redirect_to mechanisms_path, flash: { alert: 'Изменения сохранены.' }
     else
-      redirect_to edit_mechanism_path
+      render action: 'edit', mechanism: params[:mech_params]
     end
   end
 
@@ -35,7 +35,7 @@ class MechanismsController < ApplicationController
     if @mechanism.update_attributes(mechanism_params)
       redirect_to mechanisms_path, flash: { alert: 'Изменения сохранены.' }
     else
-      redirect_to edit_mechanism_path
+      render action: 'edit', mechanism: params[:mechanism]
     end
   end
 

@@ -4,6 +4,10 @@ class AuctionsController < ApplicationController
 
   def new
     @auction = Auction.new
+    @auction_subcategory_id = params['mech_subcategory']
+    @auction_category_id = MechanismSubcategory.find(params['mech_subcategory']).mechanism_category_id
+    @categories = MechanismCategory.all
+    @sub_categories = MechanismSubcategory.where(mechanism_category_id: @auction_category_id)
   end
 
   def create
@@ -14,7 +18,7 @@ class AuctionsController < ApplicationController
     if @auction.save
       redirect_to auctions_path, flash: { alert: 'Аукцион создан.' }
     else
-      redirect_to new_auction_path
+      render action: 'edit', auction: params[:auction]
     end
   end
 
@@ -32,12 +36,18 @@ class AuctionsController < ApplicationController
     if @auction.update_attributes(auction_params)
       redirect_to auctions_path, flash: { alert: 'Изменения сохранены.' }
     else
-      redirect_to edit_auction_path
+      render action: 'edit', auction: params[:auction]
     end
   end
 
   def index
     @auctions = Auction.where(user_id: current_user.id).includes(:mechanism_subcategory)
+  end
+
+  def update_subcategories
+    raise ActionController::RoutingError.new('Страница не найдена') unless request.xhr?
+    sub_categories = MechanismSubcategory.select(:id, :description).where(mechanism_category_id: params[:category_id])
+    render json: sub_categories.to_json
   end
 
   private
