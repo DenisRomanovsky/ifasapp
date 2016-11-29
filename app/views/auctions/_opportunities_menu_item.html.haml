@@ -1,0 +1,7 @@
+- if current_user.present?
+  - if current_page?(opportunities_index_path)
+    - css_class = 'active'
+  - else
+    - css_class = 'inactive'
+
+  %li{:class => css_class}= link_to 'Не мои аукционы,вот и бешусь', opportunities_index_path

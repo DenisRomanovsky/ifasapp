@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :user_infos, only: [:update]
   get 'user_info/edit' => 'user_infos#edit'
+  get 'opportunities_index' => 'auctions#opportunities_index'
   post 'auctions/update_subcategories' => 'auctions#update_subcategories'
 
   resources :auctions

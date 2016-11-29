@@ -50,6 +50,14 @@ class AuctionsController < ApplicationController
     render json: sub_categories.to_json
   end
 
+  def opportunities_index
+    @opportunies = []
+    mechanisms = current_user.mechanisms
+    if mechanisms.present?
+      @opportunies = Auction.where('mechanism_category_id in (?) AND (mechanism_subcategory_id in (?) OR mechanism_subcategory_id IS NULL)', mechanisms.pluck(:mechanism_category_id), mechanisms.pluck(:mechanism_subcategory_id))
+    end
+  end
+
   private
 
   def auction_params

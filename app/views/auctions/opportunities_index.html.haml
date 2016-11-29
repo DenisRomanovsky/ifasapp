@@ -1,0 +1,27 @@
+.row
+  .col-sm-12
+    %table.table.table-striped
+      %thead
+        %th
+          Описание
+        %th
+          Категория
+        %th
+          Подкатегория
+        %th
+          Время окончания
+        %th
+      %tbody
+        - @opportunies.each do |opportunity|
+          %tr
+            %td
+              = opportunity.description
+            %td
+              = opportunity.mechanism_subcategory.description if opportunity.mechanism_subcategory
+            %td
+              = opportunity.mechanism_category.description
+            %td
+              = opportunity.end_time
+            %td
+              %a.btn.btn-default{href: edit_auction_path(auction.id),role: "button"}
+                Редактировать

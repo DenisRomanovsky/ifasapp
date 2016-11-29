@@ -5,6 +5,8 @@
         %th
           Описание
         %th
+          Подкатегория
+        %th
           Категория
         %th
           Время начала
@@ -17,7 +19,9 @@
             %td
               = auction.description
             %td
-              = auction.mechanism_subcategory.description
+              = auction.mechanism_subcategory.description if auction.mechanism_subcategory
+            %td
+              = auction.mechanism_category.description
             %td
               = auction.start_time
             %td
