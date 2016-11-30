@@ -1,0 +1,42 @@
+.row.well
+  %dl.dl-horizontal
+    %dt
+      Описание
+    %dd
+      = @auction.description
+    %dt
+      Категория
+    %dd
+      = @auction.mechanism_category.description
+    %dt
+      Подкатегория
+    %dd
+      = @auction.mechanism_subcategory.description if @auction.mechanism_subcategory
+
+%a.btn.btn-default{href: edit_auction_path(@auction.id),role: "button"}
+  Редактировать
+
+.row
+  .col-sm-12
+    %table.table.table-striped
+      %thead
+        %th
+          Описание
+        %th
+          Лот
+        %th
+          Профиль владельца
+        %th
+          Цена
+      %tbody
+        -@bids.each do |bid|
+          %tr
+            %td
+              = bid.description
+            %td
+              = link_to bid.mechanism.description, mechanism_path(bid.mechanism.id)
+            %td
+              Ссылка на профиль
+            %td
+              = bid.price
+

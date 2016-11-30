@@ -43,3 +43,6 @@ gem 'bootstrap_form'
 gem 'bootstrap-sass', '~> 3.3.6'
 # Russian bears, sluts and Vodka
 gem 'russian'
+
+# Specify ruby version to use dig for hashes.
+ruby '~> 2.3.1'

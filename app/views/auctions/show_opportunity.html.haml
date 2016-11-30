@@ -1,0 +1,23 @@
+%dl.dl-horizontal
+  %dt
+    Описание
+  %dd
+    = @opportunity.description
+  %dt
+    Категория
+  %dd
+    = @opportunity.mechanism_category.description
+  %dt
+    Подкатегория
+  %dd
+    = @opportunity.mechanism_subcategory.description if @opportunity.mechanism_subcategory
+  %dt
+    Другие участники
+  %dd
+    =@current_bid.present? ? @total_bids - 1 : @total_bids
+  %dt
+    Моя ставка
+  %dd
+    = @current_bid.price || '-'
+%a.btn.btn-default{href: new_bid_path({auction_id: @opportunity.id}),role: "button"}
+  Сделать ставку

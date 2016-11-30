@@ -1,9 +1,10 @@
+- category = @auction_category_id || params.dig(:auction, :mechanism_category_id)
 = bootstrap_form_for(@auction) do |f|
   = f.datetime_select :start_time
   = f.datetime_select :end_time
   = f.text_area :description
-  = f.collection_select :mechanism_category_id, @categories, :id, :description, {prompt: 'Выбирите категорию', selected: @auction_category_id, label: 'Категория', help: 'Обязательное поле.', id: 'auction_category_id'}
-  = f.collection_select :mechanism_subcategory_id, @sub_categories, :id, :description, {prompt: 'Выбирите подкатегорию', selected: @auction_subcategory_id, label: 'Подкатегория', help: 'Оставьте поле пустым, чтобы аукцион увидели владельцы любой техники выбранной категории.', id: 'auction_subcategory_id'}
+  = f.collection_select :mechanism_category_id, MechanismCategory.all, :id, :description, {selected: category, label: 'Категория', help: 'Обязательное поле.', id: 'auction_category_id'}
+  = f.collection_select :mechanism_subcategory_id, MechanismSubcategory.where(mechanism_category_id: category), :id, :description, {selected: params[:mech_subcategory] || params.dig(:auction, :mechanism_subcategory_id), label: 'Подкатегория', help: 'Оставьте поле пустым, чтобы аукцион увидели владельцы любой техники выбранной категории.', id: 'auction_subcategory_id', include_blank: true}
   = f.submit "Сохранить"
 
 = javascript_include_tag('categories_selector')

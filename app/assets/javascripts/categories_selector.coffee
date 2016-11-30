@@ -14,7 +14,5 @@ setSubcategories = ->
 setEmptyOption = ->
   $("#auction_mechanism_subcategory_id").prepend("<option value='' ></option>");
 
-
-setEmptyOption();
 $('#auction_mechanism_category_id').change(setSubcategories);
 

@@ -1,13 +1,11 @@
 class AuctionsController < ApplicationController
+  include ApplicationHelper
 
   before_action :authenticate_user!
 
   def new
     @auction = Auction.new
-    @auction_subcategory_id = params['mech_subcategory']
     @auction_category_id = MechanismSubcategory.find(params['mech_subcategory']).mechanism_category_id
-    @categories = MechanismCategory.all
-    @sub_categories = MechanismSubcategory.where(mechanism_category_id: @auction_category_id)
   end
 
   def create
@@ -23,7 +21,9 @@ class AuctionsController < ApplicationController
   end
 
   def show
-
+    @auction = current_user.auctions.where(id: params[:id]).first
+    raise ActionController::RoutingError.new('Страница не найдена') unless @auction.present?
+    @bids = @auction.bids.active.joins(:mechanism).order('price ASC')
   end
 
   def edit
@@ -54,14 +54,21 @@ class AuctionsController < ApplicationController
     @opportunies = []
     mechanisms = current_user.mechanisms
     if mechanisms.present?
-      @opportunies = Auction.where('mechanism_category_id in (?) AND (mechanism_subcategory_id in (?) OR mechanism_subcategory_id IS NULL)', mechanisms.pluck(:mechanism_category_id), mechanisms.pluck(:mechanism_subcategory_id))
+      @opportunies = Auction.where('mechanism_category_id in (?) AND (mechanism_subcategory_id in (?) OR mechanism_subcategory_id IS NULL) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), mechanisms.pluck(:mechanism_subcategory_id), current_user.id)
     end
+  end
+
+  def show_opportunity
+    @opportunity = Auction.where(id: params[:id]).first
+    raise ActionController::RoutingError.new('Страница не найдена') if  !user_can_participate? || @opportunity.blank?
+    @current_bid = Bid.where(auction_id: params[:id], user_id: current_user.id).active.first
+    @total_bids = Bid.where(auction_id: params[:id]).active.size
   end
 
   private
 
   def auction_params
-    params.require(:auction).permit(:start_time, :end_time, :description, :mechanism_subcategory_id)
+    params.require(:auction).permit(:start_time, :end_time, :description, :mechanism_subcategory_id, :mechanism_category_id)
   end
 
 end

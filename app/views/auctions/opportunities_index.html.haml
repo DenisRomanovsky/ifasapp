@@ -23,5 +23,8 @@
             %td
               = opportunity.end_time
             %td
-              %a.btn.btn-default{href: edit_auction_path(auction.id),role: "button"}
-                Редактировать
+              %a.btn.btn-default{href: show_opportunity_path(opportunity.id),role: "button"}
+                Детали
+            %td
+              %a.btn.btn-default{href: new_bid_path(auction_id: opportunity.id),role: "button"}
+                Участвовать

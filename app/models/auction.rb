@@ -1,8 +1,9 @@
 class Auction < ActiveRecord::Base
   belongs_to :user
-  belongs_to :organization
   belongs_to :mechanism_subcategory
-  has_many :mechanisms, through: :auction_mechanisms
+  belongs_to :mechanism_category
+  has_many :bids
+  has_many :mechanisms, through: :bids
 
   validates_presence_of :description, :user_id
   validate do |auction|

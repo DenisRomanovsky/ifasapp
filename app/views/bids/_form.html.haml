@@ -1,0 +1,6 @@
+= bootstrap_form_for(@bid) do |f|
+  = f.number_field :price, value: @price
+  = f.text_area :description, value: @description
+  = f.collection_select(:mechanism_id, current_user.mechanisms, :id, :description, selected: @mechanism)
+  = hidden_field_tag(:auction_id, params[:auction_id])
+  = f.submit "Сохранить"

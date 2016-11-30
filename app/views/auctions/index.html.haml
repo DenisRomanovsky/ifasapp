@@ -13,6 +13,7 @@
         %th
           Время окнчания
         %th
+        %th
       %tbody
         -@auctions.each do |auction|
           %tr
@@ -29,3 +30,6 @@
             %td
               %a.btn.btn-default{href: edit_auction_path(auction.id),role: "button"}
                 Редактировать
+            %td
+              %a.btn.btn-default{href: auction_path(auction.id),role: "button"}
+                Детали

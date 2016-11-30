@@ -40,7 +40,7 @@ class MechanismsController < ApplicationController
   end
 
   def show
-    @mechanism = Mechanism.where(id: params[:id], user_id: current_user.id).includes([:mechanism_subcategory, :mechanism_category]).first
+    @mechanism = Mechanism.where(id: params[:id]).includes([:mechanism_subcategory, :mechanism_category]).first
     raise ActionController::RoutingError.new('Страница не найдена') unless @mechanism.present?
   end
 
