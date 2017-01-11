@@ -5,7 +5,7 @@ class AuctionsController < ApplicationController
 
   def new
     @auction = Auction.new
-    @auction_category_id = MechanismSubcategory.find(params['mech_subcategory']).mechanism_category_id
+    @auction_category_id = MechanismSubcategory.find(params['mech_subcategory']).mechanism_category_id if params['mech_subcategory']
   end
 
   def create
