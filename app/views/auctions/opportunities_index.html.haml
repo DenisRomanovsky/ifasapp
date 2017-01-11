@@ -1,5 +1,10 @@
 .row
   .col-sm-12
+    %h3
+      Доступные аукционы
+    %p
+      = link_to 'Добавьте ', new_mechanism_path
+      Вашу технику, чтобы увидеть больше доступных аукционов.
     %table.table.table-striped
       %thead
         %th
@@ -11,15 +16,16 @@
         %th
           Время окончания
         %th
+        %th
       %tbody
         - @opportunies.each do |opportunity|
           %tr
             %td
               = opportunity.description
             %td
-              = opportunity.mechanism_subcategory.description if opportunity.mechanism_subcategory
-            %td
               = opportunity.mechanism_category.description
+            %td
+              = opportunity.mechanism_subcategory.description if opportunity.mechanism_subcategory
             %td
               = opportunity.end_time
             %td

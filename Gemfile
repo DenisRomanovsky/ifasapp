@@ -35,6 +35,8 @@ end
 gem 'activeadmin', github: 'activeadmin'
 # Auth stuff.
 gem 'devise'
+# Some translations for devise
+gem 'devise-i18n'
 # haml
 gem 'haml'
 # Cool bootstrap forms.
