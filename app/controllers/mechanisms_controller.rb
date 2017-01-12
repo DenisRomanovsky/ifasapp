@@ -17,7 +17,7 @@ class MechanismsController < ApplicationController
                                          })
     @mechanism = Mechanism.new(mech_params)
     if @mechanism.save
-      redirect_to mechanisms_path, flash: { alert: 'Изменения сохранены.' }
+      redirect_to mechanisms_path, flash: { notice: 'Изменения сохранены.' }
     else
       render action: 'edit', mechanism: params[:mech_params]
     end
@@ -33,7 +33,7 @@ class MechanismsController < ApplicationController
     raise ActionController::RoutingError.new('Страница не найдена') unless @mechanism.present?
 
     if @mechanism.update_attributes(mechanism_params)
-      redirect_to mechanisms_path, flash: { alert: 'Изменения сохранены.' }
+      redirect_to mechanisms_path, flash: { notice: 'Изменения сохранены.' }
     else
       render action: 'edit', mechanism: params[:mechanism]
     end

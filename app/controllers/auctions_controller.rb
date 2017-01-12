@@ -35,7 +35,7 @@ class AuctionsController < ApplicationController
   def update
     @auction = Auction.where(user_id: current_user.id, id: params[:id].to_i).first
     if @auction.update_attributes(auction_params)
-      redirect_to auctions_path, flash: { alert: 'Изменения сохранены.' }
+      redirect_to auctions_path, flash: { notice: 'Изменения сохранены.' }
     else
       render action: 'edit', auction: params[:auction]
     end
