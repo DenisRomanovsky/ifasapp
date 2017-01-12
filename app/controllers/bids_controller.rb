@@ -1,8 +1,10 @@
 class BidsController < ApplicationController
   include ApplicationHelper
+  before_action :set_auction
   before_action :authenticate_user!
 
   def new
+    return if @auction.blank?
     raise ActionController::RoutingError.new('Страница не найдена') unless user_can_participate?
     @bid = Bid.new
     last_bid = Bid.where(auction_id: params[:auction_id], user_id: current_user.id).active.first
@@ -14,6 +16,7 @@ class BidsController < ApplicationController
   end
 
   def create
+    return if @auction.blank?
     raise ActionController::RoutingError.new('Страница не найдена') unless user_can_participate?
 
     last_bid = Bid.where(auction_id: params[:auction_id], user_id: current_user.id).active.first
@@ -24,13 +27,14 @@ class BidsController < ApplicationController
     bid.auction_id = params[:auction_id]
 
     if bid.save
-      redirect_to show_opportunity_path(params[:auction_id]), flash: { alert: 'Ставка сохранена' }
+      redirect_to show_opportunity_path(params[:auction_id]), flash: { notice: 'Ставка сохранена' }
     else
       render action: 'edit', auction: params[:bid]
     end
   end
 
   def edit
+    return if @auction.blank?
     raise ActionController::RoutingError.new('Страница не найдена') unless user_can_participate?
   end
 
@@ -38,5 +42,13 @@ class BidsController < ApplicationController
 
   def bid_params
     params.require(:bid).permit(:price, :description, :mechanism_id)
+  end
+
+  def set_auction
+    @auction = Auction.active.where(id: params[:auction_id]).first
+
+    if @auction.blank?
+      redirect_to show_opportunity_path(params[:auction_id]), flash: { alert: 'Этот аукцион уже закончился. Но ещё можно сделать ставки в активных аукционах.' }
+    end
   end
 end

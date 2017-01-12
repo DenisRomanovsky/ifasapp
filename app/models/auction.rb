@@ -5,6 +5,8 @@ class Auction < ActiveRecord::Base
   has_many :bids
   has_many :mechanisms, through: :bids
 
+  scope :active, -> { where('end_time < ?', Time.now.utc).where('start_time > ?', Time.now.utc) }
+
   validates_presence_of :description, :user_id, :start_time, :end_time, :mechanism_category_id
   validate do |auction|
     auction.must_be_in_future

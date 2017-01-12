@@ -10,9 +10,12 @@
   %body
     = render 'shared/menu'
     .container{style: 'padding-top: 50px;'}
-      %p.alert.alert-success
-        = notice
-      %p.alert.alert-danger
-        = alert
+      %div{style: 'padding-top: 10px;'}
+      - if notice.present?
+        %p.alert.alert-success
+          = notice
+      - if alert.present?
+        %p.alert.alert-danger
+          = alert
 
       = yield
