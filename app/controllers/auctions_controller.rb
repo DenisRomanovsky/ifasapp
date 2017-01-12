@@ -54,7 +54,9 @@ class AuctionsController < ApplicationController
     @opportunies = []
     mechanisms = current_user.mechanisms
     if mechanisms.present?
-      @opportunies = Auction.where('mechanism_category_id in (?) AND (mechanism_subcategory_id in (?) OR mechanism_subcategory_id IS NULL) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), mechanisms.pluck(:mechanism_subcategory_id), current_user.id)
+      @opportunies = Auction
+                         .where('mechanism_category_id in (?) AND (mechanism_subcategory_id in (?) OR mechanism_subcategory_id IS NULL) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), mechanisms.pluck(:mechanism_subcategory_id), current_user.id)
+                         .where('end_time < ?', Time.now.utc)
     end
   end
 
