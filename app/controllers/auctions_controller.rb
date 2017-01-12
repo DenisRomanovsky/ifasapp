@@ -14,7 +14,8 @@ class AuctionsController < ApplicationController
     @auction = Auction.new(auction_parameters)
 
     if @auction.save
-      redirect_to auctions_path, flash: { alert: 'Аукцион создан.' }
+      redirect_to auctions_path, flash: { notice: 'Аукцион создан.' }
+      @auction.sent_opportunity_emails
     else
       render action: 'edit', auction: params[:auction]
     end

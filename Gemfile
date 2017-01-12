@@ -46,7 +46,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 # Russian bears, sluts and Vodka
 gem 'russian'
 # Some work to do on background.
-gem 'resque'
+gem 'resque', '~> 1.22.0'
 
 # Specify ruby version to use dig for hashes.
 ruby '~> 2.3.1'

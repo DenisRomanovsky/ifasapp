@@ -22,4 +22,13 @@ class Auction < ActiveRecord::Base
   def validate_times
     errors.add(:start_time, 'Время начала аукциона должно быть раньше времени окончания.') if start_time > end_time
   end
+
+  def sent_opportunity_emails
+    users = User.joins(:mechanisms).where(' "mechanisms"."mechanism_category_id" = ?', self.mechanism_category_id)
+    users = users.where(' "mechanisms"."mechanism_subcategory_id" = ?', self.mechanism_subcategory_id) if  self.mechanism_subcategory_id.present?
+
+    users.pluck(:id).each do |user_id|
+      Resque.enqueue(SendUserEmailWorker, user_id, self.id, 'new_opportunity')
+    end
+  end
 end
