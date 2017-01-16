@@ -27,8 +27,8 @@ class Auction < ActiveRecord::Base
     users = User.joins(:mechanisms).where(' "mechanisms"."mechanism_category_id" = ?', self.mechanism_category_id)
     users = users.where(' "mechanisms"."mechanism_subcategory_id" = ?', self.mechanism_subcategory_id) if  self.mechanism_subcategory_id.present?
 
-    users.pluck(:id).each do |user_id|
-      Resque.enqueue(SendUserEmailJob, user_id, self.id, 'new_opportunity')
+    users.each do |user|
+      UserMailer.new_opportunity_email(user, self.id).deliver_later
     end
   end
 end
