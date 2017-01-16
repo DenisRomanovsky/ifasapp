@@ -1,5 +1,4 @@
-
-class SendUserEmailWorker < ApplicationJob
+class SendUserEmailJob < ActiveJob::Base
   queue_as :default
 
   def perform(user_id, auction_id, type)
