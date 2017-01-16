@@ -1,11 +1,8 @@
 
-class SendUserEmailWorker
-  @queue = :send_user_email
+class SendUserEmailWorker < ApplicationJob
+  queue_as :default
 
-  @retry_limit = 1
-  @retry_delay = 60
-
-  def self.perform(user_id, auction_id, type)
+  def perform(user_id, auction_id, type)
     user = User.find(user_id)
     case type
       when 'new_opportunity'
