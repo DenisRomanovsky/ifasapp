@@ -49,6 +49,8 @@ gem 'russian'
 gem 'resque', '~> 1.22.0'
 # Resuqe obey to schedule!
 gem 'resque-scheduler'
+# Resque web interface. To make 'WTF O_o' more often.
+gem 'resque-web', require: 'resque_web'
 
 # Specify ruby version to use dig for hashes.
 ruby '~> 2.3.1'
