@@ -48,7 +48,7 @@ class BidsController < ApplicationController
     @auction = Auction.active.where(id: params[:auction_id]).first
 
     if @auction.blank?
-      redirect_to show_opportunity_path(params[:auction_id]), flash: { alert: 'Этот аукцион уже закончился. Но ещё можно сделать ставки в активных аукционах.' }
+      redirect_to show_opportunity_path(params[:auction_id]), flash: { alert: 'Этот аукцион не существует или уже закончился.' }
     end
   end
 end

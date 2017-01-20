@@ -10,7 +10,8 @@ class AuctionsController < ApplicationController
 
   def create
     auction_parameters = auction_params
-    auction_parameters.merge!({user_id: current_user.id})
+    time_now = Time.now.utc + 5.seconds
+    auction_parameters.merge!({user_id: current_user.id, start_time: time_now})
     @auction = Auction.new(auction_parameters)
 
     if @auction.save
@@ -56,8 +57,8 @@ class AuctionsController < ApplicationController
     mechanisms = current_user.mechanisms
     if mechanisms.present?
       @opportunies = Auction
+                         .active
                          .where('mechanism_category_id in (?) AND (mechanism_subcategory_id in (?) OR mechanism_subcategory_id IS NULL) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), mechanisms.pluck(:mechanism_subcategory_id), current_user.id)
-                         .where('end_time < ?', Time.now.utc)
     end
   end
 

@@ -1,13 +1,13 @@
-%DOCTYPE{html: true}
 %html
   %head
-    %title
-      Vanya`s app
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
-  %body
+    %title
+      Vanya`s app
+
+  %body.main-bg-2
     = render 'shared/menu'
     .container{style: 'padding-top: 50px;'}
       %div{style: 'padding-top: 10px;'}

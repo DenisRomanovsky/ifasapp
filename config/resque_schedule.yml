@@ -1,0 +1,6 @@
+set_statuses_to_finished_auctions:
+  cron: "* * * * * *"
+  class: "StatusSetterJob"
+  queue: default
+  args:
+  description: "This job sets the status to finished for auctions with exceeded duration. Also sends emails."
