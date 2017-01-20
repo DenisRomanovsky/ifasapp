@@ -46,7 +46,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 # Russian bears, sluts and Vodka
 gem 'russian'
 # Some work to do on background.
-gem 'resque', '~> 1.22.0'
+gem 'resque', '~> 1.24.1'
 # Resuqe obey to schedule!
 gem 'resque-scheduler'
 # Resque web interface. To make 'WTF O_o' more often.
