@@ -19,7 +19,7 @@ class Auction < ActiveRecord::Base
   def must_be_in_future
     if start_time.present? && end_time.present?
       #errors.add(:start_time, 'Время начала и старта аукциона должны быть в будущем.') if start_time < Time.current
-      errors.add(:end_time, 'Время начала и старта аукциона должны быть в будущем.') if end_time < Time.current
+      errors.add(:end_time, 'Время окончания аукциона должно быть в будущем.') if end_time < Time.current
     end
   end
 

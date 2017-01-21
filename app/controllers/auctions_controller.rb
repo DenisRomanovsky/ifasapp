@@ -19,15 +19,28 @@ class AuctionsController < ApplicationController
     auction_parameters = auction_params
     time_now = Time.now.utc + 5.seconds
     auction_parameters.merge!({user_id: current_user.id, start_time: time_now, status: :active})
+    auction_parameters.merge!(mechanism_category_id: params['mechanism_category_id']) if params['mechanism_category_id']
+    
     @auction = Auction.new(auction_parameters)
 
-    @auction.end_time = @auction.end_time - 3.hours # Make sure we save time in Minsk Time.
+    @auction.end_time = @auction.end_time - 3.hours # Make sure we save time in Minsk TimeZone.
 
     if @auction.save
       redirect_to auctions_path, flash: { notice: 'Аукцион создан.' }
       @auction.sent_opportunity_emails
     else
-      render action: 'edit', auction: params[:auction]
+
+      auction_sub_category_id = params.dig(:auction, :mechanism_subcategory_id)
+      if auction_sub_category_id.nil?
+        @auction_category_id = MechanismCategory.first.id
+      else
+        @auction_category_id = MechanismSubcategory.find(auction_sub_category_id).mechanism_category_id
+        @auction_sub_category_id = auction_sub_category_id
+      end
+
+      @block_categories = true
+      @auction.end_time = @auction.end_time + 3.hours
+      render action: 'edit', auction: @auction
     end
   end
 
@@ -39,7 +52,6 @@ class AuctionsController < ApplicationController
 
   def edit
     @auction = Auction.where(user_id: current_user.id, id: params[:id].to_i).first
-    @auction.end_time = @auction.end_time + 3.hours
     @auction_category_id = @auction.mechanism_category_id
     @auction_sub_category_id = @auction.mechanism_subcategory_id
     @edit_action = true
