@@ -6,7 +6,7 @@ namespace :resque do
     require 'resque'
     require 'resque_scheduler'
     require 'resque/scheduler'
-    Resque.schedule = YAML.load_file('resque_schedule.yml')
-    require 'jobs'
+    Resque.schedule = YAML.load_file('config/resque_schedule.yml')
+    #require 'jobs'
   end
 end
