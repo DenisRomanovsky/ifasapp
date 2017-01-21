@@ -11,7 +11,7 @@ class AuctionsController < ApplicationController
   def create
     auction_parameters = auction_params
     time_now = Time.now.utc + 5.seconds
-    auction_parameters.merge!({user_id: current_user.id, start_time: time_now})
+    auction_parameters.merge!({user_id: current_user.id, start_time: time_now, status: :active})
     @auction = Auction.new(auction_parameters)
 
     if @auction.save
