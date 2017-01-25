@@ -34,7 +34,7 @@ class Auction < ActiveRecord::Base
     users = users.where(' "mechanisms"."mechanism_subcategory_id" = ?', self.mechanism_subcategory_id) if  self.mechanism_subcategory_id.present?
 
     users.each do |user|
-      UserMailer.new_opportunity_email(user, self.id).deliver_later
+      UserMailer.new_opportunity_email(user, self.id).deliver_later if user.send_email?
     end
   end
 end

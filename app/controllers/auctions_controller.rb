@@ -20,7 +20,7 @@ class AuctionsController < ApplicationController
     time_now = Time.now.utc + 5.seconds
     auction_parameters.merge!({user_id: current_user.id, start_time: time_now, status: :active})
     auction_parameters.merge!(mechanism_category_id: params['mechanism_category_id']) if params['mechanism_category_id']
-    
+
     @auction = Auction.new(auction_parameters)
 
     @auction.end_time = @auction.end_time - 3.hours # Make sure we save time in Minsk TimeZone.
@@ -29,9 +29,9 @@ class AuctionsController < ApplicationController
       redirect_to auctions_path, flash: { notice: 'Аукцион создан.' }
       @auction.sent_opportunity_emails
     else
-
       auction_sub_category_id = params.dig(:auction, :mechanism_subcategory_id)
-      if auction_sub_category_id.nil?
+
+      if auction_sub_category_id.blank?
         @auction_category_id = MechanismCategory.first.id
       else
         @auction_category_id = MechanismSubcategory.find(auction_sub_category_id).mechanism_category_id

@@ -24,6 +24,6 @@ class UserInfosController < ApplicationController
   private
 
   def user_info_params
-    params.require(:user_info).permit(:first_name, :last_name, :unp, :phone_number, :city_id)
+    params.require(:user_info).permit(:first_name, :last_name, :unp, :phone_number, :city_id, :send_email)
   end
 end
