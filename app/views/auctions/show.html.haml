@@ -11,7 +11,7 @@
     %dt
       Подкатегория
     %dd
-      = @auction.mechanism_subcategory.description if @auction.mechanism_subcategory
+      = @auction.mechanism_subcategories.pluck(:description).join(', ') if @auction.mechanism_subcategories.any?
 
 %a.btn.btn-default{href: edit_auction_path(@auction.id),role: "button"}
   Редактировать

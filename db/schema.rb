@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170125122528) do
+ActiveRecord::Schema.define(version: 20170126081953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 20170125122528) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "auction_subcategories", id: false, force: :cascade do |t|
+    t.integer "auction_id"
+    t.integer "mechanism_subcategory_id"
+  end
+
+  add_index "auction_subcategories", ["auction_id", "mechanism_subcategory_id"], name: "auction_subcats_idx", using: :btree
+
   create_table "auctions", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "start_time"
@@ -56,7 +63,6 @@ ActiveRecord::Schema.define(version: 20170125122528) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "mechanism_subcategory_id"
     t.integer  "mechanism_category_id"
     t.integer  "status"
   end

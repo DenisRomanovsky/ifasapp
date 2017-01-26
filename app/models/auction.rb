@@ -1,7 +1,9 @@
 class Auction < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
-  belongs_to :mechanism_subcategory
   belongs_to :mechanism_category
+
+  has_many :mechanism_subcategories, through: :auction_subcategories
+  has_many :auction_subcategories
 
   has_many :bids
   has_many :mechanisms, through: :bids
@@ -30,8 +32,8 @@ class Auction < ActiveRecord::Base
   end
 
   def sent_opportunity_emails
-    users = User.joins(:mechanisms).where(' "mechanisms"."mechanism_category_id" = ?', self.mechanism_category_id)
-    users = users.where(' "mechanisms"."mechanism_subcategory_id" = ?', self.mechanism_subcategory_id) if  self.mechanism_subcategory_id.present?
+    users = User.joins(:mechanisms).where('"mechanisms"."mechanism_category_id" = ?', self.mechanism_category_id)
+    users = users.where(' "mechanisms"."mechanism_subcategory_id" in (?)', self.auction_subcategories.pluck(:mechanism_subcategory_id)) if  self.auction_subcategories.present?
 
     users.each do |user|
       UserMailer.new_opportunity_email(user, self.id).deliver_later if user.send_email?

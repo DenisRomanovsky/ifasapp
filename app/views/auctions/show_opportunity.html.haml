@@ -10,7 +10,7 @@
   %dt
     Подкатегория
   %dd
-    = @opportunity.mechanism_subcategory.description if @opportunity.mechanism_subcategory
+    = @opportunity.mechanism_subcategories.pluck(:description).join(', ') if @opportunity.mechanism_subcategories.any?
   %dt
     Другие участники
   %dd

@@ -11,7 +11,7 @@ class AuctionsController < ApplicationController
       @auction_category_id = MechanismCategory.first.id
     else
       @auction_category_id = auction_sub_category.mechanism_category_id
-      @auction_sub_category_id = auction_sub_category.id
+      @auction_sub_categories = [auction_sub_category.id]
     end
   end
 
@@ -25,20 +25,21 @@ class AuctionsController < ApplicationController
 
     @auction.end_time = @auction.end_time - 3.hours # Make sure we save time in Minsk TimeZone.
 
+    create_auction_subcats
+
     if @auction.save
       redirect_to auctions_path, flash: { notice: 'Аукцион создан.' }
       @auction.sent_opportunity_emails
     else
-      auction_sub_category_id = params.dig(:auction, :mechanism_subcategory_id)
-
-      if auction_sub_category_id.blank?
+      if auction_subcategories.blank?
         @auction_category_id = MechanismCategory.first.id
       else
-        @auction_category_id = MechanismSubcategory.find(auction_sub_category_id).mechanism_category_id
-        @auction_sub_category_id = auction_sub_category_id
+        @auction_category_id = MechanismSubcategory.find(auction_subcategories.last).mechanism_category_id
+        @auction_sub_categories = auction_subcategories
       end
 
       @block_categories = true
+
       @auction.end_time = @auction.end_time + 3.hours
       render action: 'edit', auction: @auction
     end
@@ -53,7 +54,7 @@ class AuctionsController < ApplicationController
   def edit
     @auction = Auction.where(user_id: current_user.id, id: params[:id].to_i).first
     @auction_category_id = @auction.mechanism_category_id
-    @auction_sub_category_id = @auction.mechanism_subcategory_id
+    @auction_sub_categories = @auction.auction_subcategories.pluck(:mechanism_subcategory_id)
     @edit_action = true
 
     raise ActionController::RoutingError.new('Страница не найдена') unless @auction.present?
@@ -62,6 +63,9 @@ class AuctionsController < ApplicationController
   def update
     @auction = Auction.where(user_id: current_user.id, id: params[:id].to_i).first
     if @auction.update_attributes(auction_params)
+      @auction.auction_subcategories.delete_all
+      create_auction_subcats
+      @auction.save
       redirect_to auctions_path, flash: { notice: 'Изменения сохранены.' }
     else
       render action: 'edit', auction: params[:auction]
@@ -69,7 +73,7 @@ class AuctionsController < ApplicationController
   end
 
   def index
-    @auctions = Auction.where(user_id: current_user.id).includes(:mechanism_subcategory)
+    @auctions = Auction.where(user_id: current_user.id).includes(:mechanism_subcategories)
   end
 
   def update_subcategories
@@ -99,6 +103,14 @@ class AuctionsController < ApplicationController
 
   def auction_params
     params.require(:auction).permit(:start_time, :end_time, :description, :mechanism_subcategory_id, :mechanism_category_id)
+  end
+
+  def create_auction_subcats
+    auction_subcategories = params.dig(:auction, :auction_subcategories) || []
+
+    auction_subcategories.each do |subcat_id|
+      @auction.auction_subcategories.build(mechanism_subcategory_id: subcat_id)
+    end
   end
 
 end
