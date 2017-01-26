@@ -1,5 +1,5 @@
 class Auction < ActiveRecord::Base
-  belongs_to :owner, class_name: 'User'
+  belongs_to :owner, class_name: 'User', foreign_key: :user_id
   belongs_to :mechanism_category
 
   has_many :mechanism_subcategories, through: :auction_subcategories
@@ -7,7 +7,6 @@ class Auction < ActiveRecord::Base
 
   has_many :bids
   has_many :mechanisms, through: :bids
-  has_many :bidders, through: :bids, class_name: 'User'
 
   enum status: [ :active, :finished ]
 
@@ -38,5 +37,9 @@ class Auction < ActiveRecord::Base
     users.each do |user|
       UserMailer.new_opportunity_email(user, self.id).deliver_later if user.send_email?
     end
+  end
+
+  def bidders
+    User.joins(:bids).where('"bids".auction_id = ?', self.id).group('"users".id')
   end
 end

@@ -3,7 +3,7 @@ class StatusSetterJob < ActiveJob::Base
 
   def perform
     puts 'JOB STARTED ' + Time.now.to_s
-    Auction.includes(:bidders, :owner).active.where('end_time < ?', Time.now.utc).each do |auction|
+    Auction.includes(:owner).active.where('end_time < ?', Time.now.utc).each do |auction|
       auction.update_attribute(:status, :finished)
 
       UserMailer.auction_finished_owner_email(auction.owner, auction.id).deliver_later
