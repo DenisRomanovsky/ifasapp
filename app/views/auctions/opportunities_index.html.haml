@@ -27,7 +27,7 @@
             %td
               = opportunity.mechanism_subcategory.description if opportunity.mechanism_subcategory
             %td
-              = opportunity.end_time
+              = opportunity.end_time.strftime("%d/%m/%Y %R")
             %td
               %a.btn.btn-default{href: show_opportunity_path(opportunity.id),role: "button"}
                 Детали

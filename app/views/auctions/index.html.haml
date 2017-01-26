@@ -22,7 +22,7 @@
             %td
               = auction.mechanism_category.description
             %td
-              = auction.end_time
+              = auction.end_time.strftime("%d/%m/%Y %R")
             %td
               %a.btn.btn-default{href: edit_auction_path(auction.id),role: "button"}
                 Редактировать

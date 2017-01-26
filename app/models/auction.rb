@@ -26,7 +26,7 @@ class Auction < ActiveRecord::Base
 
   def validate_times
     if start_time.present? &&  end_time.present?
-      errors.add(:start_time, 'Время начала аукциона должно быть раньше времени окончания.') if start_time > end_time
+      errors.add(:end_time, "Время начала аукциона (#{start_time.strftime("%d/%m/%Y %R")}) должно быть раньше времени окончания.") if start_time > end_time
     end
   end
 

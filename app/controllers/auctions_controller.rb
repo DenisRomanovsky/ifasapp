@@ -52,10 +52,12 @@ class AuctionsController < ApplicationController
   end
 
   def edit
-    @auction = Auction.where(user_id: current_user.id, id: params[:id].to_i).first
+    @auction = Auction.where(user_id: current_user.id, id: params[:id].to_i).first!
     @auction_category_id = @auction.mechanism_category_id
     @auction_sub_categories = @auction.auction_subcategories.pluck(:mechanism_subcategory_id)
-    @edit_action = true
+
+    @block_categories = true
+    @forbid_data_edit = @auction.finished?
 
     raise ActionController::RoutingError.new('Страница не найдена') unless @auction.present?
   end
@@ -68,6 +70,9 @@ class AuctionsController < ApplicationController
       @auction.save
       redirect_to auctions_path, flash: { notice: 'Изменения сохранены.' }
     else
+      @block_categories = true
+      @auction_category_id = @auction.mechanism_category_id
+      @auction_sub_categories = @auction.auction_subcategories.pluck(:mechanism_subcategory_id)
       render action: 'edit', auction: params[:auction]
     end
   end
