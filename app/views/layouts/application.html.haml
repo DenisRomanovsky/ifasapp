@@ -9,7 +9,7 @@
 
   %body.body-style
     = render 'shared/menu'
-    .container.dark-bg-wrapper{style: 'padding-top: 50px;'}
+    .container.dark-bg-wrapper.no-side-padding{style: 'padding-top: 50px;'}
       - if notice.present?
         %p.alert.alert-success
           = notice

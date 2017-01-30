@@ -19,6 +19,11 @@ $white-color: #fff;
   background-color: $main-color;
 }
 
+.no-side-padding{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .first-wallpaper {
   z-index: 1;
   width: 100%;
@@ -29,21 +34,13 @@ $white-color: #fff;
   overflow: hidden;
 }
 
-.h1-app-welcome{
-  text-align: right;
-  color: $white-color;
-  font-size: 55px;
-  font-weight: 900;
-  text-transform: uppercase;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
 .h2-app-welcome{
   text-align: right;
-  color: $white-color;
+  color: $main-color;
   font-size: 30px;
   font-weight: 600;
   text-transform: uppercase;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .h3-app-welcome{
@@ -58,19 +55,30 @@ $white-color: #fff;
 .p-app-welcome{
   text-align: right;
   color: $white-color;
+  font-style: italic;
 }
 
 .first-info-block{
-  background: rgba(64,57,57,0.60);
+  background: rgba(64,57,57,0.40);
   overflow: hidden;
   z-index: 2;
 }
+
 /* Categories tree */
 
 .categories-tree-holder{
   z-index: 3;
   margin-top: 15px;
   color: $white-color;
+  max-height: 790px;
+}
+
+.categories-list-ul{
+  overflow-y:auto;
+  max-height: 790px;
+}
+
+.well .darker-bg-wrapper{
   max-height: 790px;
 }
 
@@ -87,10 +95,36 @@ $white-color: #fff;
     background-color: $main-color;
 }
 
-.subcategory-option:hover {
+.categories-tree-link:hover {
     background-color: $main-color;
 }
 
 .subcategory-option{
   background-color: $darker-bg-color;
+}
+
+/* Menu */
+
+.navbar{
+  background: rgba(0,0,0,0);
+  border-color: rgba(0,0,0,0);
+
+  text-transform: uppercase;
+}
+
+.navbar-default .navbar-nav > li > a{
+  color: $white-color;
+}
+
+#collapse-menu-ifasapp{
+  background: $dark-bg-color;
+  border-color: rgba(0,0,0,0);
+}
+
+.navbar-default .navbar-nav > li > a:hover{
+  color: $main-color;
+}
+
+.navbar-default .navbar-nav > li .active > a{
+  background: $main-color;
 }
