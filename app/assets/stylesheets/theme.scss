@@ -5,6 +5,7 @@ $white-color: #fff;
 
 .body-style {
   background-image: url('generic-background.jpg');
+  color: $white-color;
 }
 
 .dark-bg-wrapper {
@@ -62,6 +63,20 @@ $white-color: #fff;
   background: rgba(64,57,57,0.40);
   overflow: hidden;
   z-index: 2;
+}
+
+.align-text-center-block{
+  text-align: center;
+}
+
+#second-info-block-entry{
+  margin-top: 20px;
+}
+
+#second-info-block-info{
+  padding-top: 40px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 /* Categories tree */
@@ -127,4 +142,18 @@ $white-color: #fff;
 
 .navbar-default .navbar-nav > li .active > a{
   background: $main-color;
+}
+
+.custom-menu{
+  margin-bottom: 0;
+  max-width: 100%;
+  border: none;
+}
+
+/* Icons */
+
+#second-info-block-info .col-sm-4 i {
+  color: $main-color;
+  font-size: 80px;
+  display: block;
 }
