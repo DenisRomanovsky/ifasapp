@@ -7,10 +7,9 @@
     %title
       Vanya`s app
 
-  %body.main-bg-2
+  %body.body-style
     = render 'shared/menu'
-    .container{style: 'padding-top: 50px;'}
-      %div{style: 'padding-top: 10px;'}
+    .container.dark-bg-wrapper{style: 'padding-top: 50px;'}
       - if notice.present?
         %p.alert.alert-success
           = notice

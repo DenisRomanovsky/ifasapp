@@ -1,0 +1,96 @@
+$main-color: #ff1744;
+$dark-bg-color: #252830;
+$darker-bg-color: #1e2127;
+$white-color: #fff;
+
+.body-style {
+  background-image: url('generic-background.jpg');
+}
+
+.dark-bg-wrapper {
+  background-color: $dark-bg-color;
+}
+
+.darker-bg-wrapper{
+  background-color: $darker-bg-color;
+}
+
+.main-bg-color-wrapper {
+  background-color: $main-color;
+}
+
+.first-wallpaper {
+  z-index: 1;
+  width: 100%;
+  min-height: 540px;
+  background: rgba(0, 0, 0, 0) url('wallpaper1.jpg') repeat scroll 0 0;
+  -webkit-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.h1-app-welcome{
+  text-align: right;
+  color: $white-color;
+  font-size: 55px;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.h2-app-welcome{
+  text-align: right;
+  color: $white-color;
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.h3-app-welcome{
+  text-align: right;
+  margin-top: 140px;
+  color: $white-color;
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.p-app-welcome{
+  text-align: right;
+  color: $white-color;
+}
+
+.first-info-block{
+  background: rgba(64,57,57,0.60);
+  overflow: hidden;
+  z-index: 2;
+}
+/* Categories tree */
+
+.categories-tree-holder{
+  z-index: 3;
+  margin-top: 15px;
+  color: $white-color;
+  max-height: 790px;
+}
+
+.categories-tree-link  {
+  color: $white-color;
+}
+
+.category-tree-header{
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.category-option:hover {
+    background-color: $main-color;
+}
+
+.subcategory-option:hover {
+    background-color: $main-color;
+}
+
+.subcategory-option{
+  background-color: $darker-bg-color;
+}

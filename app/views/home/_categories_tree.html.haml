@@ -1,17 +1,15 @@
-.row
-  .span3
-    .well
-      %div
-        %h3
-          Мне нужно арендовать:
-        %ul.nav.nav-list
-          - @categories.each do |mech_category, mech_subcategories|
-            %li
-              %label.tree-toggle.nav-header
-                = mech_category.description
-              %ul.nav.nav-list.tree{style: 'display: none;'}
-                - mech_subcategories.each do |mech_subcategory|
-                  %li
-                    %a{href: new_auction_path(mech_subcategory: mech_subcategory.id)}
-                      = mech_subcategory.description
+.categories-tree-holder
+  .well.darker-bg-wrapper
+    %h3.category-tree-header
+      Мне нужно арендовать:
+    %ul.nav.nav-list
+      - @categories.each do |mech_category, mech_subcategories|
+        %li.category-option
+          %label.tree-toggle.nav-header
+            = mech_category.description
+          %ul.nav.nav-list.tree{style: 'display: none;'}
+            - mech_subcategories.each do |mech_subcategory|
+              %li.subcategory-option
+                %a.categories-tree-link{href: new_auction_path(mech_subcategory: mech_subcategory.id)}
+                  = mech_subcategory.description
 = javascript_include_tag('categories_tree')

@@ -1,3 +1,13 @@
-.row
-  .col-sm-5.col-md-5
-    = render 'home/categories_tree', collection: @categories
+.first-wallpaper
+  .row.first-info-block{style: 'margin: 0px;'}
+    .col-sm-5
+      = render 'home/categories_tree', collection: @categories
+    .col-sm-7
+      %h3.h3-app-welcome
+        Добро пожаловать в
+      %h1.h1-app-welcome
+        "Артель"
+      %h2.h2-app-welcome
+        Аренда Техники Легко
+      %p.p-app-welcome
+        Портал, созданный для проведения аукционов по аренде строительной техники.
