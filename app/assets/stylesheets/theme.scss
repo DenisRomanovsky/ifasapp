@@ -69,14 +69,48 @@ $white-color: #fff;
   text-align: center;
 }
 
-#second-info-block-entry{
+.info-block-entry{
   margin-top: 20px;
 }
 
-#second-info-block-info{
+.info-block-info{
   padding-top: 40px;
   padding-bottom: 20px;
   margin-bottom: 20px;
+}
+
+#third-info-block {
+  z-index: 1;
+  width: 100%;
+  min-height: 540px;
+  background: rgba(0, 0, 0, 0) url('wallpaper2.jpg') repeat scroll 0 0;
+  -webkit-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.third-info-block-shader{
+  width: 100%;
+  min-height: 540px;
+  background: rgba(64,57,57,0.60);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.third-block-info-label-white{
+  text-align: center;
+  color: $white-color;
+  font-size: 55px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.third-block-info-label-red{
+  color: $main-color;
+}
+
+.padding-setter{
+  padding-top: 80px;
 }
 
 /* Categories tree */
@@ -152,7 +186,7 @@ $white-color: #fff;
 
 /* Icons */
 
-#second-info-block-info .col-sm-4 i {
+.info-block-info .col-sm-4 i {
   color: $main-color;
   font-size: 80px;
   display: block;
