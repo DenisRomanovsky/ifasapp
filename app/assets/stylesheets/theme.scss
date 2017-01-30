@@ -4,7 +4,7 @@ $darker-bg-color: #1e2127;
 $white-color: #fff;
 
 .body-style {
-  background-image: url('generic-background.jpg');
+  background-image: image-url('generic-background.jpg');
   color: $white-color;
 }
 
@@ -29,7 +29,7 @@ $white-color: #fff;
   z-index: 1;
   width: 100%;
   min-height: 540px;
-  background: rgba(0, 0, 0, 0) url('wallpaper1.jpg') repeat scroll 0 0;
+  background: rgba(0, 0, 0, 0) image-url('wallpaper1.jpg') repeat scroll 0 0;
   -webkit-background-size: cover;
   background-size: cover;
   overflow: hidden;
@@ -83,7 +83,7 @@ $white-color: #fff;
   z-index: 1;
   width: 100%;
   min-height: 540px;
-  background: rgba(0, 0, 0, 0) url('wallpaper2.jpg') repeat scroll 0 0;
+  background: rgba(0, 0, 0, 0) image-url('wallpaper2.jpg') repeat scroll 0 0;
   -webkit-background-size: cover;
   background-size: cover;
   overflow: hidden;
