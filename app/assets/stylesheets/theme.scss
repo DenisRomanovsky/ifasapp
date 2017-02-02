@@ -16,6 +16,10 @@ $white-color: #fff;
   background-color: $darker-bg-color;
 }
 
+.tree-well{
+  max-height: 700px;
+}
+
 .main-bg-color-wrapper {
   background-color: $main-color;
 }
@@ -35,34 +39,24 @@ $white-color: #fff;
   overflow: hidden;
 }
 
-.h2-app-welcome{
-  text-align: right;
-  color: $main-color;
-  font-size: 30px;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.h3-app-welcome{
-  text-align: right;
-  margin-top: 140px;
-  color: $white-color;
-  font-size: 24px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
 .p-app-welcome{
   text-align: right;
   color: $white-color;
   font-style: italic;
+  font-size: 22px;
+  font-weight: 100;
+  margin-right: 30px;
+}
+
+.p-holder{
+  margin-top: 40px;
 }
 
 .first-info-block{
   background: rgba(64,57,57,0.40);
   overflow: hidden;
   z-index: 2;
+  min-height: 550px;
 }
 
 .align-text-center-block{
@@ -97,7 +91,7 @@ $white-color: #fff;
   z-index: 2;
 }
 
-.third-block-info-label-white{
+.large-white-text-white{
   text-align: center;
   color: $white-color;
   font-size: 55px;
@@ -105,12 +99,9 @@ $white-color: #fff;
   text-transform: uppercase;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-.third-block-info-label-red{
-  color: $main-color;
-}
 
 .padding-setter{
-  padding-top: 80px;
+  padding-top: 55px;
 }
 
 /* Categories tree */
@@ -124,15 +115,25 @@ $white-color: #fff;
 
 .categories-list-ul{
   overflow-y:auto;
-  max-height: 790px;
+  max-height: 600px;
 }
 
 .well .darker-bg-wrapper{
   max-height: 790px;
 }
 
-.categories-tree-link  {
+.categories-tree-link {
   color: $white-color;
+}
+
+.nav > li > a.categories-tree-link {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav > li > a.categories-tree-link:hover  {
+  background-color: $main-color;
+  color: $white-color
 }
 
 .category-tree-header{
@@ -141,11 +142,13 @@ $white-color: #fff;
 }
 
 .category-option:hover {
-    background-color: $main-color;
+  background-color: $main-color;
 }
 
-.categories-tree-link:hover {
-    background-color: $main-color;
+.label-long{
+  width: 100%;
+  margin-top:5px;
+  margin-bottom:5px;
 }
 
 .subcategory-option{
@@ -166,7 +169,7 @@ $white-color: #fff;
 }
 
 #collapse-menu-ifasapp{
-  background: $dark-bg-color;
+  background: $darker-bg-color;
   border-color: rgba(0,0,0,0);
 }
 
@@ -190,4 +193,21 @@ $white-color: #fff;
   color: $main-color;
   font-size: 80px;
   display: block;
+}
+
+
+/* Footer */
+
+.footer-custom {
+  height: 40px;
+  background-color: $darker-bg-color;
+}
+
+.footer-right-text{
+  text-align: right;
+}
+
+.footer-contents{
+  margin-top: 15px;
+  color: #8F8E8D;
 }

@@ -1,11 +1,11 @@
 .categories-tree-holder
-  .well.darker-bg-wrapper
+  .well.darker-bg-wrapper.tree-well
     %h3.category-tree-header
       Мне нужно арендовать:
     %ul.nav.nav-list.categories-list-ul
       - @categories.each do |mech_category, mech_subcategories|
         %li.category-option
-          %label.tree-toggle.nav-header
+          %label.tree-toggle.nav-header.label-long
             = mech_category.description
           %ul.nav.nav-list.tree{style: 'display: none;'}
             - mech_subcategories.each do |mech_subcategory|

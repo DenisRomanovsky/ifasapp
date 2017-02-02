@@ -9,7 +9,8 @@
 
   %body.body-style
     = render 'shared/menu'
-    .container.dark-bg-wrapper.no-side-padding{style: 'padding-top: 20px;'}
+    - additional_style = current_page?(root_path) ? 'padding-left: 0; padding-right: 0;' : ''
+    .container.dark-bg-wrapper{style: 'padding-top: 20px; ' + additional_style}
       - if notice.present?
         %p.alert.alert-success
           = notice
@@ -18,3 +19,7 @@
           = alert
 
       = yield
+      - if current_page?(root_path)
+        = render 'shared/footer_static'
+      - else
+        = render 'shared/footer'
