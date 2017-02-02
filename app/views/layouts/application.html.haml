@@ -10,7 +10,7 @@
   %body.body-style
     = render 'shared/menu'
     - additional_style = current_page?(root_path) ? 'padding-left: 0; padding-right: 0;' : ''
-    .container.dark-bg-wrapper{style: 'padding-top: 20px; ' + additional_style}
+    .container.dark-bg-wrapper{style: '' + additional_style}
       - if notice.present?
         %p.alert.alert-success
           = notice
