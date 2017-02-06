@@ -1,9 +1,4 @@
 .row
-  .col-xs-9.col-md-10
-  .col-xs-3.col-md-2
-    %a.btn.btn-default{href: new_mechanism_path,role: "button"}
-      Создать
-.row
   .col-sm-12
     %table.table.table-striped
       %thead
@@ -21,8 +16,10 @@
             %td
               = mech.mechanism_subcategory.description
             %td
-              %a.btn.btn-default{href: edit_mechanism_path(mech.id),role: "button"}
+              %a.btn.btn-default.btn-custom{href: edit_mechanism_path(mech.id),role: "button"}
                 Редактировать
             %td
-              %a.btn.btn-default{href: mechanism_path(mech.id),role: "button"}
+              %a.btn.btn-default.btn-custom{href: mechanism_path(mech.id),role: "button"}
                 Детали
+%a.btn.btn-default.btn-custom{href: new_mechanism_path,role: "button"}
+  Создать

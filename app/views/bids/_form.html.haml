@@ -3,4 +3,4 @@
   = f.text_area :description, value: @description, label: 'Комментарий'
   = f.collection_select(:mechanism_id, current_user.mechanisms, :id, :description, selected: @mechanism, label: 'Техника')
   = hidden_field_tag(:auction_id, params[:auction_id])
-  = f.submit "Сохранить"
+  = f.submit "Сохранить", {class: 'btn btn-default btn-custom '}

@@ -29,8 +29,8 @@
             %td
               = opportunity.end_time.strftime("%d/%m/%Y %R")
             %td
-              %a.btn.btn-default{href: show_opportunity_path(opportunity.id),role: "button"}
+              %a.btn.btn-default.btn-custom{href: show_opportunity_path(opportunity.id),role: "button"}
                 Детали
             %td
-              %a.btn.btn-default{href: new_bid_path(auction_id: opportunity.id),role: "button"}
+              %a.btn.btn-default.btn-custom{href: new_bid_path(auction_id: opportunity.id),role: "button"}
                 Участвовать

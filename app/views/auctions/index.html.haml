@@ -24,10 +24,10 @@
             %td
               = auction.end_time.strftime("%d/%m/%Y %R")
             %td
-              %a.btn.btn-default{href: edit_auction_path(auction.id),role: "button"}
+              %a.btn.btn-default.btn-custom{href: edit_auction_path(auction.id),role: "button"}
                 Редактировать
             %td
-              %a.btn.btn-default{href: auction_path(auction.id),role: "button"}
+              %a.btn.btn-default.btn-custom{href: auction_path(auction.id),role: "button"}
                 Детали
-    %a.btn.btn-default{href: new_auction_path,role: "button"}
+    %a.btn.btn-default.btn-custom{href: new_auction_path,role: "button"}
       Создать новый

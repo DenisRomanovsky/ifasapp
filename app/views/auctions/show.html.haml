@@ -13,7 +13,7 @@
     %dd
       = @auction.mechanism_subcategories.pluck(:description).join(', ') if @auction.mechanism_subcategories.any?
 
-%a.btn.btn-default{href: edit_auction_path(@auction.id),role: "button"}
+%a.btn.btn-default.btn-custom{href: edit_auction_path(@auction.id),role: "button"}
   Редактировать
 
 .row

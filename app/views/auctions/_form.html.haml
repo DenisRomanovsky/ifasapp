@@ -7,6 +7,6 @@
   - if @block_categories
     = f.hidden_field_tag(:mechanism_category_id, @auction_category_id)
   = f.collection_select :auction_subcategories, MechanismSubcategory.where(mechanism_category_id: @auction_category_id), :id, :description, {selected: @auction_sub_categories, label: 'Подкатегории', help: 'Оставьте поле пустым, чтобы аукцион увидели владельцы любой техники выбранной категории.', id: 'auction_subcategory_id', include_blank: false}, {multiple: true}
-  = f.submit "Сохранить"
+  = f.submit "Сохранить", {class: 'btn btn-default btn-custom '}
 
 = javascript_include_tag('categories_selector')

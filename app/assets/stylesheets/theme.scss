@@ -6,6 +6,7 @@ $white-color: #fff;
 .body-style {
   background-image: image-url('generic-background.jpg');
   color: $white-color;
+  heigth: 100%;
 }
 
 .dark-bg-wrapper {
@@ -28,6 +29,28 @@ $white-color: #fff;
   padding-left: 0;
   padding-right: 0;
 }
+
+.btn-custom{
+  color: $white-color;
+  background: $main-color;
+  border-radius: 0px;
+  border: 0px;
+}
+
+.btn-custom:hover{
+  background: $white-color;
+  color: $main-color;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: $dark-bg-color;
+}
+
+.table-striped>tbody>tr:nth-child(even)>td, .table-striped>tbody>tr:nth-child(even)>th {
+  background-color: $darker-bg-color;
+}
+
+/* Home */
 
 .first-wallpaper {
   z-index: 1;

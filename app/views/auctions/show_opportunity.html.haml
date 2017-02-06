@@ -19,5 +19,5 @@
     Моя ставка
   %dd
     = @current_bid.present? ? @current_bid.price : '-'
-%a.btn.btn-default{href: new_bid_path({auction_id: @opportunity.id}),role: "button"}
+%a.btn.btn-default.btn-custom{href: new_bid_path({auction_id: @opportunity.id}),role: "button"}
   Сделать ставку
