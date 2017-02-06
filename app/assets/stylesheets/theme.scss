@@ -131,6 +131,38 @@ $white-color: #fff;
   padding-top: 55px;
 }
 
+.shiny-button {
+  background-color: hsl(347, 100%, 44%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fea3b7", endColorstr="#e00030");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#fea3b7), to($main-color));
+  background-image: -moz-linear-gradient(top, #fea3b7, $main-color);
+  background-image: -ms-linear-gradient(top, #fea3b7, $main-color);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fea3b7), color-stop(100%, $main-color));
+  background-image: -webkit-linear-gradient(top, #fea3b7, $main-color);
+  background-image: -o-linear-gradient(top, #fea3b7, $main-color);
+  background-image: linear-gradient(#fea3b7, $main-color);
+  border-color: $main-color $main-color hsl(347, 100%, 34.5%);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.62);
+  -webkit-font-smoothing: antialiased;
+}
+
+.button-one{
+  margin-top: 80px;
+  height: 70px;
+
+  text-align: center;
+  color: $white-color;
+  font-size: 40px;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.button-two{
+  margin-top: 60px;
+}
+
 /* Scroll bar */
 .custom_scroll::-webkit-scrollbar-track
 {

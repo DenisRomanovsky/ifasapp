@@ -14,12 +14,19 @@
           технику в аренду
         %p.p-app-welcome
           просто.
+      .row
+        .col-sm-12.align-text-center-block
+          - if current_user.present?
+            = link_to("Начать аукцион",  new_auction_path , class: "btn btn-info shiny-button button-one large-white-text-white", role: "button"  )
+          -else
+            = link_to("Войти",  new_user_session_path , class: "btn btn-info shiny-button button-one large-white-text-white", role: "button"  )
+
 .row.info-block-entry
   .col-sm-12.align-text-center-block
     %h1 Арендовать технику легко!
 .row.info-block-info
   .col-sm-4.align-text-center-block.info-columns-margin
-    %i.icofont.icofont-car-alt-4
+    %i.icofont.icofont-concrete-mixer
     %h3
       Создайте аукцион, выбрав нужную категорию техники. Опишите характер и объём работы.
   .col-sm-4.align-text-center-block.info-columns-margin
@@ -42,6 +49,13 @@
         .padding-setter
           %h1.large-white-text-white
             для Вашей техники.
+        .row
+          .col-sm-12.align-text-center-block
+            - if current_user.present?
+              = link_to("Описать технику",  new_mechanism_path , class: "btn btn-info shiny-button button-one button-two large-white-text-white", role: "button"  )
+            -else
+              = link_to("Войти",  new_user_session_path , class: "btn btn-info shiny-button button-one button-two large-white-text-white", role: "button"  )
+
 .row.info-block-entry
   .col-sm-12.align-text-center-block
     %h1 Сдать технику в аренду легко!
@@ -51,7 +65,7 @@
     %h3
       Опишите Вашу технику в специальном разделе, указав правильные категории и подкатегории.
   .col-sm-4.align-text-center-block.info-columns-margin
-    %i.icofont.icofont-fast-delivery
+    %i.icofont.icofont-email
     %h3
       Получайте уведомления о новых аукционах, в которых Вы можете участвовать.
   .col-sm-4.align-text-center-block.info-columns-margin
