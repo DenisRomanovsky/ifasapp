@@ -2,7 +2,7 @@
   .well.darker-bg-wrapper.tree-well
     %h3.category-tree-header
       Мне нужно арендовать:
-    %ul.nav.nav-list.categories-list-ul
+    %ul.nav.nav-list.categories-list-ul.custom_scroll
       - @categories.each do |mech_category, mech_subcategories|
         %li.category-option
           %label.tree-toggle.nav-header.label-long

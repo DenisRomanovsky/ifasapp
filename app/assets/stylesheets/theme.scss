@@ -55,7 +55,7 @@ $white-color: #fff;
 .first-wallpaper {
   z-index: 1;
   width: 100%;
-  min-height: 540px;
+  height: 630px;
   background: rgba(0, 0, 0, 0) image-url('wallpaper1.jpg') repeat scroll 0 0;
   -webkit-background-size: cover;
   background-size: cover;
@@ -131,18 +131,39 @@ $white-color: #fff;
   padding-top: 55px;
 }
 
+/* Scroll bar */
+.custom_scroll::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+.custom_scroll::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.custom_scroll::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
+
 /* Categories tree */
 
 .categories-tree-holder{
   z-index: 3;
   margin-top: 15px;
   color: $white-color;
-  max-height: 790px;
+  max-height: 596px;
 }
 
 .categories-list-ul{
   overflow-y:auto;
-  max-height: 600px;
+  max-height: 510px;
 }
 
 .well .darker-bg-wrapper{
