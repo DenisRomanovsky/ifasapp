@@ -91,5 +91,5 @@ Rails.application.configure do
       enable_starttls_auto: true
   }
 
-  config.consider_all_requests_local = true # Uncomment to allow error page display in prod.
+  config.consider_all_requests_local = false # Uncomment to allow error page display in prod.
 end

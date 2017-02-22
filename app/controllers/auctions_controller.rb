@@ -5,14 +5,9 @@ class AuctionsController < ApplicationController
 
   def new
     @auction = Auction.new
-    auction_sub_category = MechanismSubcategory.find(params['mech_subcategory']) if params['mech_subcategory']
-
-    if auction_sub_category.nil?
-      @auction_category_id = MechanismCategory.first.id
-    else
-      @auction_category_id = auction_sub_category.mechanism_category_id
-      @auction_sub_categories = [auction_sub_category.id]
-    end
+    category = params['mech_category'].present? ? MechanismCategory.find(params['mech_category']) : MechanismCategory.first
+    @auction_category_id = category.id
+    @auction_sub_categories = category.mechanism_subcategories
   end
 
   def create
@@ -31,11 +26,11 @@ class AuctionsController < ApplicationController
       redirect_to auctions_path, flash: { notice: 'Аукцион создан.' }
       @auction.sent_opportunity_emails
     else
-      if auction_subcategories.blank?
+      if @auction.auction_subcategories.blank?
         @auction_category_id = MechanismCategory.first.id
       else
-        @auction_category_id = MechanismSubcategory.find(auction_subcategories.last).mechanism_category_id
-        @auction_sub_categories = auction_subcategories
+        @auction_category_id = auction_parameters['mechanism_category_id']
+        @auction_sub_categories = MechanismSubcategory.where(id: params['auction']['auction_subcategories'])
       end
 
       @block_categories = true

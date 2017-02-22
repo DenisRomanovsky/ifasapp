@@ -1,15 +1,8 @@
 .categories-tree-holder
   .well.darker-bg-wrapper.tree-well
     %h3.category-tree-header
-      Мне нужно арендовать:
+      Аренда:
     %ul.nav.nav-list.categories-list-ul.custom_scroll
       - @categories.each do |mech_category, mech_subcategories|
         %li.category-option
-          %label.tree-toggle.nav-header.label-long
-            = mech_category.description
-          %ul.nav.nav-list.tree{style: 'display: none;'}
-            - mech_subcategories.each do |mech_subcategory|
-              %li.subcategory-option
-                %a.categories-tree-link{href: new_auction_path(mech_subcategory: mech_subcategory.id)}
-                  = mech_subcategory.description
-= javascript_include_tag('categories_tree')
+          = link_to(mech_category.home_description, new_auction_path(mech_category: mech_category.id), class: 'categories-tree-link nav-header label-long')
