@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   post 'auctions/update_subcategories' => 'auctions#update_subcategories'
 
-  resources :auctions
+  resources :auctions, except: [:edit, :update]
 
   resources :bids, only: [:create, :new]
 

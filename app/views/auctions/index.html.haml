@@ -16,16 +16,13 @@
         -@auctions.each do |auction|
           %tr
             %td
-              = auction.description
+              = auction.description.truncate(20, omission: '...')
             %td
               = auction.mechanism_subcategories.pluck(:description).join(', ') if auction.mechanism_subcategories.any?
             %td
               = auction.mechanism_category.description
             %td
               = auction.end_time.strftime("%d/%m/%Y %R")
-            %td
-              %a.btn.btn-default.btn-custom{href: edit_auction_path(auction.id),role: "button"}
-                Редактировать
             %td
               %a.btn.btn-default.btn-custom{href: auction_path(auction.id),role: "button"}
                 Детали

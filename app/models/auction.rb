@@ -42,4 +42,41 @@ class Auction < ActiveRecord::Base
   def bidders
     User.joins(:bids).where('"bids".auction_id = ?', self.id).group('"users".id')
   end
+
+  def self.durations
+    [
+        {id: 1,
+         text: '20 минут',
+         duration: 20.minutes},
+        {id: 2,
+         text: '1 час',
+         duration: 1.hour},
+        {id: 3,
+         text: '1 день',
+         duration: 1.day},
+        {id: 4,
+         text: '1 неделя',
+         duration: 1.week}
+    ]
+  end
+
+  def self.set_end_time(time_now, type)
+    result = time_now
+
+    case type.to_i
+      when 1
+        result += Auction.durations[0][:duration]
+      when 2
+        result += Auction.durations[1][:duration]
+      when 3
+        result += Auction.durations[2][:duration]
+      when 4
+        result += Auction.durations[3][:duration]
+      else
+        puts 'Incorrect auction duration.'
+        result += Auction.durations[0][:duration]
+    end
+
+    result
+  end
 end
