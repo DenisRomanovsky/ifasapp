@@ -5,20 +5,16 @@
         %th
           Описание
         %th
-          Подкатегория
-        %th
           Категория
         %th
-          Время окнчания
+          Время окончания
         %th
         %th
       %tbody
         -@auctions.each do |auction|
           %tr
             %td
-              = auction.description.truncate(20, omission: '...')
-            %td
-              = auction.mechanism_subcategories.pluck(:description).join(', ') if auction.mechanism_subcategories.any?
+              = auction.description.truncate(100, omission: '...')
             %td
               = auction.mechanism_category.description
             %td

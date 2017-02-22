@@ -17,6 +17,8 @@ class AuctionsController < ApplicationController
                                status: :active,
                                mechanism_category_id: params['mechanism_category_id']})
 
+    auction_parameters['with_tax'] == '0' if auction_parameters['cash_payed'] == '0'
+
     @auction = Auction.new(auction_parameters)
 
     @auction.end_time = Auction.set_end_time(time_now, auction_parameters[:end_time])
@@ -29,7 +31,7 @@ class AuctionsController < ApplicationController
     else
       @auction_sub_categories_ids = params.dig(:auction, :auction_subcategories)
       @duration_id = params.dig(:auction, :end_time).to_i
-          render action: 'edit', auction: @auction
+      render action: 'edit', auction: @auction
     end
   end
 
@@ -96,7 +98,7 @@ class AuctionsController < ApplicationController
   private
 
   def auction_params
-    params.require(:auction).permit(:end_time, :description)
+    params.require(:auction).permit(:end_time, :description, :delivery_included, :cash_payed, :with_tax)
   end
 
   def build_auction_subcats

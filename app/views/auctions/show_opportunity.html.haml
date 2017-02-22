@@ -12,6 +12,19 @@
   %dd
     = @opportunity.mechanism_subcategories.pluck(:description).join(', ') if @opportunity.mechanism_subcategories.any?
   %dt
+    Доставка
+  %dd
+    = @auction.delivery_included? ? 'Включена в цену' : 'Не включена в цену'
+  %dt
+    Оплата наличными
+  %dd
+    = @auction.cash_payed? ? 'Да' : 'Нет'
+  - unless @auction.cash_payed?
+    %dt
+      Ставки включают НДС
+    %dd
+      = @auction.with_tax? ? 'Да' : 'Нет'
+  %dt
     Другие участники
   %dd
     = @current_bid.present? ? @total_bids - 1 : @total_bids

@@ -1,9 +1,25 @@
 = bootstrap_form_for(@auction) do |f|
-  = f.select :end_time, options_for_select(Auction.durations.map { |obj| [obj[:text], obj[:id]] }, @duration_id), {label: 'Длительность аукциона'}
-  = f.text_area :description, {label: 'Описание', help: 'Обязательное поле.'}
   = f.collection_select :mechanism_category_id, [@auction_category], :id, :description, {selected: @auction_category.id, label: 'Категория'}, disabled: true
   = f.hidden_field_tag(:mechanism_category_id, @auction_category.id)
   = f.collection_select :auction_subcategories, @auction_sub_categories, :id, :description, {selected: @auction_sub_categories_ids, label: 'Подкатегории', help: 'Оставьте поле пустым, чтобы аукцион увидели владельцы любой техники выбранной категории.', id: 'auction_subcategory_id', include_blank: false}, {multiple: true}
-  = f.submit "Сохранить", {class: 'btn btn-default btn-custom '}
+  = f.text_area :description, {label: 'Описание', help: 'Обязательное поле.'}
+  .form-group
+    = f.check_box :delivery_included, label: 'Ставки с учётом стоимости доставки'
+    %span.help-block.custom-span-auction
+      Отметьте это поле, если ставки участников должны включать в себя стоимость доставки техники к месту проведения работ.
+  .form-group
+    - cash_payed = params.dig(:auction, :cash_payed)
+    = f.check_box :cash_payed, label: 'Оплата наличными', checked: cash_payed.present? ? cash_payed == '1' : true, id: 'cash-checkbox'
+    %span.help-block.custom-span-auction
+      Используйте это поле, чтобы уведомить участников аукциона о способе оплаты.
+      - if cash_payed.present?
+        - display_tax_checkbox =  !(cash_payed == '1')
+  .form-group.nds-form-group{style: display_tax_checkbox ||  'display: none;' }
+    = f.check_box :with_tax, label: 'Ставки с учётом НДС'
+    %span.help-block.custom-span-auction
+      Отметьте это поле, если ставки участников должны включать в себя НДС.
+  = f.select :end_time, options_for_select(Auction.durations.map { |obj| [obj[:text], obj[:id]] }, @duration_id), {label: 'Длительность аукциона'}
+  = f.submit "Сохранить", {class: 'btn btn-default btn-custom ', data: { confirm:  'После публикации аукциона Вы не сможете вносить изменения в его условия и описание. Продолжить?'}}
 
 = javascript_include_tag('categories_selector')
+= javascript_include_tag('nds_hider')
