@@ -2,6 +2,13 @@
   = f.collection_select :mechanism_category_id, [@auction_category], :id, :description, {selected: @auction_category.id, label: 'Категория'}, disabled: true
   = f.hidden_field_tag(:mechanism_category_id, @auction_category.id)
   = f.collection_select :auction_subcategories, @auction_sub_categories, :id, :description, {selected: @auction_sub_categories_ids, label: 'Подкатегории', help: 'Оставьте поле пустым, чтобы аукцион увидели владельцы любой техники выбранной категории.', id: 'auction_subcategory_id', include_blank: false}, {multiple: true}
+
+  .form-group
+    %label.control-label
+      Количество предложений в выбранных подкатегориях
+    %p#bidders-counter
+      = @potential_bidders
+
   = f.text_area :description, {label: 'Описание', help: 'Обязательное поле.'}
   .form-group
     = f.check_box :delivery_included, label: 'Ставки с учётом стоимости доставки'
@@ -23,3 +30,4 @@
 
 = javascript_include_tag('categories_selector')
 = javascript_include_tag('nds_hider')
+= javascript_include_tag('potential_bidders')

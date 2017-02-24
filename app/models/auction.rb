@@ -31,12 +31,24 @@ class Auction < ActiveRecord::Base
   end
 
   def sent_opportunity_emails
-    users = User.joins(:mechanisms).where('"mechanisms"."mechanism_category_id" = ?', self.mechanism_category_id)
-    users = users.where(' "mechanisms"."mechanism_subcategory_id" in (?)', self.auction_subcategories.pluck(:mechanism_subcategory_id)) if  self.auction_subcategories.present?
+    users = Auction.allowed_bidders(self.mechanism_category_id, self.auction_subcategories.pluck(:mechanism_subcategory_id))
 
     users.each do |user|
       UserMailer.new_opportunity_email(user, self.id).deliver_later if user.send_email?
     end
+  end
+
+  def self.allowed_bidders_amount(mechanism_category_id, mechanism_subcategory_ids, current_user)
+    users = users_by_mech_cats(mechanism_category_id, mechanism_subcategory_ids)
+    users = users.map(&:id).uniq.compact
+    users.delete(current_user.id)
+    users.size
+  end
+
+  def self.users_by_mech_cats(mechanism_category_id, mechanism_subcategory_ids)
+    users = User.select(:id).joins(:mechanisms).where('"mechanisms"."mechanism_category_id" = ?', mechanism_category_id)
+    users = users.where(' "mechanisms"."mechanism_subcategory_id" in (?)', mechanism_subcategory_ids) if  mechanism_subcategory_ids.present?
+    users
   end
 
   def bidders

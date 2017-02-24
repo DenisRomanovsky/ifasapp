@@ -1,5 +1,5 @@
 = bootstrap_form_for(@mechanism) do |f|
   = f.text_field :description, {label: 'Модель и марка', help: 'Краткая информация о модели и марке техники.'}
   = f.text_area :long_description, {label: 'Описание', help: 'Детальное описание техники - год выпуска, особеннотти и пр.'}
-  = f.collection_select :mechanism_subcategory_id, MechanismSubcategory.all, :id, :description, prompt: true, label: 'Подкатегория'
+  = f.collection_select :mechanism_subcategory_id, MechanismSubcategory.all.order('description'), :id, :description, prompt: false, label: 'Подкатегория'
   = f.submit "Сохранить", {class: 'btn btn-default btn-custom '}

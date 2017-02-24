@@ -6,6 +6,7 @@ class AuctionsController < ApplicationController
 
   def new
     @auction = Auction.new
+    @potential_bidders = Auction.allowed_bidders_amount(params['mechanism_category_id'], nil, current_user)
   end
 
   def create
@@ -93,6 +94,11 @@ class AuctionsController < ApplicationController
     raise ActionController::RoutingError.new('Страница не найдена') if  !user_can_participate? || @opportunity.blank?
     @current_bid = Bid.where(auction_id: params[:id], user_id: current_user.id).active.first
     @total_bids = Bid.where(auction_id: params[:id]).active.size
+  end
+
+  def get_bidders_counter
+    users_amount = Auction.allowed_bidders_amount(params['category_id'], params['subcategories_ids'], current_user)
+    render json: {'bidders-counter' =>  users_amount}.to_json
   end
 
   private

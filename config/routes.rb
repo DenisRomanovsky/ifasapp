@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'opportunities' => 'auctions#opportunities_index'
   get 'opportunities/:id' => 'auctions#show_opportunity', as: 'show_opportunity'
 
+  post 'auctions/get_bidders_counter' => 'auctions#get_bidders_counter'
   post 'auctions/update_subcategories' => 'auctions#update_subcategories'
 
   resources :auctions, except: [:edit, :update]
