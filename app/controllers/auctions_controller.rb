@@ -28,7 +28,7 @@ class AuctionsController < ApplicationController
 
     if @auction.save
       redirect_to auctions_path, flash: { notice: 'Аукцион создан.' }
-      @auction.sent_opportunity_emails
+      @auction.sent_opportunity_emails(current_user)
     else
       @auction_sub_categories_ids = params.dig(:auction, :auction_subcategories)
       @duration_id = params.dig(:auction, :end_time).to_i
