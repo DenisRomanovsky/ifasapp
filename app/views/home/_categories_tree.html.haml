@@ -5,4 +5,4 @@
     %ul.nav.nav-list.categories-list-ul.custom_scroll
       - @categories.each do |mech_category, mech_subcategories|
         %li.category-option
-          = link_to(mech_category.home_description, new_auction_path(mechanism_category_id: mech_category.id), class: 'categories-tree-link nav-header label-long')
+          = link_to(mech_category.home_description, "arenda/#{mech_category.slug}", class: 'categories-tree-link nav-header label-long')

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   authenticate :admin_user do
-    mount ResqueWeb::Engine => "/resque_web"
+    mount ResqueWeb::Engine => '/resque_web'
   end
 
   ActiveAdmin.routes(self)
@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   post 'auctions/get_bidders_counter' => 'auctions#get_bidders_counter'
   post 'auctions/update_subcategories' => 'auctions#update_subcategories'
 
-  resources :auctions, except: [:edit, :update]
+  resources :auctions, except: [:edit, :update, :new]
+  get 'arenda/:category_slug' => 'auctions#new', constraints: { category_slug: /\w+/ }
 
   resources :bids, only: [:create, :new]
 

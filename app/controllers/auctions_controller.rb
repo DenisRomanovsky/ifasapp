@@ -30,9 +30,10 @@ class AuctionsController < ApplicationController
       redirect_to auctions_path, flash: { notice: 'Аукцион создан.' }
       @auction.sent_opportunity_emails(current_user)
     else
+      #TODO: Check if it works.
       @auction_sub_categories_ids = params.dig(:auction, :auction_subcategories)
       @duration_id = params.dig(:auction, :end_time).to_i
-      render action: 'edit', auction: @auction
+      render action: 'new', auction: @auction
     end
   end
 
@@ -134,9 +135,16 @@ class AuctionsController < ApplicationController
   end
 
   def set_categories
-    category_id = params['mechanism_category_id'] || params.dig(:auction, :mechanism_category_id)
+    category = nil
 
-    category = MechanismCategory.find(category_id)
+    if params['category_slug'].present?
+      category = MechanismCategory.friendly.find(params['category_slug'])
+    elsif params['mechanism_category_id'].present?
+      category = MechanismCategory.find(params['mechanism_category_id'])
+    else
+      raise ActionController::RoutingError.new('Страница не найдена')
+    end
+
     @auction_category = category
     @auction_sub_categories = category.mechanism_subcategories
   end
