@@ -1,36 +1,50 @@
-%dl.dl-horizontal
-  %dt
-    Описание
-  %dd
-    = @opportunity.description
-  %dt
-    Категория
-  %dd
-    = @opportunity.mechanism_category.description
-  %dt
-    Подкатегория
-  %dd
-    = @opportunity.mechanism_subcategories.pluck(:description).join(', ') if @opportunity.mechanism_subcategories.any?
-  %dt
-    Доставка
-  %dd
-    = @auction.delivery_included? ? 'Включена в цену' : 'Не включена в цену'
-  %dt
-    Оплата наличными
-  %dd
-    = @auction.cash_payed? ? 'Да' : 'Нет'
-  - unless @auction.cash_payed?
-    %dt
-      Ставки включают НДС
-    %dd
-      = @auction.with_tax? ? 'Да' : 'Нет'
-  %dt
-    Другие участники
-  %dd
-    = @current_bid.present? ? @total_bids - 1 : @total_bids
-  %dt
-    Моя ставка
-  %dd
-    = @current_bid.present? ? @current_bid.price : '-'
-%a.btn.btn-default.btn-custom{href: new_bid_path({auction_id: @opportunity.id}),role: "button"}
-  Сделать ставку
+.row
+  .col-sm-6
+    %dl.dl-horizontal
+      %dt
+        Описание
+      %dd
+        = @opportunity.description
+      %dt
+        Категория
+      %dd
+        = @opportunity.mechanism_category.description
+      %dt
+        Подкатегория
+      %dd
+        = @opportunity.mechanism_subcategories.pluck(:description).join(', ') if @opportunity.mechanism_subcategories.any?
+      %dt
+        Доставка
+      %dd
+        = @opportunity.delivery_included? ? 'Включена в цену' : 'Не включена в цену'
+      %dt
+        Оплата наличными
+      %dd
+        = @opportunity.cash_payed? ? 'Да' : 'Нет'
+      - unless @opportunity.cash_payed?
+        %dt
+          Ставки включают НДС
+        %dd
+          = @opportunity.with_tax? ? 'Да' : 'Нет'
+      %dt
+        Другие участники
+      %dd
+        = @current_bid.present? ? @total_bids - 1 : @total_bids
+      %dt
+        Моя ставка
+      %dd
+        = @current_bid.present? ? @current_bid.price : '-'
+    - if @time_left > 0
+      %a.btn.btn-default.btn-custom{href: new_bid_path({auction_id: @opportunity.id}),role: "button"}
+        Сделать ставку
+  .col-sm-6
+    - if @time_left > 0
+      %h3
+        Время до окончания аукциона:
+      .timer{ 'data-seconds-left'=>@time_left }
+    - else
+      %h3
+        Аукцион окончен.
+= javascript_include_tag('jquery_simple_timer')
+%script
+  $('.timer').startTimer({onComplete: function(element){ element.addClass('is-complete'); }});

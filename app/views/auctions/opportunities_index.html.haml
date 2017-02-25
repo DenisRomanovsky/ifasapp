@@ -25,7 +25,7 @@
             %td
               = opportunity.mechanism_category.description
             %td
-              = opportunity.mechanism_subcategory.description if opportunity.mechanism_subcategory
+              = opportunity.mechanism_subcategories.pluck(:description).join(', ') if opportunity.mechanism_subcategories.any?
             %td
               = opportunity.end_time.strftime("%d/%m/%Y %R")
             %td

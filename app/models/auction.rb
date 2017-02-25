@@ -40,7 +40,7 @@ class Auction < ActiveRecord::Base
   end
 
   def self.allowed_bidders_amount(mechanism_category_id, mechanism_subcategory_ids, current_user)
-    users = users_by_mech_cats(mechanism_category_id, mechanism_subcategory_ids)
+    users = self.users_by_mech_cats(mechanism_category_id, mechanism_subcategory_ids)
     users = users.map(&:id).uniq.compact
     users.delete(current_user.id)
     users.size

@@ -82,10 +82,26 @@ class AuctionsController < ApplicationController
   def opportunities_index
     @opportunies = []
     mechanisms = current_user.mechanisms
+
     if mechanisms.present?
       @opportunies = Auction
+                         .includes(:mechanism_category, :mechanism_subcategories)
                          .active
-                         .where('mechanism_category_id in (?) AND (mechanism_subcategory_id in (?) OR mechanism_subcategory_id IS NULL) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), mechanisms.pluck(:mechanism_subcategory_id), current_user.id)
+                         .where('auctions.mechanism_category_id in (?) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), current_user.id)
+                         .order('id DESC')
+
+      @opportunies = @opportunies.map do |op|
+        if op.user_id == current_user.id #check the owner
+          next
+        end
+
+        if op.mechanism_subcategories.any?
+          (op.mechanism_subcategories.pluck(:id).compact.uniq & mechanisms.pluck(:mechanism_subcategory_id).compact.uniq).any? ? op : nil
+        else
+          op
+        end
+      end
+      @opportunies = @opportunies.compact.uniq
     end
   end
 
@@ -94,6 +110,8 @@ class AuctionsController < ApplicationController
     raise ActionController::RoutingError.new('Страница не найдена') if  !user_can_participate? || @opportunity.blank?
     @current_bid = Bid.where(auction_id: params[:id], user_id: current_user.id).active.first
     @total_bids = Bid.where(auction_id: params[:id]).active.size
+    time_left = @opportunity.end_time.utc - Time.now.utc
+    @time_left = time_left > 0 ? time_left : 0
   end
 
   def get_bidders_counter
