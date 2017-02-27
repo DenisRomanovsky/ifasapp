@@ -1,6 +1,6 @@
 getBiddersCount = ->
   subcategories_ids = $('#auction_auction_subcategories').val()
-  category_id = $('#mechanism_category_id').val()
+  category_id = $('#auction_mechanism_category_id').val()
   $.post( "get_bidders_counter", {category_id: category_id, subcategories_ids: subcategories_ids}, (data) ->
     $("#bidders-counter").empty().append(data['bidders-counter']);
   ).fail( ->
@@ -9,4 +9,4 @@ getBiddersCount = ->
   )
 
 $('#auction_auction_subcategories').change(getBiddersCount);
-
+$('#auction_mechanism_category_id').change(getBiddersCount);

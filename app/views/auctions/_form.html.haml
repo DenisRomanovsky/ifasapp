@@ -1,6 +1,5 @@
 = bootstrap_form_for(@auction) do |f|
-  = f.collection_select :mechanism_category_id, [@auction_category], :id, :description, {selected: @auction_category.id, label: 'Категория'}, disabled: true
-  = f.hidden_field_tag(:mechanism_category_id, @auction_category.id)
+  = f.collection_select :mechanism_category_id, MechanismCategory.all, :id, :description, {selected: @auction_category.id, label: 'Категория'}, disabled: false
   = f.collection_select :auction_subcategories, @auction_sub_categories, :id, :description, {selected: @auction_sub_categories_ids, label: 'Подкатегории', help: 'Оставьте поле пустым, чтобы аукцион увидели владельцы любой техники выбранной категории.', id: 'auction_subcategory_id', include_blank: false}, {multiple: true}
 
   .form-group

@@ -15,8 +15,7 @@ class AuctionsController < ApplicationController
 
     auction_parameters.merge!({user_id: current_user.id,
                                start_time: time_now,
-                               status: :active,
-                               mechanism_category_id: params['mechanism_category_id']})
+                               status: :active})
 
     auction_parameters['with_tax'] == '0' if auction_parameters['cash_payed'] == '0'
 
@@ -30,7 +29,6 @@ class AuctionsController < ApplicationController
       redirect_to auctions_path, flash: { notice: 'Аукцион создан.' }
       @auction.sent_opportunity_emails(current_user)
     else
-      #TODO: Check if it works.
       @auction_sub_categories_ids = params.dig(:auction, :auction_subcategories)
       @duration_id = params.dig(:auction, :end_time).to_i
       render action: 'new', auction: @auction
@@ -116,14 +114,15 @@ class AuctionsController < ApplicationController
   end
 
   def get_bidders_counter
-    users_amount = Auction.allowed_bidders_amount(params['category_id'], params['subcategories_ids'], current_user)
+    subcats = params['subcategories_ids'].present? ? params['subcategories_ids'] : []
+    users_amount = Auction.allowed_bidders_amount(params['category_id'], subcats, current_user)
     render json: {'bidders-counter' =>  users_amount}.to_json
   end
 
   private
 
   def auction_params
-    params.require(:auction).permit(:end_time, :description, :delivery_included, :cash_payed, :with_tax)
+    params.require(:auction).permit(:end_time, :description, :delivery_included, :cash_payed, :with_tax, :mechanism_category_id)
   end
 
   def build_auction_subcats
@@ -139,14 +138,16 @@ class AuctionsController < ApplicationController
 
     if params['category_slug'].present?
       category = MechanismCategory.friendly.find(params['category_slug'])
-    elsif params['mechanism_category_id'].present?
-      category = MechanismCategory.find(params['mechanism_category_id'])
+    elsif params['auction'].present?
+      category_id = params.dig(:auction, :mechanism_category_id)
+      category = category_id.present? ? MechanismCategory.find(category_id) : MechanismCategory.first
     else
-      raise ActionController::RoutingError.new('Страница не найдена')
+      category = MechanismCategory.first
     end
 
     @auction_category = category
     @auction_sub_categories = category.mechanism_subcategories
+    @auction_article = category.article
   end
 
 end

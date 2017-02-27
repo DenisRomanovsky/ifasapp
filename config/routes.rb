@@ -18,8 +18,10 @@ Rails.application.routes.draw do
   get 'opportunities' => 'auctions#opportunities_index'
   get 'opportunities/:id' => 'auctions#show_opportunity', as: 'show_opportunity'
 
-  post 'auctions/get_bidders_counter' => 'auctions#get_bidders_counter'
-  post 'auctions/update_subcategories' => 'auctions#update_subcategories'
+  post 'arenda/get_bidders_counter' => 'auctions#get_bidders_counter'
+  post 'arenda/update_subcategories' => 'auctions#update_subcategories'
+  post '/get_bidders_counter' => 'auctions#get_bidders_counter'
+  post '/update_subcategories' => 'auctions#update_subcategories'
 
   resources :auctions, except: [:edit, :update, :new]
   get 'arenda/:category_slug' => 'auctions#new', constraints: { category_slug: /\w+/ }
