@@ -7,7 +7,7 @@
     %title
       Vanya`s app
 
-  %body.body-style
+  %body
     = render 'shared/menu'
     - additional_style = current_page?(root_path) ? 'padding-left: 0; padding-right: 0; ' : 'min-height: 100%; height: 100px;'
     .container.dark-bg-wrapper{style: '' + additional_style}

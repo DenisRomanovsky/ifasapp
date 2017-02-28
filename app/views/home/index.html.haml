@@ -17,9 +17,9 @@
       .row
         .col-sm-12.align-text-center-block
           - if current_user.present?
-            = link_to("Начать аукцион",  "#" , class: "btn btn-info shiny-button button-one large-white-text-white", role: "button"  )
+            = link_to("Начать аукцион",  "#" , class: "btn btn-info button-one large-white-text-white", role: "button"  )
           -else
-            = link_to("Войти",  new_user_session_path , class: "btn btn-info shiny-button button-one large-white-text-white", role: "button"  )
+            = link_to("Войти",  new_user_session_path , class: "btn btn-info button-one large-white-text-white", role: "button"  )
 
 .row.info-block-entry
   .col-sm-12.align-text-center-block
@@ -52,9 +52,9 @@
         .row
           .col-sm-12.align-text-center-block
             - if current_user.present?
-              = link_to("Описать технику",  new_mechanism_path , class: "btn btn-info shiny-button button-one button-two large-white-text-white", role: "button"  )
+              = link_to("Описать технику",  new_mechanism_path , class: "btn btn-info button-one button-two large-white-text-white", role: "button"  )
             -else
-              = link_to("Войти",  new_user_session_path , class: "btn btn-info shiny-button button-one button-two large-white-text-white", role: "button"  )
+              = link_to("Войти",  new_user_session_path , class: "btn btn-info button-one button-two large-white-text-white", role: "button"  )
 
 .row.info-block-entry
   .col-sm-12.align-text-center-block
