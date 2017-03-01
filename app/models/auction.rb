@@ -10,16 +10,16 @@ class Auction < ActiveRecord::Base
 
   enum status: [ :active, :finished ]
 
-  validates_presence_of :description, :user_id, :start_time, :end_time, :mechanism_category_id
+  validates_presence_of :description, :start_time, :end_time, :mechanism_category_id
 
   validate do |auction|
-    auction.must_be_in_future
-    auction.validate_times
+    #auction.must_be_in_future
+    #auction.validate_times
+    auction.validate_owner
   end
 
   def must_be_in_future
     if start_time.present? && end_time.present?
-      #errors.add(:start_time, 'Время начала и старта аукциона должны быть в будущем.') if start_time < Time.current
       errors.add(:end_time, 'Время окончания аукциона должно быть в будущем.') if end_time < Time.current
     end
   end
@@ -30,9 +30,15 @@ class Auction < ActiveRecord::Base
     end
   end
 
+  def validate_owner
+    if user_id.blank? && user_email.blank?
+      errors.add(:user_email, 'Необходимо указать адрес для получения результата аукциона')
+    end
+  end
+
   def sent_opportunity_emails(current_user)
     users = Auction.users_by_mech_cats(self.mechanism_category_id, self.auction_subcategories.pluck(:mechanism_subcategory_id))
-    users = users.where('users.id != ?', current_user.id).uniq
+    users = users.where('users.id != ?', current_user.id).uniq if current_user.present?
 
     users.each do |user|
       UserMailer.new_opportunity_email(user.id, self.id).deliver_later
@@ -42,7 +48,7 @@ class Auction < ActiveRecord::Base
   def self.allowed_bidders_amount(mechanism_category_id, mechanism_subcategory_ids, current_user)
     users = self.users_by_mech_cats(mechanism_category_id, mechanism_subcategory_ids)
     users = users.map(&:id).uniq.compact
-    users.delete(current_user.id)
+    users.delete(current_user.id) if current_user.present?
     users.size
   end
 

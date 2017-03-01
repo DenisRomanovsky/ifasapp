@@ -1,44 +1,33 @@
 class AuctionsController < ApplicationController
   include ApplicationHelper
 
-  before_action :authenticate_user!
-  before_action :set_categories, only: [:new, :create]
+  before_action :authenticate_user!, except: [:new_unregistered, :create_unregistered, :update_subcategories, :show]
+  before_action :set_categories, only: [:new, :create, :new_unregistered, :create_unregistered]
 
   def new
-    @auction = Auction.new
-    @potential_bidders = Auction.allowed_bidders_amount(params['mechanism_category_id'], nil, current_user)
+    setup_new_auction(current_user)
+  end
+
+  def new_unregistered
+    setup_new_auction(nil)
   end
 
   def create
-    auction_parameters = auction_params
-    time_now = Time.now.utc + 5.seconds
+    save_auction
+  end
 
-    auction_parameters.merge!({user_id: current_user.id,
-                               start_time: time_now,
-                               status: :active})
-
-    auction_parameters['with_tax'] == '0' if auction_parameters['cash_payed'] == '0'
-
-    @auction = Auction.new(auction_parameters)
-
-    @auction.end_time = Auction.set_end_time(time_now, auction_parameters[:end_time])
-
-    build_auction_subcats
-
-    if @auction.save
-      redirect_to auctions_path, flash: { notice: 'Аукцион создан.' }
-      @auction.sent_opportunity_emails(current_user)
-    else
-      @auction_sub_categories_ids = params.dig(:auction, :auction_subcategories)
-      @duration_id = params.dig(:auction, :end_time).to_i
-      render action: 'new', auction: @auction
-    end
+  def create_unregistered
+    save_auction
   end
 
   def show
-    @auction = current_user.auctions.where(id: params[:id]).first
-    raise ActionController::RoutingError.new('Страница не найдена') unless @auction.present?
-    @bids = @auction.bids.active.joins(:mechanism).order('price ASC')
+    if current_user.present?
+      @auction = current_user.auctions.where(id: params[:id]).first
+      raise ActionController::RoutingError.new('Страница не найдена') unless @auction.present?
+      @bids = @auction.bids.includes(:user).active.joins(:mechanism).order('price ASC')
+    else
+      @auction = Auction.find(params[:id])
+    end
   end
 
   #Not used for now.
@@ -122,7 +111,9 @@ class AuctionsController < ApplicationController
   private
 
   def auction_params
-    params.require(:auction).permit(:end_time, :description, :delivery_included, :cash_payed, :with_tax, :mechanism_category_id)
+    params.require(:auction).permit(:end_time, :description, :delivery_included,
+                                    :cash_payed, :with_tax, :mechanism_category_id,
+                                    :user_email)
   end
 
   def build_auction_subcats
@@ -148,6 +139,37 @@ class AuctionsController < ApplicationController
     @auction_category = category
     @auction_sub_categories = category.mechanism_subcategories
     @auction_article = category.article
+  end
+
+  def setup_new_auction(user)
+    @auction = Auction.new
+    @potential_bidders = Auction.allowed_bidders_amount(params['mechanism_category_id'], nil, user)
+  end
+
+  def save_auction
+    auction_parameters = auction_params
+    time_now = Time.now.utc + 5.seconds
+
+    auction_parameters.merge!({user_id: current_user.present? ? current_user.id : nil,
+                               start_time: time_now,
+                               status: :active})
+
+    auction_parameters['with_tax'] == '0' if auction_parameters['cash_payed'] == '0'
+
+    @auction = Auction.new(auction_parameters)
+
+    @auction.end_time = Auction.set_end_time(time_now, auction_parameters[:end_time])
+
+    build_auction_subcats
+
+    if @auction.save
+      redirect_to auction_path(@auction), flash: { notice: 'Аукцион создан.' }
+      @auction.sent_opportunity_emails(current_user)
+    else
+      @auction_sub_categories_ids = params.dig(:auction, :auction_subcategories)
+      @duration_id = params.dig(:auction, :end_time).to_i
+      render action: current_user.present? ? 'new' :'new_unregistered', auction: @auction
+    end
   end
 
 end

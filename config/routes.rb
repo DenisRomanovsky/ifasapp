@@ -18,13 +18,20 @@ Rails.application.routes.draw do
   get 'opportunities' => 'auctions#opportunities_index'
   get 'opportunities/:id' => 'auctions#show_opportunity', as: 'show_opportunity'
 
+
+  # Dynamic data on auction create form.
   post 'arenda/get_bidders_counter' => 'auctions#get_bidders_counter'
   post 'arenda/update_subcategories' => 'auctions#update_subcategories'
   post '/get_bidders_counter' => 'auctions#get_bidders_counter'
   post '/update_subcategories' => 'auctions#update_subcategories'
 
+  # Auction basic routes.
   resources :auctions, except: [:edit, :update, :new]
-  get 'arenda/:category_slug' => 'auctions#new', constraints: { category_slug: /\w+/ }
+  get 'arenda/:category_slug' => 'auctions#new', constraints: { category_slug: /\w+/ }, as: 'new_arenda'
+
+  # Auctions for unregistered users.
+  get 'bystraia-arenda/:category_slug' => 'auctions#new_unregistered', constraints: { category_slug: /\w+/ }, as: 'quick_new_arenda'
+  post 'bystraia-arenda/' => 'auctions#create_unregistered'
 
   resources :bids, only: [:create, :new]
 

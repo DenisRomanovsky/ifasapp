@@ -25,27 +25,29 @@
         Ставки включают НДС
       %dd
         = @auction.with_tax? ? 'Да' : 'Нет'
-.row
-  .col-sm-12
-    %table.table.table-striped
-      %thead
-        %th
-          Описание
-        %th
-          Лот
-        %th
-          Профиль владельца
-        %th
-          Цена
-      %tbody
-        -@bids.each do |bid|
-          %tr
-            %td
-              = bid.description
-            %td
-              = link_to bid.mechanism.description, mechanism_path(bid.mechanism.id)
-            %td
-              Ссылка на профиль
-            %td
-              = bid.price
+
+- if current_user.present?
+  .row
+    .col-sm-12
+      %table.table.table-striped
+        %thead
+          %th
+            Описание
+          %th
+            Лот
+          %th
+            Профиль владельца
+          %th
+            Цена
+        %tbody
+          -@bids.each do |bid|
+            %tr
+              %td
+                = bid.description
+              %td
+                = link_to bid.mechanism.description, mechanism_path(bid.mechanism.id)
+              %td
+                Ссылка на профиль
+              %td
+                = bid.price
 

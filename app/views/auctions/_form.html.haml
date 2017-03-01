@@ -1,12 +1,15 @@
-= bootstrap_form_for(@auction) do |f|
-  = f.collection_select :mechanism_category_id, MechanismCategory.all, :id, :description, {selected: @auction_category.id, label: 'Категория'}, disabled: false
+= bootstrap_form_for(@auction, url: current_user.present? ? '/auctions' : '/bystraia-arenda') do |f|
+  - unless current_user.present?
+    = f.email_field :user_email, autofocus: true
+  = f.collection_select :mechanism_category_id, current_user.present? ? MechanismCategory.all : [@auction_category], :id, :description, {selected: @auction_category.id, label: 'Категория'}, disabled: false
   = f.collection_select :auction_subcategories, @auction_sub_categories, :id, :description, {selected: @auction_sub_categories_ids, label: 'Подкатегории', help: 'Оставьте поле пустым, чтобы аукцион увидели владельцы любой техники выбранной категории.', id: 'auction_subcategory_id', include_blank: false}, {multiple: true}
 
-  .form-group
-    %label.control-label
-      Количество предложений в выбранных подкатегориях
-    %p#bidders-counter
-      = @potential_bidders
+  - if current_user.present?
+    .form-group
+      %label.control-label
+        Количество предложений в выбранных подкатегориях
+      %p#bidders-counter
+        = @potential_bidders
 
   = f.text_area :description, {label: 'Описание', help: 'Обязательное поле.'}
   .form-group
@@ -27,6 +30,8 @@
   = f.select :end_time, options_for_select(Auction.durations.map { |obj| [obj[:text], obj[:id]] }, @duration_id), {label: 'Длительность аукциона'}
   = f.submit "Сохранить", {class: 'btn btn-default btn-custom ', data: { confirm:  'После публикации аукциона Вы не сможете вносить изменения в его условия и описание. Продолжить?'}}
 
-= javascript_include_tag('categories_selector')
+- if current_user.present?
+  = javascript_include_tag('categories_selector')
+  = javascript_include_tag('potential_bidders')
+
 = javascript_include_tag('nds_hider')
-= javascript_include_tag('potential_bidders')

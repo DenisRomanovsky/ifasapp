@@ -6,8 +6,40 @@
 <body>
 <h1>Аукцион окончен</h1>
 <p>
-  <%= link_to 'Аукцион', show_opportunity_url(@auction_id)%> окончен, и доступны результаты.<br>
+  <%= link_to 'Аукцион', show_opportunity_url(@auction.id)%> окончен, и доступны результаты.<br>
 </p>
+<table>
+  <thead>
+  <th>
+    Описание
+  </th>
+
+  <th>
+    Цена
+  </th>
+
+  <th>
+    Контакты участника
+  </th>
+
+  </thead>
+  <tbody>
+  <% @auction.bids.active.each do |bid| %>
+      <tr>
+        <td>
+          <%= bid.description %>
+        </td>
+        <td>
+          <%= bid.price%>
+        </td>
+        <td>
+          <%= bid.user.email %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
 <p>
   С уважением
   Команда ifasapp

@@ -6,18 +6,18 @@ class UserMailer < ApplicationMailer
     return  if @user.user_info.present? &&  !@user.user_info.send_email?
 
     @opportunity_id = opportunity_id
-    mail(to: @user.email, subject: 'ifasapp: Новый аукцион: спрос на Вашу технику.')
+    mail(to: @user.email, subject: 'Артель - Новый аукцион: спрос на Вашу технику.')
   end
 
-  def auction_finished_owner_email(user_id, auction_id)
-    @user = User.find(user_id)
-    @auction_id = auction_id
-    mail(to: @user.email, subject: 'ifasapp: Аукцион окончен: доступны результаты.')
+  def auction_finished_owner_email(user_email, auction_id)
+    @auction = Auction.find(auction_id)
+    @bids = Bid.where(auction_id: auction_id).includes(:user)
+    mail(to: user_email, subject: 'Артель - Аукцион окончен: доступны результаты.')
   end
 
   def auction_finished_bidder_email(user_id,opportunity_id)
     @user = User.find(user_id)
     @opportunity_id = opportunity_id
-    mail(to: @user.email, subject: 'ifasapp: Аукцион окончен.')
+    mail(to: @user.email, subject: 'Артель - Аукцион окончен.')
   end
 end
