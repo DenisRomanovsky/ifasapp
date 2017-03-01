@@ -5,5 +5,7 @@ class Bid < ActiveRecord::Base
 
   enum status: [ :active, :archived ]
 
+  self.per_page = 10
+
   validates_presence_of :mechanism, :auction, :user, :price, :description
 end

@@ -3,7 +3,7 @@ class MechanismsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @mechanisms = Mechanism.where(user_id: current_user.id)#.includes(:mechanism_subcategory)
+    @mechanisms = Mechanism.where(user_id: current_user.id).paginate(:page => params[:page])#.includes(:mechanism_subcategory)
   end
 
   def new

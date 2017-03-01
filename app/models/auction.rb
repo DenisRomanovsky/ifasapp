@@ -10,6 +10,8 @@ class Auction < ActiveRecord::Base
 
   enum status: [ :active, :finished ]
 
+  self.per_page = 10
+
   validates_presence_of :description, :start_time, :end_time, :mechanism_category_id
 
   validate do |auction|

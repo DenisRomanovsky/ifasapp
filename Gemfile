@@ -53,6 +53,8 @@ gem 'resque-scheduler'
 gem 'resque-web', require: 'resque_web'
 # Humanity for the URLs
 gem 'friendly_id', '~> 5.1.0'
+# Obey and paginate, motherfucker.
+gem 'will_paginate', '~> 3.1.1'
 
 # Specify ruby version to use dig for hashes.
 ruby '~> 2.3.1'

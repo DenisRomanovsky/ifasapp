@@ -18,7 +18,7 @@
         %th
         %th
       %tbody
-        - @opportunies.each do |opportunity|
+        - @opportunities.each do |opportunity|
           %tr
             %td
               = opportunity.description
@@ -34,3 +34,6 @@
             %td
               %a.btn.btn-default.btn-custom{href: new_bid_path(auction_id: opportunity.id),role: "button"}
                 Участвовать
+.row
+  .col-sm-4
+    = will_paginate(@opportunities)

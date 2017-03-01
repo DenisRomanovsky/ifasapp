@@ -1,0 +1,28 @@
+ru:
+  will_paginate:
+    previous_label: "&#8592; Назад"
+    next_label: "Вперёд &#8594;"
+    page_gap: "&hellip;"
+    page_entries_info:
+      single_page:
+        zero:  "Здесь пока ничего нет :)"
+        one:   "Отобразить "
+        other: "Отобразить всё"
+      single_page_html:
+        zero:  "Здесь пока ничего нет :)"
+        one:   "Отобразить"
+        other: "Отобразить всё"
+
+      multi_page: "Displaying %{model} %{from} - %{to} of %{count} in total"
+      multi_page_html: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{count}</b> in total"
+      models:
+            line_item:
+              zero:  line items
+              one:   line item
+              few:   line items
+              other: line items
+      activerecord:
+          models:
+            line_item:
+              zero:  line items
+              one:   line item

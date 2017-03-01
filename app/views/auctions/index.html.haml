@@ -11,7 +11,7 @@
         %th
         %th
       %tbody
-        -@auctions.each do |auction|
+        - @auctions.each do |auction|
           %tr
             %td
               = auction.description.truncate(100, omission: '...')
@@ -22,5 +22,9 @@
             %td
               %a.btn.btn-default.btn-custom{href: auction_path(auction.id),role: "button"}
                 Детали
+.row
+  .col-sm-8
     %a.btn.btn-default.btn-custom{href: '#',role: "button"}
       Создать новый
+  .col-sm-4
+    = will_paginate(@auctions)
