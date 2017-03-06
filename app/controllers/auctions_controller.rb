@@ -24,7 +24,7 @@ class AuctionsController < ApplicationController
     if current_user.present?
       @auction = current_user.auctions.where(id: params[:id]).first
       raise ActionController::RoutingError.new('Страница не найдена') unless @auction.present?
-      @bids = @auction.bids.includes(:user).active.joins(:mechanism).order('price ASC')
+      @bids = @auction.bids.paginate(:page => params[:page], :per_page => 30).includes(:user).active.joins(:mechanism).order('price ASC')
     else
       @auction = Auction.find(params[:id])
     end
