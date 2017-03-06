@@ -16,7 +16,7 @@
           .modal-body
             = raw article.article_text
             %br
-            %a.btn.btn-default.btn-custom{href: '/arenda/avtovyshka',role: "button"}
+            %a.btn.btn-default.btn-custom{href: "/arenda/#{MechanismCategory.first.slug}",role: "button"}
               Арендовать
           .modal-footer
             %button{type: "button", class: "btn btn-default", 'data-dismiss' => "modal"}
