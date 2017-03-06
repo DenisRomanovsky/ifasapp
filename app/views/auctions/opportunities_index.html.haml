@@ -1,39 +1,42 @@
-.row
-  .col-sm-12
-    %h3
-      Доступные аукционы
-    %p
-      = link_to 'Добавьте ', new_mechanism_path
-      Вашу технику, чтобы увидеть больше доступных аукционов.
-    %table.table.table-striped
-      %thead
-        %th
-          Описание
-        %th
-          Категория
-        %th
-          Подкатегория
-        %th
-          Время окончания
-        %th
-        %th
-      %tbody
-        - @opportunities.each do |opportunity|
-          %tr
-            %td
-              = opportunity.description
-            %td
-              = opportunity.mechanism_category.description
-            %td
-              = opportunity.mechanism_subcategories.pluck(:description).join(', ') if opportunity.mechanism_subcategories.any?
-            %td
-              = opportunity.end_time.strftime("%d/%m/%Y %R")
-            %td
-              %a.btn.btn-default.btn-custom{href: show_opportunity_path(opportunity.id),role: "button"}
-                Детали
-            %td
-              %a.btn.btn-default.btn-custom{href: new_bid_path(auction_id: opportunity.id),role: "button"}
-                Участвовать
-.row
-  .col-sm-4
-    = will_paginate(@opportunities)
+- if @opportunities.any?
+  .row
+    .col-sm-12
+      %h3
+        Доступные аукционы
+      %p
+        = link_to 'Добавьте ', new_mechanism_path
+        Вашу технику, чтобы увидеть больше доступных аукционов.
+      %table.table.table-striped
+        %thead
+          %th
+            Описание
+          %th
+            Категория
+          %th
+            Подкатегория
+          %th
+            Время окончания
+          %th
+          %th
+        %tbody
+          - @opportunities.each do |opportunity|
+            %tr
+              %td
+                = opportunity.description
+              %td
+                = opportunity.mechanism_category.description
+              %td
+                = opportunity.mechanism_subcategories.pluck(:description).join(', ') if opportunity.mechanism_subcategories.any?
+              %td
+                = opportunity.end_time.strftime("%d/%m/%Y %R")
+              %td
+                %a.btn.btn-default.btn-custom{href: show_opportunity_path(opportunity.id),role: "button"}
+                  Детали
+              %td
+                %a.btn.btn-default.btn-custom{href: new_bid_path(auction_id: opportunity.id),role: "button"}
+                  Участвовать
+  .row
+    .col-sm-4
+      = will_paginate(@opportunities)
+- else
+  = render 'shared/no_data'
