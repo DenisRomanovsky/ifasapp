@@ -10,4 +10,8 @@ module ApplicationHelper
       false
     end
   end
+
+  def minsk_time(time)
+    time + 3.hours
+  end
 end

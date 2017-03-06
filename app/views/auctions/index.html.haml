@@ -19,7 +19,7 @@
               %td
                 = auction.mechanism_category.description
               %td
-                = auction.end_time.strftime("%d/%m/%Y %R")
+                = minsk_time(auction.end_time).strftime("%d/%m/%Y %R")
               %td
                 %a.btn.btn-default.btn-custom{href: auction_path(auction.id),role: "button"}
                   Детали

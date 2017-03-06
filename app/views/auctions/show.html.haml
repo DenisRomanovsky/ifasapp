@@ -25,7 +25,10 @@
         Ставки включают НДС
       %dd
         = @auction.with_tax? ? 'Да' : 'Нет'
-
+    %dt
+      Окончание аукциона
+    %dd
+      = minsk_time(@auction.end_time).strftime("%d/%m/%Y %R")
 - if current_user.present?
   - if @bids.any?
     .row

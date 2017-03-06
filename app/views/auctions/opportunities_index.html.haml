@@ -28,7 +28,7 @@
               %td
                 = opportunity.mechanism_subcategories.pluck(:description).join(', ') if opportunity.mechanism_subcategories.any?
               %td
-                = opportunity.end_time.strftime("%d/%m/%Y %R")
+                = minsk_time(opportunity.end_time).strftime("%d/%m/%Y %R")
               %td
                 %a.btn.btn-default.btn-custom{href: show_opportunity_path(opportunity.id),role: "button"}
                   Детали
