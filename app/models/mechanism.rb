@@ -7,4 +7,5 @@ class Mechanism < ActiveRecord::Base
   self.per_page = 10
 
   validates_presence_of :description
+  validates_length_of :description, maximum: 500
 end

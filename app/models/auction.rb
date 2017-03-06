@@ -13,23 +13,10 @@ class Auction < ActiveRecord::Base
   self.per_page = 10
 
   validates_presence_of :description, :start_time, :end_time, :mechanism_category_id
+  validates_length_of :description, maximum: 1000
 
   validate do |auction|
-    #auction.must_be_in_future
-    #auction.validate_times
     auction.validate_owner
-  end
-
-  def must_be_in_future
-    if start_time.present? && end_time.present?
-      errors.add(:end_time, 'Время окончания аукциона должно быть в будущем.') if end_time < Time.current
-    end
-  end
-
-  def validate_times
-    if start_time.present? &&  end_time.present?
-      errors.add(:end_time, "Время начала аукциона (#{start_time.strftime("%d/%m/%Y %R")}) должно быть раньше времени окончания.") if start_time > end_time
-    end
   end
 
   def validate_owner

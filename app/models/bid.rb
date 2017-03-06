@@ -8,4 +8,5 @@ class Bid < ActiveRecord::Base
   self.per_page = 10
 
   validates_presence_of :mechanism, :auction, :user, :price, :description
+  validates_length_of :description, maximum: 500
 end
