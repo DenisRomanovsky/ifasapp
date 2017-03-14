@@ -22,6 +22,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
@@ -55,6 +56,14 @@ gem 'resque-web', require: 'resque_web'
 gem 'friendly_id', '~> 5.1.0'
 # Obey and paginate, motherfucker.
 gem 'will_paginate', '~> 3.1.1'
+
+
+group :test do
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'faker'
+  gem 'database_cleaner'
+end
 
 # Specify ruby version to use dig for hashes.
 ruby '~> 2.3.1'

@@ -12,7 +12,7 @@ namespace :categories do
     if csv_text.present?
       #MechanismSubcategory.delete_all
       #MechanismCategory.delete_all
-      Article.delete_all
+      #Article.delete_all
       csv = CSV.parse(csv_text, :headers => false)
       csv.each do |row|
         category = MechanismCategory.where(description: row[1]).first_or_initialize
