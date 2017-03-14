@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :user_infos, only: [:update]
-  get 'user_info/edit' => 'user_infos#edit'
+  get 'user_info/edit' => 'user_infos#edit', as: 'edit_profile'
 
   get 'opportunities' => 'auctions#opportunities_index'
   get 'opportunities/:id' => 'auctions#show_opportunity', as: 'show_opportunity'
@@ -27,10 +27,10 @@ Rails.application.routes.draw do
 
   # Auction basic routes.
   resources :auctions, except: [:edit, :update, :new]
-  get 'arenda/:category_slug' => 'auctions#new', constraints: { category_slug: /\w+/ }, as: 'new_arenda'
+  get 'arenda/:category_slug' => 'auctions#new', constraints: { category_slug: /(\w|-)+/ }, as: 'new_arenda'
 
   # Auctions for unregistered users.
-  get 'bystraia-arenda/:category_slug' => 'auctions#new_unregistered', constraints: { category_slug: /\w+/ }, as: 'quick_new_arenda'
+  get 'bystraia-arenda/:category_slug' => 'auctions#new_unregistered', constraints: { category_slug: /(\w|-)+/ }, as: 'quick_new_arenda'
   post 'bystraia-arenda/' => 'auctions#create_unregistered'
 
   resources :bids, only: [:create, :new]

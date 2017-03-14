@@ -24,7 +24,7 @@
 
   </thead>
   <tbody>
-  <% bids = @auction.bids.active%>
+  <% bids = @auction.bids.active.includes(:user)%>
   <% bids = bids.limit(3) if @auction.owner_id.nil?%>
   <% bids.each do |bid| %>
       <tr>

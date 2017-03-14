@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def set_admin_locale
     I18n.locale = :ru
   end
+
+  def after_inactive_sign_up_path_for(resource)
+    edit_profile_path
+  end
 end
