@@ -1,6 +1,5 @@
 # require database cleaner at the top level
 require 'database_cleaner'
-require 'capybara/rspec'
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
