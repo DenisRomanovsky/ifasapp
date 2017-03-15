@@ -1,0 +1,19 @@
+.modal.fade{id: 'contacts_modal', role: "dialog"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{type: "button", 'data-dismiss'=>"modal"}
+          x
+        %h4.modal-title
+          О Нас
+      .modal-body.text-center
+        %br
+        %p
+          Сайт "Артель" создан для бла-бла-бла.
+        %p
+          А здесь наши контакты бла-бла-бла.
+        %p
+          = raw("Вы можете сставить свои пожелания по улучшению работы сайта #{link_to('здесь', new_feedback_path)}.") if current_user.present?
+      .modal-footer
+        %button{type: "button", class: "btn btn-default", 'data-dismiss' => "modal"}
+          Закрыть

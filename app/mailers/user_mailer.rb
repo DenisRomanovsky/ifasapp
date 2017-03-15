@@ -20,4 +20,9 @@ class UserMailer < ApplicationMailer
     @opportunity_id = opportunity_id
     mail(to: @user.email, subject: 'Артель - Аукцион окончен.')
   end
+
+  def feedback_received_email(feedback_id)
+    @feedback = Feedback.includes(:user).find(feedback_id)
+    mail(to: @feedback.user.email, subject: 'Артель - Отзыв от пользователя.')
+  end
 end

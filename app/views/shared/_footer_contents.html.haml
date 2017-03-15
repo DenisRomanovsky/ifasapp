@@ -4,5 +4,5 @@
       'АРТЕЛЬ' &#169;
       = Time.now.year
     .col-sm-9.footer-right-text.footer-contents
-      = link_to("Контакты    ", '')
-      = link_to("О Нас", '')
+      = link_to("Обратная связь", new_feedback_path) if current_user.present?
+      = link_to("О Нас", '#', 'data-toggle'=>'modal', 'data-target' => '#contacts_modal')
