@@ -21,7 +21,11 @@
   <th>
     Контакты участника
   </th>
-
+  <% if @auction.owner_id.present? %>
+      <th>
+        Профиль участника
+      </th>
+  <% end %>
   </thead>
   <tbody>
   <% bids = @auction.bids.active.includes(:user)%>
@@ -32,11 +36,16 @@
           <%= bid.description %>
         </td>
         <td>
-          <%= bid.price%>
+          <%= bid.price %>
         </td>
         <td>
           <%= bid.user.email %>
         </td>
+        <% if @auction.owner_id.present? %>
+            <td>
+              <%= link_to 'Участника', user_info_path(bid.user.user_info_id) %>
+            </td>
+        <% end %>
       </tr>
   <% end %>
   </tbody>

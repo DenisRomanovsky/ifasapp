@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :user_infos, only: [:update]
+  resources :user_infos, only: [:update, :show]
   get 'user_info/edit' => 'user_infos#edit', as: 'edit_profile'
 
   get 'opportunities' => 'auctions#opportunities_index'

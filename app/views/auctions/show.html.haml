@@ -1,58 +1,60 @@
 .row.well
-  %dl.dl-horizontal
-    %dt
-      Описание
-    %dd
-      = @auction.description
-    %dt
-      Категория
-    %dd
-      = @auction.mechanism_category.description
-    %dt
-      Подкатегория
-    %dd
-      = @auction.mechanism_subcategories.pluck(:description).join(', ') if @auction.mechanism_subcategories.any?
-    %dt
-      Доставка
-    %dd
-      = @auction.delivery_included? ? 'Включена в цену' : 'Не включена в цену'
-    %dt
-      Оплата наличными
-    %dd
-      = @auction.cash_payed? ? 'Да' : 'Нет'
-    - unless @auction.cash_payed?
+  .col-sm-2
+  .col-sm-8
+    %dl.dl-horizontal
       %dt
-        Ставки включают НДС
+        Описание
       %dd
-        = @auction.with_tax? ? 'Да' : 'Нет'
-    %dt
-      Окончание аукциона
-    %dd
-      = minsk_time(@auction.end_time).strftime("%d/%m/%Y %R")
-- if current_user.present?
-  - if @bids.any?
-    .row
-      .col-sm-12
-        %table.table.table-striped
-          %thead
-            %th
-              Описание
-            %th
-              Лот
-            %th
-              Профиль владельца
-            %th
-              Цена
-          %tbody
-            - @bids.each do |bid|
-              %tr
-                %td
-                  = bid.description
-                %td
-                  = link_to bid.mechanism.description, mechanism_path(bid.mechanism.id)
-                %td
-                  Ссылка на профиль
-                %td
-                  = bid.price
-  - else
-    = render 'shared/no_data'
+        = @auction.description
+      %dt
+        Категория
+      %dd
+        = @auction.mechanism_category.description
+      %dt
+        Подкатегория
+      %dd
+        = @auction.mechanism_subcategories.pluck(:description).join(', ') if @auction.mechanism_subcategories.any?
+      %dt
+        Доставка
+      %dd
+        = @auction.delivery_included? ? 'Включена в цену' : 'Не включена в цену'
+      %dt
+        Оплата наличными
+      %dd
+        = @auction.cash_payed? ? 'Да' : 'Нет'
+      - unless @auction.cash_payed?
+        %dt
+          Ставки включают НДС
+        %dd
+          = @auction.with_tax? ? 'Да' : 'Нет'
+      %dt
+        Окончание аукциона
+      %dd
+        = minsk_time(@auction.end_time).strftime("%d/%m/%Y %R")
+  .col-sm-2
+- if @bids.any?
+  .row
+    .col-sm-12
+      %table.table.table-striped
+        %thead
+          %th
+            Описание
+          %th
+            Лот
+          %th
+            Профиль владельца
+          %th
+            Цена
+        %tbody
+          - @bids.each do |bid|
+            %tr
+              %td
+                = bid.description
+              %td
+                = link_to 'Участник', user_info_path(bid.user.user_info)
+              %td
+                = link_to bid.mechanism.description, mechanism_path(bid.mechanism.id)
+              %td
+                = bid.price
+- else
+  = render 'shared/no_data'

@@ -21,6 +21,10 @@ class UserInfosController < ApplicationController
     end
   end
 
+  def show
+    @user_info = UserInfo.includes(:city, :user).find(params[:id])
+  end
+
   private
 
   def user_info_params

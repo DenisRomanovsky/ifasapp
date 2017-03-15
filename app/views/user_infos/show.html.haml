@@ -1,0 +1,29 @@
+.row.well
+  .col-sm-4
+  .col-sm-4
+    %dl.dl-horizontal
+      %dt
+        Имя
+      %dd
+        = @user_info.first_name
+      %dt
+        Фамилия
+      %dd
+        = @user_info.last_name
+      %dt
+        Телефон
+      %dd
+        = @user_info.phone_number
+      %dt
+        Почта
+      %dd
+        = @user_info.user.email
+      %dt
+        Город
+      %dd
+        = @user_info.city.try(:name)
+      %dt
+        УНП
+      %dd
+        = @user_info.unp
+  .col-sm-4
