@@ -11,7 +11,7 @@
       %p#bidders-counter
         = @potential_bidders
 
-  = f.text_area :description, {label: 'Описание', help: 'Обязательное поле.'}
+  = f.text_area :description, {label: 'Описание', help: 'Укажите, пожалуйста город в котором необходимо провести работы, планируемую продолжительнось работ и любые другие данные, которые помогут участникам дать Вам максимально точное предложение цены.'}
   .form-group
     = f.check_box :delivery_included, label: 'Ставки с учётом стоимости доставки'
     %span.help-block.custom-span-auction
