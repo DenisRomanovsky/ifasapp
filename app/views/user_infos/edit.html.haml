@@ -2,10 +2,14 @@
   = f.text_field :first_name, label: 'Имя'
   = f.text_field :last_name, label: 'Фамилия'
   = f.text_field :unp, label: 'УНП'
-  = f.phone_field :phone_number, label: 'Телефон'
+  = f.phone_field :phone_number, label: 'Телефон', help: 'Формат: (xx) xxx-xx-xx'
   = f.collection_select :city_id, City.all, :id, :name, prompt: true, label: 'Город'
   .form-group
     %label.control_label
       Получать письма
     = f.check_box :send_email, label: 'Получать письма о новых аукционах, в которых Вы можете принять участие.'
   = f.submit "Сохранить", {class: 'btn btn-default btn-custom '}
+
+= javascript_include_tag('jquery.mask.min')
+%script
+  $("#user_info_phone_number").mask("(99) 999-99-99");
