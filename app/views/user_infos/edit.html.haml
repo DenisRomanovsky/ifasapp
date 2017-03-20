@@ -1,7 +1,7 @@
 = bootstrap_form_for(@user_info) do |f|
   = f.text_field :first_name, label: 'Имя'
   = f.text_field :last_name, label: 'Фамилия'
-  = f.text_field :unp, label: 'УНП'
+  = f.text_field :organization_name, label: 'Организация'
   = f.phone_field :phone_number, label: 'Телефон', help: 'Формат: (xx) xxx-xx-xx'
   = f.collection_select :city_id, City.all, :id, :name, prompt: true, label: 'Город'
   .form-group

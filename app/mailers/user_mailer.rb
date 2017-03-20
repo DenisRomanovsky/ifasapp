@@ -23,6 +23,6 @@ class UserMailer < ApplicationMailer
 
   def feedback_received_email(feedback_id)
     @feedback = Feedback.includes(:user).find(feedback_id)
-    mail(to: @feedback.user.email, subject: 'Артель - Отзыв от пользователя.')
+    mail(to: ENV['ADMIN_EMAIL']|| 'niafasmail@gmail.com', subject: 'Артель - Отзыв от пользователя.')
   end
 end
