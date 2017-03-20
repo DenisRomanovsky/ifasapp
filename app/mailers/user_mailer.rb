@@ -16,8 +16,9 @@ class UserMailer < ApplicationMailer
   end
 
   def auction_finished_bidder_email(user_id,opportunity_id)
-    @user = User.find(user_id)
     @opportunity_id = opportunity_id
+    @best_bid_price = Bid.active.where(auction_id: opportunity_id).order('price ASC').first.try(:price)
+    @current_bid_price = Bid.active.where(auction_id: opportunity_id, user_id: user_id).order('price ASC').first.try(:price)
     mail(to: @user.email, subject: 'Артель - Аукцион окончен.')
   end
 
