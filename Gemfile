@@ -57,7 +57,6 @@ gem 'friendly_id', '~> 5.1.0'
 # Obey and paginate, motherfucker.
 gem 'will_paginate', '~> 3.1.1'
 
-
 group :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 3.1'

@@ -8,4 +8,6 @@ class User < ActiveRecord::Base
   has_many :mechanisms
 
   validates_uniqueness_of :user_info_id, allow_nil: true
+
+  validates_format_of :email,:with => Devise::email_regexp
 end

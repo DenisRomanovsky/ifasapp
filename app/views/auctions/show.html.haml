@@ -32,7 +32,7 @@
       %dd
         = minsk_time(@auction.end_time).strftime("%d/%m/%Y %R")
   .col-sm-2
-- if @bids.any?
+- if @bids.present?
   .row
     .col-sm-12
       %table.table.table-striped

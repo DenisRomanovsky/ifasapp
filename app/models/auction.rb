@@ -14,6 +14,7 @@ class Auction < ActiveRecord::Base
 
   validates_presence_of :description, :start_time, :end_time, :mechanism_category_id
   validates_length_of :description, maximum: 1000
+  validates_format_of :user_email, :with => Devise::email_regexp
 
   validate do |auction|
     auction.validate_owner
