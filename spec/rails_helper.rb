@@ -75,6 +75,7 @@ RSpec.configure do |config|
   end
 
   config.include RequestSpecHelper, type: :request
+  config.include MailerMacros, type: :request
 end
 
 Shoulda::Matchers.configure do |config|
