@@ -55,6 +55,6 @@
               %td
                 = link_to bid.mechanism.description, mechanism_path(bid.mechanism.id)
               %td
-                = bid.price
+                = "#{bid.price} руб."
 - else
   = render 'shared/no_data'
