@@ -6,6 +6,7 @@ class UserMailer < ApplicationMailer
     return  if @user.user_info.present? &&  !@user.user_info.send_email?
 
     @opportunity_id = opportunity_id
+    @opportunity_category = Auction.find(opportunity_id).mechanism_category.description
     mail(to: @user.email, subject: 'Артель - Новый аукцион: спрос на Вашу технику.')
   end
 

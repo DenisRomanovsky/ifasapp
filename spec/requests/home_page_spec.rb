@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.feature 'Home page', :type => :feature do
   let!(:category) { FactoryGirl.create(:mechanism_category) }
-  let!(:user) { FactoryGirl.create(FactoryGirl.create(:user)) }
 
   it 'home page is available' do
     visit '/'

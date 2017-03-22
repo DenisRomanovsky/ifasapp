@@ -14,7 +14,7 @@ class Auction < ActiveRecord::Base
 
   validates_presence_of :description, :start_time, :end_time, :mechanism_category_id
   validates_length_of :description, maximum: 1000
-  validates_format_of :user_email, :with => Devise::email_regexp
+  validates_format_of :user_email, :with => Devise::email_regexp, :allow_blank => true
 
   validate do |auction|
     auction.validate_owner
@@ -43,8 +43,9 @@ class Auction < ActiveRecord::Base
   end
 
   def self.users_by_mech_cats(mechanism_category_id, mechanism_subcategory_ids)
+    mechanism_subcategory_ids = mechanism_subcategory_ids.nil? ? [] :  mechanism_subcategory_ids.uniq.compact
     users = User.joins(:mechanisms).where('"mechanisms"."mechanism_category_id" = ?', mechanism_category_id)
-    users = users.where(' "mechanisms"."mechanism_subcategory_id" in (?)', mechanism_subcategory_ids) if !mechanism_subcategory_ids.nil? && mechanism_subcategory_ids.any?
+    users = users.where(' "mechanisms"."mechanism_subcategory_id" in (?)', mechanism_subcategory_ids) if mechanism_subcategory_ids.present?
     users
   end
 
