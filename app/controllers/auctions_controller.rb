@@ -74,10 +74,10 @@ class AuctionsController < ApplicationController
     if mechanisms.present?
       # TODO: Cover this with tests and AFTER refactor to use one god damned SQL query.
       opportunities = Auction
-                         .includes(:mechanism_category, :mechanism_subcategories)
-                         .active
-                         .where('auctions.mechanism_category_id in (?) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), current_user.id)
-                         .order('id DESC')
+                          .includes(:mechanism_category, :mechanism_subcategories)
+                          .active
+                          .where('auctions.mechanism_category_id in (?) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), current_user.id)
+                          .order('id DESC')
 
       opportunities = opportunities.map do |op|
         next if op.user_id == current_user.id #check the owner

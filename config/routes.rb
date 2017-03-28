@@ -1,7 +1,7 @@
 require 'resque_web'
 
 Rails.application.routes.draw do
-
+  
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   authenticate :admin_user do

@@ -137,7 +137,7 @@ RSpec.feature 'Logged in user experience with NO js tests', :type => :feature do
 
     let!(:auction) { FactoryGirl.create(:auction, :with_subcats, user_id: user.id) }
 
-    describe 'Auction with bids' do
+    describe 'Auction with no bids' do
       it 'shows no bids correctly' do
         expect(Auction.all.size).to eq(1)
 
@@ -160,17 +160,34 @@ RSpec.feature 'Logged in user experience with NO js tests', :type => :feature do
       end
 
       it 'blocks not owner from show page' do
-
+        ApplicationController.any_instance.stub(:current_user).and_return(user_with_tech_two)
+        expect{visit "/auctions/#{auction.id}/"}.to raise_error(ActionController::RoutingError)
       end
     end
 
     describe 'Auction with bids' do
-      it 'shows correctly bids' do
+      let!(:bid_one) { FactoryGirl.create(:bid, user_id: user_with_tech_one.id, mechanism_id: user_with_tech_one.mechanisms.first.id, auction_id: auction.id) }
+      let!(:bid_two) { FactoryGirl.create(:bid, user_id: user_with_tech_two.id, mechanism_id: user_with_tech_two.mechanisms.first.id, auction_id: auction.id) }
 
+      it 'shows correctly bids' do
+        visit "/auctions/#{auction.id}/"
+
+        expect(page).to have_content bid_one.price
+        expect(page).to have_content bid_two.price
+        expect(page).to have_content bid_one.description
+        expect(page).to have_content bid_two.description
       end
 
       it 'shows only active bids' do
+        bid_three = FactoryGirl.create(:bid, user_id: user_with_tech_two.id, mechanism_id: user_with_tech_two.mechanisms.first.id, auction_id: auction.id)
+        bid_two.update_attribute(:status, :archived)
 
+        visit "/auctions/#{auction.id}/"
+
+        expect(page).not_to have_content bid_two.description
+        expect(page).not_to have_content bid_two.price
+        expect(page).to have_content bid_three.price
+        expect(page).to have_content bid_three.description
       end
     end
   end
