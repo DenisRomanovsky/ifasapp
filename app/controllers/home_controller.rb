@@ -3,6 +3,6 @@ class HomeController < ApplicationController
   #before_action :authenticate_user!
 
   def index
-    @categories = MechanismCategory.order('description').all
+    @categories = MechanismCategory.order('id ASC').all
   end
 end

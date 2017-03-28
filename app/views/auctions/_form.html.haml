@@ -1,7 +1,7 @@
 = bootstrap_form_for(@auction, url: current_user.present? ? '/auctions' : '/bystraia-arenda') do |f|
   - unless current_user.present?
     = f.email_field :user_email, autofocus: true
-  = f.collection_select :mechanism_category_id, current_user.present? ? MechanismCategory.all : [@auction_category], :id, :description, {selected: @auction_category.id, label: 'Категория'}, disabled: false
+  = f.collection_select :mechanism_category_id, current_user.present? ? MechanismCategory.order('id ASC').all : [@auction_category], :id, :description, {selected: @auction_category.id, label: 'Категория'}, disabled: false
   = f.collection_select :auction_subcategories, @auction_sub_categories, :id, :description, {selected: @auction_sub_categories_ids, label: 'Подкатегории', help: 'Оставьте поле пустым, чтобы аукцион увидели владельцы любой техники выбранной категории.', id: 'auction_subcategory_id', include_blank: false}, {multiple: true}
 
   - if current_user.present?
