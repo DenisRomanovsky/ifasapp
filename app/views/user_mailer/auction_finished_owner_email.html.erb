@@ -43,7 +43,7 @@
         </td>
         <% if @auction.owner_id.present? %>
             <td>
-              <%= link_to 'Участника', user_info_path(bid.user.user_info_id) %>
+              <%= link_to 'Участника', user_info_url(bid.user.user_info_id) %>
             </td>
         <% end %>
       </tr>

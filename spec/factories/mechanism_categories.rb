@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :mechanism_category do
-    sequence(:description) { |n| Faker::Lorem.word + n.to_s }
-    home_description { Faker::Lorem.word }
+    sequence(:description) { |n| Faker::Lorem.sentence + n.to_s }
+    sequence(:home_description) { |n| Faker::Lorem.sentence + n.to_s }
 
     trait :with_subcats do
       after :create do |cat|
