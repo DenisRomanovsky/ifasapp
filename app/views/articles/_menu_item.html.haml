@@ -1,6 +1,2 @@
-- if current_page?(infos_index_path)
-  - css_class = 'active'
-- else
-  - css_class = 'inactive'
-
-%li{:class => css_class}= link_to 'Информация', infos_index_path
+%li
+  = link_to 'Информация', infos_index_path

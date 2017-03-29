@@ -1,14 +1,13 @@
-$main-color: #ff6e11;
-$dark-bg-color: #ffffff;
-$darker-bg-color: white;
-$white-color: #23110b;
+$main-color: #ff5523;
+$background-color: white;
+$font-color: black;
 
-.dark-bg-wrapper {
-  background-color: $dark-bg-color;
+.white-bg-wrapper {
+  background-color: $background-color;
 }
 
 .darker-bg-wrapper{
-  background-color: $darker-bg-color;
+  background-color: $background-color;
 }
 
 .tree-well{
@@ -16,7 +15,7 @@ $white-color: #23110b;
 }
 
 .main-bg-color-wrapper {
-  background-color: $main-color;
+  background-color: $background-color;
 }
 
 .no-side-padding{
@@ -25,200 +24,35 @@ $white-color: #23110b;
 }
 
 .btn-custom{
-  color: $white-color;
-  background: $main-color;
+  color: $main-color;
+  background: $background-color;
   border-radius: 0px;
   border: 0px;
 }
 
 .btn-custom:hover{
-  background: $white-color;
-  color: $main-color;
+  background: $main-color;
+  color: $background-color;
 }
 
 .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
-  background-color: $dark-bg-color;
+  background-color: $background-color;
 }
 
 .table-striped>tbody>tr:nth-child(even)>td, .table-striped>tbody>tr:nth-child(even)>th {
-  background-color: $darker-bg-color;
+  background-color: $background-color;
 }
 
 .custom-span-auction{
   margin-top: -5px;
 }
 
-/* Home */
-
-.first-wallpaper {
-  z-index: 1;
-  width: 100%;
-  height: 630px;
-  background: rgba(0, 0, 0, 0) image-url('wallpaper1.jpg') repeat scroll 0 0;
-  -webkit-background-size: cover;
-  background-size: cover;
-  overflow: hidden;
-}
-
-.p-app-welcome{
-  text-align: right;
-  color: $white-color;
-  font-style: italic;
-  font-size: 22px;
-  font-weight: 100;
-  margin-right: 30px;
-}
-
-.p-holder{
-  margin-top: 40px;
-}
-
-.first-info-block{
-  background: rgba(64,57,57,0.40);
-  overflow: hidden;
-  z-index: 2;
-  min-height: 550px;
-}
-
-.align-text-center-block{
-  text-align: center;
-}
-.info-columns-margin {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.info-block-entry{
-  margin-top: 20px;
-}
-
-.info-block-info{
-  padding-top: 40px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-#third-info-block {
-  z-index: 1;
-  width: 100%;
-  min-height: 540px;
-  background: rgba(0, 0, 0, 0) image-url('wallpaper2.jpg') repeat scroll 0 0;
-  -webkit-background-size: cover;
-  background-size: cover;
-  overflow: hidden;
-}
-
-.third-info-block-shader{
-  width: 100%;
-  min-height: 540px;
-  background: rgba(64,57,57,0.60);
-  overflow: hidden;
-  z-index: 2;
-}
-
-.large-white-text-white{
-  text-align: center;
-  color: $white-color;
-  font-size: 55px;
-  font-weight: 600;
+#main_page_url{
+  font-size: 30px;
+  font-weight: 700;
   text-transform: uppercase;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-
-.padding-setter{
-  padding-top: 55px;
-}
-
-.button-one{
-  margin-top: 80px;
-  height: 70px;
-
-  text-align: center;
-  color: $white-color;
-  font-size: 40px;
-  font-weight: 300;
-  text-transform: uppercase;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.button-two{
-  margin-top: 60px;
-}
-
-/* Scroll bar */
-.custom_scroll::-webkit-scrollbar-track
-{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  background-color: #F5F5F5;
-}
-
-.custom_scroll::-webkit-scrollbar
-{
-  width: 12px;
-  background-color: rgba(0,0,0,0.3);
-}
-
-.custom_scroll::-webkit-scrollbar-thumb
-{
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: #555;
-}
-
-/* Categories tree */
-
-.categories-tree-holder{
-  z-index: 3;
-  margin-top: 15px;
-  color: $white-color;
-  max-height: 596px;
-}
-
-.categories-list-ul{
-  overflow-y:auto;
-  max-height: 510px;
-}
-
-.well .darker-bg-wrapper{
-  max-height: 790px;
-}
-
-.categories-tree-link {
-  color: $white-color;
-}
-
-.nav > li > a.categories-tree-link {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.nav > li > a.categories-tree-link:hover  {
-  background-color: $main-color;
-  color: $white-color
-}
-
-.category-tree-header{
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
-
-.category-option:hover {
-  background-color: $main-color;
-}
-
-.label-long{
-  width: 100%;
-  margin-top:5px;
-  margin-bottom:5px;
-}
-
-.subcategory-option{
-  background-color: $darker-bg-color;
-}
-
 /* Menu */
 
 .navbar{
@@ -229,47 +63,24 @@ $white-color: #23110b;
 }
 
 .navbar-default .navbar-nav > li > a{
-  color: $white-color;
+  color: $main-color;
+  font-weight: 600;
 }
 
 #collapse-menu-ifasapp{
-  background: $darker-bg-color;
+  background: $background-color;
   border-color: rgba(0,0,0,0);
 }
 
 .navbar-default .navbar-nav > li > a:hover{
-  color: $main-color;
+  color: $background-color;
+  background: $main-color;
 }
 
 .custom-menu{
   margin-bottom: 0;
   max-width: 100%;
   border: none;
-}
-
-/* Icons */
-
-.info-block-info .col-sm-4 i {
-  color: $main-color;
-  font-size: 80px;
-  display: block;
-}
-
-
-/* Footer */
-
-.footer-custom {
-  height: 40px;
-  background-color: $darker-bg-color;
-}
-
-.footer-right-text{
-  text-align: right;
-}
-
-.footer-contents{
-  margin-top: 15px;
-  color: #8F8E8D;
 }
 
 /* Timer css */

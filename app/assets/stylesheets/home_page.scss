@@ -1,0 +1,198 @@
+.first-wallpaper {
+  z-index: 1;
+  width: 100%;
+  height: 630px;
+  background: rgba(0, 0, 0, 0) image-url('wallpaper1.jpg') repeat scroll 0 0;
+  -webkit-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.slogan-container{
+  padding-top: 80px;
+  padding-left: 80px;
+}
+
+.info-columns-margin {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.info-block-entry{
+  margin-top: 20px;
+}
+
+.info-block-info{
+  padding-top: 40px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#third-info-block {
+  z-index: 1;
+  width: 100%;
+  min-height: 540px;
+  background: rgba(0, 0, 0, 0) image-url('wallpaper2.jpg') repeat scroll 0 0;
+  -webkit-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.large-black-text, .large-orange-text{
+  text-align: left;
+  color: black;
+  font-size: 55px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.large-orange-text, .orange-text{
+  color: $main-color;
+}
+
+.medium-black-text{
+  text-align: left;
+  color: black;
+  font-size: 45px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.orange-button{
+  color: $background-color;
+  background-color: $main-color;
+
+  border-radius: 0px;
+  border: none;
+
+  padding-top: 15px;
+  margin-top: 120px;
+  height: 70px;
+  text-align: center;
+
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.orange-button:hover{
+  color: $main-color;
+  background-color: $background-color;
+}
+
+.orange-button:active{
+  color: $main-color;
+  background-color: $background-color;
+}
+
+.orange-button:active:focus{
+  color: $main-color;
+  background-color: $background-color;
+}
+
+/* Scroll bar */
+.custom_scroll::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+.custom_scroll::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.custom_scroll::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+}
+
+/* Categories tree */
+
+.categories-tree-holder{
+  z-index: 3;
+  margin-top: 15px;
+  color: $main-color;
+  max-height: 596px;
+}
+
+.categories-list-ul{
+  overflow-y:auto;
+  max-height: 510px;
+}
+
+.well .darker-bg-wrapper{
+  max-height: 790px;
+}
+
+.categories-tree-link {
+  color: $main-color;
+}
+
+.nav > li > a.categories-tree-link {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav > li > a.categories-tree-link:hover  {
+  background-color: $main-color;
+  color: $background-color
+}
+
+.category-tree-header{
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.category-option:hover {
+  background-color: $main-color;
+}
+
+.label-long{
+  width: 100%;
+  margin-top:5px;
+  margin-bottom:5px;
+}
+
+.subcategory-option{
+  background-color: $background-color;
+}
+
+
+/* Icons */
+
+.info-block-info .col-sm-4 i {
+  color: $main-color;
+  font-size: 80px;
+  display: block;
+}
+
+
+/* Footer */
+
+.footer-custom {
+  height: 40px;
+  background-color: $background-color;
+}
+
+.footer-right-text{
+  text-align: right;
+}
+
+.footer-contents{
+  margin-top: 15px;
+  color: #8F8E8D;
+}

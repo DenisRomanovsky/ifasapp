@@ -1,74 +1,61 @@
 .first-wallpaper
-  .row.first-info-block{style: 'margin: 0px;'}
+  .row.slogan-container
     .col-sm-5
-      = render 'home/categories_tree', collection: @categories
-    .col-sm-7
-      %h3.large-white-text-white
-        "Артель"
-      %h3.large-white-text-white
-        Аренда Техники Легко
-      .p-holder
-        %p.p-app-welcome
-          Арендуй или сдавай
-        %p.p-app-welcome
-          технику в аренду
-        %p.p-app-welcome
-          просто.
+      %h3.large-black-text
+        Аренда
+      %h3.large-black-text
+        Техники
+      %h3.large-orange-text
+        Легко
       .row
-        .col-sm-12.align-text-center-block
-          - if current_user.present?
-            = link_to("Начать аукцион",  "#" , class: "btn btn-info button-one large-white-text-white", role: "button"  )
-          -else
-            = link_to("Войти",  new_user_session_path , class: "btn btn-info button-one large-white-text-white", role: "button"  )
-
+        .col-sm-12
+          = link_to("Начать аукцион!",  "#" , class: "btn orange-button", role: "button"  )
+    .col-sm-7
 .row.info-block-entry
-  .col-sm-12.align-text-center-block
+  .col-sm-12.text-center
     %h1 Арендовать технику легко!
 .row.info-block-info
-  .col-sm-4.align-text-center-block.info-columns-margin
+  .col-sm-4.text-center.info-columns-margin
     %i.icofont.icofont-excavator
     %h3
       Создайте аукцион, выбрав нужную категорию техники. Опишите характер и объём работы.
-  .col-sm-4.align-text-center-block.info-columns-margin
+  .col-sm-4.text-center.info-columns-margin
     %i.icofont.icofont-clock-time
     %h3
       Опубликуйте аукцион. Участники предложат свою цену и условия.
-  .col-sm-4.align-text-center-block.info-columns-margin
+  .col-sm-4.text-center.info-columns-margin
     %i.icofont.icofont-file-spreadsheet
     %h3
       Получите подробную статистику и результаты аукциона с указанием лучших ставок.
 #third-info-block
-  .row
-    .col-sm-12.align-text-center-block
-      .third-info-block-shader
-        %h1.large-white-text-white
-          "АРТЕЛЬ"
-        .padding-setter
-          %h1.large-white-text-white
-            поможет найти арендаторов
-        .padding-setter
-          %h1.large-white-text-white
-            для Вашей техники.
-        .row
-          .col-sm-12.align-text-center-block
-            - if current_user.present?
-              = link_to("Описать технику",  new_mechanism_path , class: "btn btn-info button-one button-two large-white-text-white", role: "button"  )
-            -else
-              = link_to("Войти",  new_user_session_path , class: "btn btn-info button-one button-two large-white-text-white", role: "button"  )
+  .row.text-right
+    .col-sm-6.col-sm-offset-6
+      %h3.medium-black-text
+        <span class='orange-text'>АРТЕЛЬ</span> поможет
+      %h3.medium-black-text
+        найти арендаторов
+      %h3.medium-black-text
+        для <span class='orange-text'>Вашей</span> техники
+      .row
+        .col-sm-12.text-center
+          - if current_user.present?
+            = link_to("Описать технику",  new_mechanism_path , class: "btn orange-button", role: "button"  )
+          -else
+            = link_to("Войти",  new_user_session_path , class: "btn orange-button", role: "button"  )
 
 .row.info-block-entry
-  .col-sm-12.align-text-center-block
+  .col-sm-12.text-center
     %h1 Сдать технику в аренду легко!
 .row.info-block-info
-  .col-sm-4.align-text-center-block.info-columns-margin
+  .col-sm-4.text-center.info-columns-margin
     %i.icofont.icofont-articulated-truck
     %h3
       Опишите Вашу технику в специальном разделе, указав правильные категории и подкатегории.
-  .col-sm-4.align-text-center-block.info-columns-margin
+  .col-sm-4.text-center.info-columns-margin
     %i.icofont.icofont-email
     %h3
       Получайте уведомления о новых аукционах, в которых Вы можете участвовать.
-  .col-sm-4.align-text-center-block.info-columns-margin
+  .col-sm-4.text-center.info-columns-margin
     %i.icofont.icofont-bill-alt
     %h3
       Делайте ставки и ожидайте ответа организатора аукциона.

@@ -1,8 +1,8 @@
-.row.align-text-center-block
+.row.text-center
   %h2
     Полезная информация
   - @articles.each do |article|
-    .col-sm-4.align-text-center-block.articles-modal-trigger
+    .col-sm-4.articles-modal-trigger.text-center
       %button{type: "button", class: "btn btn-info btn-lg", 'data-toggle'=>"modal", 'data-target' => "##{article.mechanism_category.slug}"}
         = image_tag("info-icons/#{article.mechanism_category.slug}.png", size: "128x128", alt: "#{article.mechanism_category.description}")
       %h3
