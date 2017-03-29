@@ -1,5 +1,5 @@
 .first-wallpaper
-  .row.slogan-container
+  .row.slogan-container-one
     .col-sm-5
       %h3.large-black-text
         Аренда
@@ -8,7 +8,7 @@
       %h3.large-orange-text
         Легко
       .row
-        .col-sm-12
+        .col-sm-12.button-one-holder
           = link_to("Начать аукцион!",  "#" , class: "btn orange-button", role: "button"  )
     .col-sm-7
 .row.info-block-entry
@@ -28,20 +28,20 @@
     %h3
       Получите подробную статистику и результаты аукциона с указанием лучших ставок.
 #third-info-block
-  .row.text-right
-    .col-sm-6.col-sm-offset-6
-      %h3.medium-black-text
-        <span class='orange-text'>АРТЕЛЬ</span> поможет
-      %h3.medium-black-text
-        найти арендаторов
-      %h3.medium-black-text
-        для <span class='orange-text'>Вашей</span> техники
-      .row
-        .col-sm-12.text-center
-          - if current_user.present?
-            = link_to("Описать технику",  new_mechanism_path , class: "btn orange-button", role: "button"  )
-          -else
-            = link_to("Войти",  new_user_session_path , class: "btn orange-button", role: "button"  )
+  .row.slogan-container-two
+    .col-sm-12
+      %h3.medium-black-text{style: 'text-align: right;'}
+        арендаторы
+      %h3.medium-black-text{style: 'text-align: right;'}
+        для <span class='orange-text'>Вашей</span>
+      %h3.medium-black-text{style: 'text-align: right;'}
+        техники <span class='orange-text'>Легко</span>
+  .row
+    .col-sm-12.button-two-holder{style: 'text-align: right;'}
+      - if current_user.present?
+        = link_to("Описать технику",  new_mechanism_path , class: "btn orange-button", role: "button"  )
+      -else
+        = link_to("Войти",  new_user_session_path , class: "btn orange-button", role: "button"  )
 
 .row.info-block-entry
   .col-sm-12.text-center

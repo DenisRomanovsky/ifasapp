@@ -8,9 +8,23 @@
   overflow: hidden;
 }
 
-.slogan-container{
-  padding-top: 80px;
-  padding-left: 80px;
+.slogan-container-one{
+  padding-top: 40px;
+  padding-left: 35px;
+}
+
+.button-one-holder{
+  margin-top: 40px;
+}
+
+.slogan-container-two{
+  margin-top: 40px;
+  padding-right: 40px;
+}
+
+.button-two-holder{
+  margin-top: 50px;
+  padding-right: 150px;
 }
 
 .info-columns-margin {
@@ -33,7 +47,7 @@
 #third-info-block {
   z-index: 1;
   width: 100%;
-  min-height: 540px;
+  height: 630px;
   background: rgba(0, 0, 0, 0) image-url('wallpaper2.jpg') repeat scroll 0 0;
   -webkit-background-size: cover;
   background-size: cover;
@@ -74,7 +88,6 @@
   border: none;
 
   padding-top: 15px;
-  margin-top: 120px;
   height: 70px;
   text-align: center;
 
