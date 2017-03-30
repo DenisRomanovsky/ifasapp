@@ -24,15 +24,20 @@ $font-color: black;
 }
 
 .btn-custom{
-  color: $main-color;
-  background: $background-color;
+  color: $background-color;
+  background: $main-color;
   border-radius: 0px;
-  border: 0px;
+  border: solid;
+  border-color: $main-color;
+  border-width: 2px;
 }
 
 .btn-custom:hover{
-  background: $main-color;
-  color: $background-color;
+  background:$background-color;
+  color: $main-color;
+  border: solid;
+  border-color: $main-color;
+  border-width: 2px;
 }
 
 .table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
@@ -53,6 +58,15 @@ $font-color: black;
   text-transform: uppercase;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+textarea{
+  resize: none;
+}
+
+textarea.form-control {
+  height: 150px;
+}
+
 /* Menu */
 
 .navbar{
