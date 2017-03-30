@@ -1,0 +1,14 @@
+.btn-info-icon{
+  background: $background-color;
+  border-radius: 12px;
+  border: solid;
+  border-color: $main-color;
+  border-width: 4px;
+}
+
+.btn-info-icon:hover{
+  background:$main-color;
+  border: solid;
+  border-color: $main-color;
+  border-width: 4px;
+}
