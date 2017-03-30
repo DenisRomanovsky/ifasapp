@@ -1,11 +1,9 @@
 .categories-tree-holder
   .well.darker-bg-wrapper.tree-well
-    %h3.category-tree-header
-      Аренда:
     %ul.nav.nav-list.categories-list-ul.custom_scroll
       - @categories.each do |mech_category, mech_subcategories|
         %li.category-option
           - if current_user.present?
-            = link_to(mech_category.home_description, "arenda/#{mech_category.slug}", class: 'categories-tree-link nav-header label-long')
+            = link_to(mech_category.description, "arenda/#{mech_category.slug}", class: 'categories-tree-link nav-header label-long')
           -else
-            = link_to(mech_category.home_description, "bystraia-arenda/#{mech_category.slug}", class: 'categories-tree-link nav-header label-long')
+            = link_to(mech_category.description, "bystraia-arenda/#{mech_category.slug}", class: 'categories-tree-link nav-header label-long')

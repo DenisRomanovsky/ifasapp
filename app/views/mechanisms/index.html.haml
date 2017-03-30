@@ -1,6 +1,18 @@
 - if @mechanisms.any?
   .row
     .col-sm-12
+      %h2
+        Список техники
+      %br
+      .row
+        .col-sm-8
+          %p
+            Добавьте в этот список всю Вашу технику. Мы уведомим Вас о появлении спроса на неё.
+        .col-sm-4.text-right
+          %a.btn.btn-default.btn-custom{href: new_mechanism_path,role: "button"}
+            Добавить технику
+          %br
+          %br
       %table.table.table-striped
         %thead
           %th
@@ -27,7 +39,5 @@
 
 .row
   .col-sm-8
-    %a.btn.btn-default.btn-custom{href: new_mechanism_path,role: "button"}
-      Создать
   .col-sm-4
     = will_paginate(@mechanisms)

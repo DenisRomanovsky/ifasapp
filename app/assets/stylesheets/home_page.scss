@@ -22,9 +22,8 @@
   padding-right: 40px;
 }
 
-.button-two-holder{
+.button-two-holder {
   margin-top: 50px;
-  padding-right: 150px;
 }
 
 .info-columns-margin {
@@ -105,11 +104,13 @@
 .orange-button:active{
   color: $main-color;
   background-color: $background-color;
+  border: none;
 }
 
 .orange-button:active:focus{
   color: $main-color;
   background-color: $background-color;
+  border: none;
 }
 
 /* Scroll bar */

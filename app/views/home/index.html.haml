@@ -9,7 +9,8 @@
         Легко
       .row
         .col-sm-12.button-one-holder
-          = link_to("Начать аукцион!",  "#" , class: "btn orange-button", role: "button"  )
+          %button{type: 'button', class: 'btn orange-button', 'data-toggle' => 'modal', 'data-target' => "#categoriesTree", style: 'padding-top: 12px;'}
+            Начать аукцион!
     .col-sm-7
 .row.info-block-entry
   .col-sm-12.text-center
@@ -29,19 +30,19 @@
       Получите подробную статистику и результаты аукциона с указанием лучших ставок.
 #third-info-block
   .row.slogan-container-two
-    .col-sm-12
+    .col-sm-6
+    .col-sm-6
       %h3.medium-black-text{style: 'text-align: right;'}
         арендаторы
       %h3.medium-black-text{style: 'text-align: right;'}
         для <span class='orange-text'>Вашей</span>
       %h3.medium-black-text{style: 'text-align: right;'}
         техники <span class='orange-text'>Легко</span>
-  .row
-    .col-sm-12.button-two-holder{style: 'text-align: right;'}
-      - if current_user.present?
-        = link_to("Описать технику",  new_mechanism_path , class: "btn orange-button", role: "button"  )
-      -else
-        = link_to("Войти",  new_user_session_path , class: "btn orange-button", role: "button"  )
+      .button-two-holder{style: 'text-align: center;'}
+        - if current_user.present?
+          = link_to('Добавить технику!',  new_mechanism_path , class: 'btn orange-button', role: 'button'  )
+        -else
+          = link_to('Войти!',  new_user_session_path , class: 'btn orange-button', role: 'button'  )
 
 .row.info-block-entry
   .col-sm-12.text-center
@@ -59,3 +60,16 @@
     %i.icofont.icofont-bill-alt
     %h3
       Делайте ставки и ожидайте ответа организатора аукциона.
+
+/ categories tree
+#categoriesTree.modal.fade{:role => "dialog"}
+  .modal-dialog
+    / Modal content
+    .modal-content
+      .modal-header
+        %button.close{"data-dismiss" => "modal", :type => "button"} ×
+        %h4.modal-title Категория аукциона
+      .modal-body
+        = render 'home/categories_tree'
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Закрыть
