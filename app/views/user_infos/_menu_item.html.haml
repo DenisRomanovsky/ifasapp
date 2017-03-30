@@ -1,3 +1,13 @@
 - if current_user.present?
-  %li
-    = link_to 'Профиль', edit_profile_path
+  %li.dropdown
+    %a{href: "#", class: "dropdown-toggle", 'data-toggle'=>"dropdown", role: "button", 'aria-haspopup'=>"true", 'aria-expanded'=>"false"}
+      Профиль
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        = link_to 'Редактировать Профиль', edit_profile_path
+      %li
+        = link_to 'Выйти', destroy_user_session_path
+- else
+  %li{:class => 'inactive'}= link_to 'Войти', new_user_session_path
+  %li{:class => 'inactive'}= link_to 'Регистрация', new_user_registration_path
