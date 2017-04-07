@@ -15,10 +15,12 @@ namespace :categories do
         category = MechanismCategory.where(description: row[1]).first_or_initialize
         category.home_description = row[0]
         category.save!
-        MechanismSubcategory.where(mechanism_category: category, description: row[2]).first_or_create()
-        article = Article.where(mechanism_category_id: category.id).first_or_initialize
-        article.article_text = row[3]
-        article.save!
+        MechanismSubcategory.where(mechanism_category: category, description: row[2]).first_or_create
+        if row[3].present?
+          article = Article.where(mechanism_category_id: category.id).first_or_initialize
+          article.article_text = row[3]
+          article.save!
+        end
       end
       puts 'Categories are updated.'
     end

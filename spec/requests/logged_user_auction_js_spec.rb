@@ -1,35 +1,31 @@
 require 'rails_helper'
 
 RSpec.feature 'Logged in user experience with NO js tests', :type => :feature do
-  let!(:category_one) { FactoryGirl.create(:mechanism_category, :with_subcats) }
-  let!(:category_two) { FactoryGirl.create(:mechanism_category, :with_subcats) }
-  let!(:user) { FactoryGirl.create(:user) }
 
   before do
     ApplicationController.any_instance.stub(:authenticate_user!).and_return(true)
     ApplicationController.any_instance.stub(:current_user).and_return(user)
-    DatabaseCleaner.strategy = :truncation
-    Capybara.current_driver = :selenium
+    Capybara.javascript_driver = :poltergeist
   end
 
-  it 'can open new page' do
-    DatabaseCleaner.start
-    visit '/'
-    click_link(category_one.home_description)
-    expect(page).to have_content 'Создать аукцион для аренды техники.'
-    DatabaseCleaner.clean
-  end
+  describe 'Auction successful creation' do
+    let!(:category_one) { FactoryGirl.create(:mechanism_category, :with_subcats) }
+    let!(:category_two) { FactoryGirl.create(:mechanism_category, :with_subcats) }
+    let!(:user) { FactoryGirl.create(:user) }
 
-  it 'can save auction' do
-    DatabaseCleaner.start
-    visit "/arenda/#{category_one.slug}"
-    fill_in('Описание', with: Faker::Lorem.paragraph)
-
-    accept_alert do
-      click_button('Сохранить')
+    it 'can open new page' do
+      visit '/'
+      click_button('Начать аукцион!')
+      click_link(category_one.description)
+      expect(page).to have_content 'Создать аукцион для аренды техники.'
     end
 
-    expect(page).to have_content 'Аукцион создан.'
-    DatabaseCleaner.clean
+    it 'can save auction' do
+      visit "/arenda/#{category_one.slug}"
+      fill_in('Описание', with: Faker::Lorem.paragraph)
+
+      click_button('Сохранить')
+      expect(page).to have_content 'Аукцион создан.'
+    end
   end
 end

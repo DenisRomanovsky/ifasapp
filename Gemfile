@@ -63,7 +63,8 @@ group :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'selenium-webdriver'
+  #gem 'selenium-webdriver', '2.53.4'
+  gem 'poltergeist'
 end
 
 # Specify ruby version to use dig for hashes.

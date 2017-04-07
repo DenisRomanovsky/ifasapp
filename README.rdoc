@@ -5,7 +5,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version - 2.3.1
 
 * System dependencies
 
@@ -21,7 +21,11 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* Cities Update: rake cities:update
+
+* Categories & Articles Update: rake categories:update
+
+* Categories & Articles Clean: rake categories:delete
 
 
 Please feel free to use a different markup language if you do not plan to run
