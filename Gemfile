@@ -66,5 +66,8 @@ group :test do
   gem 'poltergeist'
 end
 
+# New relic guard is here!
+gem 'newrelic_rpm'
+
 # Specify ruby version to use dig for hashes.
 ruby '~> 2.3.1'
