@@ -82,7 +82,7 @@ class AuctionsController < ApplicationController
       opportunities = opportunities.map do |op|
         next if op.user_id == current_user.id #check the owner
 
-        if op.mechanism_subcategories.any?
+        if op.mechanism_subcategories.present?
           (op.mechanism_subcategories.pluck(:id).compact.uniq & mechanisms.pluck(:mechanism_subcategory_id).compact.uniq).any? ? op : nil
         else
           op
