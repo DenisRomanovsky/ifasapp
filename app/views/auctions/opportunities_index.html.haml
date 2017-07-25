@@ -5,7 +5,7 @@
     %p
       = link_to 'Добавьте ', new_mechanism_path
       Вашу технику, чтобы увидеть больше доступных аукционов.
-    - if @opportunities.any?
+    - if @opportunities.present?
       %table.table.table-striped
         %thead
           %th
