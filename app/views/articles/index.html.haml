@@ -1,3 +1,4 @@
+- link_prefix = current_user.present? ? 'arenda' : 'bystraia-arenda'
 .row.text-center
   %h2
     Полезная информация
@@ -22,7 +23,7 @@
           .modal-body
             = raw article.article_text
             %br
-            %a.btn.btn-default.btn-custom{href: "/arenda/#{article.mechanism_category.slug}",role: "button"}
+            %a.btn.btn-default.btn-custom{href: "/#{link_prefix}/#{article.mechanism_category.slug}",role: "button"}
               Арендовать
           .modal-footer
             %button{type: "button", class: "btn btn-default", 'data-dismiss' => "modal"}
