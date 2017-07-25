@@ -1,41 +1,41 @@
-- if @mechanisms.present?
-  .row
-    .col-sm-12
-      %h2
-        Список техники
-      %br
-      .row
-        .col-sm-8
-          %p
-            Добавьте в этот список всю Вашу технику. Мы уведомим Вас о появлении спроса на неё.
-        .col-sm-4.text-right
-          %a.btn.btn-default.btn-custom{href: new_mechanism_path,role: "button"}
-            Добавить технику
-          %br
-          %br
-      %table.table.table-striped
-        %thead
-          %th
-            Модель и марка
-          %th
-            Категория
-          %th
-          %th
-        %tbody
-          - @mechanisms.each do |mech|
-            %tr
-              %td
-                = mech.description if mech.description
-              %td
-                = mech.mechanism_subcategory.description if mech.mechanism_subcategory
-              %td
-                %a.btn.btn-default.btn-custom{href: edit_mechanism_path(mech.id),role: "button"}
-                  Редактировать
-              %td
-                %a.btn.btn-default.btn-custom{href: mechanism_path(mech.id),role: "button"}
-                  Детали
-- else
-  = render 'shared/no_data'
+.row
+  .col-sm-12
+    %h2
+      Список техники
+    %br
+    .row
+      .col-sm-8
+        %p
+          Добавьте в этот список всю Вашу технику. Мы уведомим Вас о появлении спроса на неё.
+      .col-sm-4.text-right
+        %a.btn.btn-default.btn-custom{href: new_mechanism_path,role: "button"}
+          Добавить технику
+        %br
+        %br
+  - if @mechanisms.present?
+    %table.table.table-striped
+      %thead
+        %th
+          Модель и марка
+        %th
+          Категория
+        %th
+        %th
+      %tbody
+        - @mechanisms.each do |mech|
+          %tr
+            %td
+              = mech.description if mech.description
+            %td
+              = mech.mechanism_subcategory.description if mech.mechanism_subcategory
+            %td
+              %a.btn.btn-default.btn-custom{href: edit_mechanism_path(mech.id),role: "button"}
+                Редактировать
+            %td
+              %a.btn.btn-default.btn-custom{href: mechanism_path(mech.id),role: "button"}
+                Детали
+  - else
+    = render 'shared/no_data'
 
 .row
   .col-sm-8
