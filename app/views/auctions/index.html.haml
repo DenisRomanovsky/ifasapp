@@ -1,4 +1,4 @@
-- if @auctions.any?
+- if @auctions.present?
   .row
     .col-sm-12
       %table.table.table-striped
@@ -15,9 +15,9 @@
           - @auctions.each do |auction|
             %tr
               %td
-                = auction.description.truncate(100, omission: '...')
+                = auction.description.truncate(100, omission: '...') if auction.description
               %td
-                = auction.mechanism_category.description
+                = auction.mechanism_category.description if auction.mechanism_category
               %td
                 = minsk_time(auction.end_time).strftime("%d/%m/%Y %R")
               %td
