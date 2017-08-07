@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20170320113153) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
     t.text     "body"
@@ -27,9 +24,9 @@ ActiveRecord::Schema.define(version: 20170320113153) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -40,14 +37,14 @@ ActiveRecord::Schema.define(version: 20170320113153) do
     t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "articles", force: :cascade do |t|
     t.integer  "mechanism_category_id"
@@ -56,14 +53,14 @@ ActiveRecord::Schema.define(version: 20170320113153) do
     t.datetime "updated_at"
   end
 
-  add_index "articles", ["mechanism_category_id"], name: "index_articles_on_mechanism_category_id", using: :btree
+  add_index "articles", ["mechanism_category_id"], name: "index_articles_on_mechanism_category_id"
 
   create_table "auction_subcategories", id: false, force: :cascade do |t|
     t.integer "auction_id"
     t.integer "mechanism_subcategory_id"
   end
 
-  add_index "auction_subcategories", ["auction_id", "mechanism_subcategory_id"], name: "auction_subcats_idx", using: :btree
+  add_index "auction_subcategories", ["auction_id", "mechanism_subcategory_id"], name: "auction_subcats_idx"
 
   create_table "auctions", force: :cascade do |t|
     t.integer  "user_id"
@@ -80,8 +77,8 @@ ActiveRecord::Schema.define(version: 20170320113153) do
     t.string   "user_email"
   end
 
-  add_index "auctions", ["status"], name: "index_auctions_on_status", using: :btree
-  add_index "auctions", ["user_id"], name: "index_auctions_on_user_id", using: :btree
+  add_index "auctions", ["status"], name: "index_auctions_on_status"
+  add_index "auctions", ["user_id"], name: "index_auctions_on_user_id"
 
   create_table "bids", force: :cascade do |t|
     t.float    "price"
@@ -94,9 +91,9 @@ ActiveRecord::Schema.define(version: 20170320113153) do
     t.integer  "mechanism_id"
   end
 
-  add_index "bids", ["auction_id"], name: "index_bids_on_auction_id", using: :btree
-  add_index "bids", ["status"], name: "index_bids_on_status", using: :btree
-  add_index "bids", ["user_id"], name: "index_bids_on_user_id", using: :btree
+  add_index "bids", ["auction_id"], name: "index_bids_on_auction_id"
+  add_index "bids", ["status"], name: "index_bids_on_status"
+  add_index "bids", ["user_id"], name: "index_bids_on_user_id"
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -121,10 +118,10 @@ ActiveRecord::Schema.define(version: 20170320113153) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "mechanism_categories", force: :cascade do |t|
     t.text     "description"
@@ -151,8 +148,8 @@ ActiveRecord::Schema.define(version: 20170320113153) do
     t.integer  "user_id"
   end
 
-  add_index "mechanisms", ["mechanism_category_id", "mechanism_subcategory_id"], name: "by_category_subcategory", using: :btree
-  add_index "mechanisms", ["user_id"], name: "index_mechanisms_on_user_id", using: :btree
+  add_index "mechanisms", ["mechanism_category_id", "mechanism_subcategory_id"], name: "by_category_subcategory"
+  add_index "mechanisms", ["user_id"], name: "index_mechanisms_on_user_id"
 
   create_table "user_infos", force: :cascade do |t|
     t.string   "first_name"
@@ -186,8 +183,8 @@ ActiveRecord::Schema.define(version: 20170320113153) do
     t.integer  "user_info_id"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["user_info_id"], name: "index_users_on_user_info_id", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["user_info_id"], name: "index_users_on_user_info_id"
 
 end

@@ -4,13 +4,9 @@
       Список техники
     %br
     .row
-      .col-sm-8
+      .col-sm-12
         %p
           Добавьте в этот список всю Вашу технику. Мы уведомим Вас о появлении спроса на неё.
-      .col-sm-4.text-right
-        %a.btn.btn-default.btn-custom{href: new_mechanism_path,role: "button"}
-          Добавить технику
-        %br
         %br
   - if @mechanisms.present?
     %table.table.table-striped
@@ -36,7 +32,10 @@
                 Детали
   - else
     = render 'shared/no_data'
-
+.row
+  .col-sm-12
+    %a.btn.btn-default.btn-custom{href: new_mechanism_path,role: "button"}
+      Добавить технику
 .row
   .col-sm-8
   .col-sm-4
