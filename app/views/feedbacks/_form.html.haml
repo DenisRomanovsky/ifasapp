@@ -1,3 +1,4 @@
 = bootstrap_form_for(@feedback) do |f|
   = f.text_area :feedback_text, {label: 'Текст сообщения'}
-  = f.submit "Сохранить", {class: 'btn btn-default btn-custom'}
+  = f.email_field :email, {label: 'Email', value: current_user.try(:email), required: true}
+  = f.submit "Сохранить", {class: 'btn btn-default btn-custom', required: true}
