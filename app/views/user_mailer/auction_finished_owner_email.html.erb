@@ -8,6 +8,7 @@
 <p>
   <%= link_to 'Аукцион', show_opportunity_url(@auction.id)%> окончен, и доступны результаты.<br>
 </p>
+<p>Наиболее полная информация доступна на сайте. Ниже представлены лучшие ставки.</p>
 <table>
   <thead>
   <th>
@@ -39,7 +40,7 @@
           <%= bid.price %> руб.
         </td>
         <td>
-          <%= bid.user.email %>
+          <%= bid.user.email %> <%= bid.user.try(:user_info).try(:phone_number) %>
         </td>
         <% if @auction.owner_id.present? %>
             <td>
