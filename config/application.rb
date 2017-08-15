@@ -28,5 +28,6 @@ module Ifasapp
 
     # ActiveJob adapter.
     config.active_job.queue_adapter = :resque
+    config.x.redis_url = ENV["REDISCLOUD_URL"]
   end
 end
