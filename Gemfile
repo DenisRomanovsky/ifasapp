@@ -32,6 +32,11 @@ group :development do
   gem 'web-console', '~> 2.0'
 end
 
+group :production do
+# Real web server
+  gem 'puma'
+end
+
 # TODO: Check rails 5 availability now and then.
 gem 'activeadmin', github: 'activeadmin'
 # Auth stuff.
