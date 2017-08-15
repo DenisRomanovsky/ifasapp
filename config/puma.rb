@@ -12,7 +12,5 @@ on_worker_boot do
   # Worker specific setup for Rails 4.1+
   # See: https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#on-worker-boot
   ActiveRecord::Base.establish_connection
-
-  uri = URI.parse(Rails.application.config.x.redis_url)
-  Resque.redis = Redis.new host:uri.host, port:uri.port, password:uri.password
+  Resque.redis = Rails.application.config.x.redis_url
 end
