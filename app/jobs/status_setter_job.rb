@@ -2,7 +2,9 @@ class StatusSetterJob < ActiveJob::Base
   queue_as :default
 
   def perform
+    puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     puts 'JOB STARTED ' + Time.now.to_s
+    puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     Auction.includes(:owner).active.where('end_time < ?', Time.now.utc).each do |auction|
       auction.update_attribute(:status, :finished)
 
