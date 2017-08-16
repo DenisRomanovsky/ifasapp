@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StatusSetterJob < ActiveJob::Base
   queue_as :default
 

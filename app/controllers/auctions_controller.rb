@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class AuctionsController < ApplicationController
   include ApplicationHelper
 
-  before_action :authenticate_user!, except: [:new_unregistered, :create_unregistered, :update_subcategories, :show]
-  before_action :set_categories, only: [:new, :create, :new_unregistered, :create_unregistered]
+  before_action :authenticate_user!, except: %i[new_unregistered create_unregistered update_subcategories show]
+  before_action :set_categories, only: %i[new create new_unregistered create_unregistered]
 
   def new
     setup_new_auction(current_user)
@@ -23,14 +25,14 @@ class AuctionsController < ApplicationController
   def show
     if current_user.present?
       @auction = current_user.auctions.where(id: params[:id]).first
-      raise ActionController::RoutingError.new('Страница не найдена') unless @auction.present?
-      @bids = @auction.bids.paginate(:page => params[:page], :per_page => 30).includes(:user).active.joins(:mechanism).order('price ASC')
+      raise ActionController::RoutingError, 'Страница не найдена' unless @auction.present?
+      @bids = @auction.bids.paginate(page: params[:page], per_page: 30).includes(:user).active.joins(:mechanism).order('price ASC')
     else
       @auction = Auction.find(params[:id])
     end
   end
 
-  #Not used for now.
+  # Not used for now.
   def edit
     @auction = Auction.where(user_id: current_user.id, id: params[:id].to_i).first!
 
@@ -38,8 +40,7 @@ class AuctionsController < ApplicationController
     @auction_category = category
     @auction_sub_categories = category.mechanism_subcategories
 
-
-    raise ActionController::RoutingError.new('Страница не найдена') unless @auction.present?
+    raise ActionController::RoutingError, 'Страница не найдена' unless @auction.present?
   end
 
   def update
@@ -58,11 +59,11 @@ class AuctionsController < ApplicationController
   end
 
   def index
-    @auctions = Auction.paginate(:page => params[:page]).where(user_id: current_user.id).includes(:mechanism_subcategories)
+    @auctions = Auction.paginate(page: params[:page]).where(user_id: current_user.id).includes(:mechanism_subcategories)
   end
 
   def update_subcategories
-    raise ActionController::RoutingError.new('Страница не найдена') unless request.xhr?
+    raise ActionController::RoutingError, 'Страница не найдена' unless request.xhr?
     sub_categories = MechanismSubcategory.select(:id, :description).where(mechanism_category_id: params[:category_id])
     render json: sub_categories.to_json
   end
@@ -74,13 +75,13 @@ class AuctionsController < ApplicationController
     if mechanisms.present?
       # TODO: Cover this with tests and AFTER refactor to use one god damned SQL query.
       opportunities = Auction
-                          .includes(:mechanism_category, :mechanism_subcategories)
-                          .active
-                          .where('auctions.mechanism_category_id in (?) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), current_user.id)
-                          .order('id DESC')
+                      .includes(:mechanism_category, :mechanism_subcategories)
+                      .active
+                      .where('auctions.mechanism_category_id in (?) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), current_user.id)
+                      .order('id DESC')
 
       opportunities = opportunities.map do |op|
-        next if op.user_id == current_user.id #check the owner
+        next if op.user_id == current_user.id # check the owner
 
         if op.mechanism_subcategories.present?
           (op.mechanism_subcategories.pluck(:id).compact.uniq & mechanisms.pluck(:mechanism_subcategory_id).compact.uniq).any? ? op : nil
@@ -90,13 +91,13 @@ class AuctionsController < ApplicationController
       end
 
       opportunities = opportunities.compact.uniq
-      @opportunities = Auction.paginate(:page => params[:page]).where(id: opportunities)
+      @opportunities = Auction.paginate(page: params[:page]).where(id: opportunities)
     end
   end
 
   def show_opportunity
     @opportunity = Auction.where(id: params[:id]).first
-    raise ActionController::RoutingError.new('Страница не найдена') if  !user_can_participate? || @opportunity.blank?
+    raise ActionController::RoutingError, 'Страница не найдена' if !user_can_participate? || @opportunity.blank?
     @current_bid = Bid.where(auction_id: params[:id], user_id: current_user.id).active.first
     @total_bids = Bid.where(auction_id: params[:id]).active.size
     time_left = @opportunity.end_time.utc - Time.now.utc
@@ -106,7 +107,7 @@ class AuctionsController < ApplicationController
   def get_bidders_counter
     subcats = params['subcategories_ids'].present? ? params['subcategories_ids'] : []
     users_amount = Auction.allowed_bidders_amount(params['category_id'], subcats, current_user)
-    render json: {'bidders-counter' =>  users_amount}.to_json
+    render json: { 'bidders-counter' => users_amount }.to_json
   end
 
   private
@@ -151,9 +152,9 @@ class AuctionsController < ApplicationController
     auction_parameters = auction_params
     time_now = Time.now.utc + 5.seconds
 
-    auction_parameters.merge!({user_id: current_user.present? ? current_user.id : nil,
-                               start_time: time_now,
-                               status: :active})
+    auction_parameters.merge!(user_id: current_user.present? ? current_user.id : nil,
+                              start_time: time_now,
+                              status: :active)
 
     auction_parameters['with_tax'] == '0' if auction_parameters['cash_payed'] == '0'
 
@@ -169,8 +170,7 @@ class AuctionsController < ApplicationController
     else
       @auction_sub_categories_ids = params.dig(:auction, :auction_subcategories)
       @duration_id = params.dig(:auction, :end_time).to_i
-      render action: current_user.present? ? 'new' :'new_unregistered', auction: @auction
+      render action: current_user.present? ? 'new' : 'new_unregistered', auction: @auction
     end
   end
-
 end

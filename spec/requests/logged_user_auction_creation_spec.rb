@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature 'Logged in user experience with NO js tests', :type => :feature do
+RSpec.feature 'Logged in user experience with NO js tests', type: :feature do
   let!(:category_one) { FactoryGirl.create(:mechanism_category, :with_subcats) }
   let!(:category_two) { FactoryGirl.create(:mechanism_category, :with_subcats) }
   let!(:category_three) { FactoryGirl.create(:mechanism_category, :with_subcats) }
@@ -47,13 +49,13 @@ RSpec.feature 'Logged in user experience with NO js tests', :type => :feature do
         user
       end
 
-      let!(:user_with_tech_two)do
+      let!(:user_with_tech_two) do
         user = FactoryGirl.create(:user)
         FactoryGirl.create(:mechanism, user: user, mechanism_category: category_one, mechanism_subcategory: category_one.mechanism_subcategories.last)
         user
       end
 
-      let!(:user_with_tech_three)do
+      let!(:user_with_tech_three) do
         user = FactoryGirl.create(:user)
         FactoryGirl.create(:mechanism, user: user, mechanism_category: category_two, mechanism_subcategory: category_two.mechanism_subcategories.last)
         user
@@ -109,7 +111,6 @@ RSpec.feature 'Logged in user experience with NO js tests', :type => :feature do
           expect(ActionMailer::Base.deliveries.size).to eq(2)
         end
 
-
         it 'sends correct emails when no match in subcats' do
           visit "/arenda/#{category_one.slug}"
           fill_in('Описание', with: Faker::Lorem.paragraph)
@@ -129,7 +130,7 @@ RSpec.feature 'Logged in user experience with NO js tests', :type => :feature do
       user
     end
 
-    let!(:user_with_tech_two)do
+    let!(:user_with_tech_two) do
       user = FactoryGirl.create(:user)
       FactoryGirl.create(:mechanism, user: user, mechanism_category: category_one, mechanism_subcategory: category_one.mechanism_subcategories.last)
       user
@@ -156,12 +157,12 @@ RSpec.feature 'Logged in user experience with NO js tests', :type => :feature do
         expect(page).to have_content 'Да'
 
         expect(page).to have_content 'Включена в цену'
-        expect(page).to have_content (auction.end_time.utc + 3.hours).strftime("%d/%m/%Y %R")
+        expect(page).to have_content (auction.end_time.utc + 3.hours).strftime('%d/%m/%Y %R')
       end
 
       it 'blocks not owner from show page' do
         ApplicationController.any_instance.stub(:current_user).and_return(user_with_tech_two)
-        expect{visit "/auctions/#{auction.id}/"}.to raise_error(ActionController::RoutingError)
+        expect { visit "/auctions/#{auction.id}/" }.to raise_error(ActionController::RoutingError)
       end
     end
 

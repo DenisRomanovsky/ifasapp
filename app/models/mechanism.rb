@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Mechanism < ActiveRecord::Base
   belongs_to :user
   belongs_to :mechanism_subcategory

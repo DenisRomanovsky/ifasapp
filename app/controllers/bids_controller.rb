@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BidsController < ApplicationController
   include ApplicationHelper
   before_action :set_auction
@@ -5,7 +7,7 @@ class BidsController < ApplicationController
 
   def new
     return if @auction.blank?
-    raise ActionController::RoutingError.new('Страница не найдена') unless user_can_participate?
+    raise ActionController::RoutingError, 'Страница не найдена' unless user_can_participate?
     @bid = Bid.new
     last_bid = Bid.where(auction_id: params[:auction_id], user_id: current_user.id).active.first
     if last_bid.present?
@@ -17,7 +19,7 @@ class BidsController < ApplicationController
 
   def create
     return if @auction.blank?
-    raise ActionController::RoutingError.new('Страница не найдена') unless user_can_participate?
+    raise ActionController::RoutingError, 'Страница не найдена' unless user_can_participate?
 
     last_bid = Bid.where(auction_id: params[:auction_id], user_id: current_user.id).active.first
     last_bid.update_attribute(:status, :archived) if last_bid.present?
@@ -35,7 +37,7 @@ class BidsController < ApplicationController
 
   def edit
     return if @auction.blank?
-    raise ActionController::RoutingError.new('Страница не найдена') unless user_can_participate?
+    raise ActionController::RoutingError, 'Страница не найдена' unless user_can_participate?
   end
 
   private
@@ -59,6 +61,6 @@ module ApplicationHelper
     return false if auction.blank? || auction.user_id == current_user.id # Current user can not participate.
 
     !(auction.mechanism_subcategory_ids & current_user.mechanisms.pluck(:mechanism_subcategory_id)).empty? ||
-    (auction.mechanism_subcategory_ids.nil? && current_user.mechanisms.pluck(:mechanism_category_id).include?(auction.mechanism_category_ids))
+      (auction.mechanism_subcategory_ids.nil? && current_user.mechanisms.pluck(:mechanism_category_id).include?(auction.mechanism_category_ids))
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require database cleaner at the top level
 require 'database_cleaner'
 
@@ -6,7 +8,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 
 require 'rspec/rails'
 require 'capybara/poltergeist'
@@ -23,7 +25,6 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
-
   config.use_transactional_fixtures = false
 
   config.infer_spec_type_from_file_location!

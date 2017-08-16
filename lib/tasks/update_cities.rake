@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 namespace :cities do
   desc 'Scans through cities.csv and updates db.'
@@ -6,11 +8,11 @@ namespace :cities do
     csv_text = File.read(file)
     if csv_text.present?
       City.delete_all
-      csv = CSV.parse(csv_text, :headers => false)
+      csv = CSV.parse(csv_text, headers: false)
       csv.each do |row|
-        City.create(){ |c|
-            c.name =row[0]
-        }
+        City.create do |c|
+          c.name = row[0]
+        end
       end
       puts 'Cities are updated.'
     end

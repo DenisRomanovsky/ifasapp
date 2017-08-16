@@ -1,5 +1,6 @@
-class FeedbacksController < InheritedResources::Base
+# frozen_string_literal: true
 
+class FeedbacksController < InheritedResources::Base
   before_action :authenticate_user!
 
   def create
@@ -16,8 +17,7 @@ class FeedbacksController < InheritedResources::Base
 
   private
 
-    def feedback_params
-      params.require(:feedback).permit(:feedback_text, :email)
-    end
+  def feedback_params
+    params.require(:feedback).permit(:feedback_text, :email)
+  end
 end
-

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OfferedMechanismsTable < ActiveRecord::Migration
   def change
     create_table :auction_mechanisms do |t|

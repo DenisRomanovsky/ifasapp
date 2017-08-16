@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def user_can_participate?
     auction = Auction.includes(:mechanism_subcategories).active.where(id: params[:auction_id] || params[:id]).first

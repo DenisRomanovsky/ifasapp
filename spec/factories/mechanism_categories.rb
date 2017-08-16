@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :mechanism_category do
     sequence(:description) { |n| Faker::Lorem.sentence + n.to_s }

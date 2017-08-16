@@ -1,9 +1,10 @@
-class UserMailer < ApplicationMailer
+# frozen_string_literal: true
 
+class UserMailer < ApplicationMailer
   def new_opportunity_email(user_id, opportunity_id)
     @user = User.includes(:user_info).find(user_id)
 
-    return  if @user.user_info.present? &&  !@user.user_info.send_email?
+    return  if @user.user_info.present? && !@user.user_info.send_email?
 
     @opportunity_id = opportunity_id
     @opportunity_category = Auction.find(opportunity_id).mechanism_category.description
@@ -16,7 +17,7 @@ class UserMailer < ApplicationMailer
     mail(to: user_email, subject: 'Артель - Аукцион окончен: доступны результаты.')
   end
 
-  def auction_finished_bidder_email(user_id,opportunity_id)
+  def auction_finished_bidder_email(user_id, opportunity_id)
     @opportunity_id = opportunity_id
     @best_bid_price = Bid.active.where(auction_id: opportunity_id).order('price ASC').first.try(:price)
     @current_bid_price = Bid.active.where(auction_id: opportunity_id, user_id: user_id).order('price ASC').first.try(:price)
@@ -25,6 +26,6 @@ class UserMailer < ApplicationMailer
 
   def feedback_received_email(feedback_id)
     @feedback = Feedback.includes(:user).find(feedback_id)
-    mail(to: ENV['ADMIN_EMAIL']|| 'niafasmail@gmail.com', subject: 'Артель - Отзыв от пользователя.')
+    mail(to: ENV['ADMIN_EMAIL'] || 'niafasmail@gmail.com', subject: 'Артель - Отзыв от пользователя.')
   end
 end

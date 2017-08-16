@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Feedbacks', type: :request do
   describe 'post /feedbacks' do
     let!(:user) { FactoryGirl.create(:user) }
-    let (:text) {Faker::Lorem.paragraph}
-    let!(:category) {FactoryGirl.create(:mechanism_category)}
+    let (:text) { Faker::Lorem.paragraph }
+    let!(:category) { FactoryGirl.create(:mechanism_category) }
 
     before do
       ApplicationController.any_instance.stub(:authenticate_user!).and_return(true)
@@ -12,9 +14,8 @@ RSpec.describe 'Feedbacks', type: :request do
     end
 
     context 'feedback is saved' do
-
       before do
-        post feedbacks_path, {feedback: { feedback_text: text }}
+        post feedbacks_path, feedback: { feedback_text: text }
       end
 
       it 'create a feedback' do
@@ -31,13 +32,13 @@ RSpec.describe 'Feedbacks', type: :request do
 
     context 'input validations' do
       it 'empty text' do
-        post feedbacks_path, {feedback: { feedback_text: '' }}
+        post feedbacks_path, feedback: { feedback_text: '' }
         response.should render_template('new')
         expect(Feedback.all.size).to eq(0)
       end
 
       it 'long text' do
-        post feedbacks_path, {feedback: { feedback_text: '' }}
+        post feedbacks_path, feedback: { feedback_text: '' }
         response.should render_template('new')
         expect(Feedback.all.size).to eq(0)
       end

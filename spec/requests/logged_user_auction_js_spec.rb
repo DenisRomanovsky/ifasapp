@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature 'Logged in user experience with NO js tests', :type => :feature do
-
+RSpec.feature 'Logged in user experience with NO js tests', type: :feature do
   before do
     ApplicationController.any_instance.stub(:authenticate_user!).and_return(true)
     ApplicationController.any_instance.stub(:current_user).and_return(user)

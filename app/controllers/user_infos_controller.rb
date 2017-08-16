@@ -1,15 +1,16 @@
-class UserInfosController < ApplicationController
+# frozen_string_literal: true
 
+class UserInfosController < ApplicationController
   before_action :authenticate_user!
 
   def edit
-    raise ActionController::RoutingError.new('Страница не найдена') unless current_user.present?
+    raise ActionController::RoutingError, 'Страница не найдена' unless current_user.present?
 
-    if current_user.user_info.present?
-      @user_info = current_user.user_info
-    else
-      @user_info = current_user.create_user_info
-    end
+    @user_info = if current_user.user_info.present?
+                   current_user.user_info
+                 else
+                   current_user.create_user_info
+                 end
   end
 
   def update

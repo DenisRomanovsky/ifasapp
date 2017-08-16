@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :auction do
     start_time Time.now - 10.minutes
@@ -7,7 +9,6 @@ FactoryGirl.define do
     delivery_included true
     cash_payed true
     with_tax true
-
 
     trait :with_subcats do
       mechanism_category

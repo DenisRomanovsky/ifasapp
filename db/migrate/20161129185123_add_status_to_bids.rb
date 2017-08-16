@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddStatusToBids < ActiveRecord::Migration
   def change
     add_column :bids, :status, :integer, default: 0

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Auction < ActiveRecord::Base
   belongs_to :owner, class_name: 'User', foreign_key: :user_id
   belongs_to :mechanism_category
@@ -8,17 +10,15 @@ class Auction < ActiveRecord::Base
   has_many :bids
   has_many :mechanisms, through: :bids
 
-  enum status: [ :active, :finished ]
+  enum status: %i[active finished]
 
   self.per_page = 10
 
   validates_presence_of :description, :start_time, :end_time, :mechanism_category_id
   validates_length_of :description, maximum: 1000
-  validates_format_of :user_email, :with => Devise::email_regexp, :allow_blank => true
+  validates_format_of :user_email, with: Devise.email_regexp, allow_blank: true
 
-  validate do |auction|
-    auction.validate_owner
-  end
+  validate(&:validate_owner)
 
   def validate_owner
     if user_id.blank? && user_email.blank?
@@ -27,46 +27,46 @@ class Auction < ActiveRecord::Base
   end
 
   def sent_opportunity_emails(current_user)
-    users = Auction.users_by_mech_cats(self.mechanism_category_id, self.auction_subcategories.pluck(:mechanism_subcategory_id))
+    users = Auction.users_by_mech_cats(mechanism_category_id, auction_subcategories.pluck(:mechanism_subcategory_id))
     users = users.where('users.id != ?', current_user.id).uniq if current_user.present?
 
     users.each do |user|
-      UserMailer.new_opportunity_email(user.id, self.id).deliver_later
+      UserMailer.new_opportunity_email(user.id, id).deliver_later
     end
   end
 
   def self.allowed_bidders_amount(mechanism_category_id, mechanism_subcategory_ids, current_user)
-    users = self.users_by_mech_cats(mechanism_category_id, mechanism_subcategory_ids)
+    users = users_by_mech_cats(mechanism_category_id, mechanism_subcategory_ids)
     users = users.map(&:id).uniq.compact
     users.delete(current_user.id) if current_user.present?
     users.size
   end
 
   def self.users_by_mech_cats(mechanism_category_id, mechanism_subcategory_ids)
-    mechanism_subcategory_ids = mechanism_subcategory_ids.nil? ? [] :  mechanism_subcategory_ids.uniq.compact
+    mechanism_subcategory_ids = mechanism_subcategory_ids.nil? ? [] : mechanism_subcategory_ids.uniq.compact
     users = User.joins(:mechanisms).where('"mechanisms"."mechanism_category_id" = ?', mechanism_category_id)
     users = users.where(' "mechanisms"."mechanism_subcategory_id" in (?)', mechanism_subcategory_ids) if mechanism_subcategory_ids.present?
     users
   end
 
   def bidders
-    User.joins(:bids).where('"bids".auction_id = ?', self.id).group('"users".id')
+    User.joins(:bids).where('"bids".auction_id = ?', id).group('"users".id')
   end
 
   def self.durations
     [
-        {id: 1,
-         text: '20 минут',
-         duration: 20.minutes},
-        {id: 2,
-         text: '1 час',
-         duration: 1.hour},
-        {id: 3,
-         text: '1 день',
-         duration: 1.day},
-        {id: 4,
-         text: '1 неделя',
-         duration: 1.week}
+      { id: 1,
+        text: '20 минут',
+        duration: 20.minutes },
+      { id: 2,
+        text: '1 час',
+        duration: 1.hour },
+      { id: 3,
+        text: '1 день',
+        duration: 1.day },
+      { id: 4,
+        text: '1 неделя',
+        duration: 1.week }
     ]
   end
 
@@ -74,17 +74,17 @@ class Auction < ActiveRecord::Base
     result = time_now
 
     case type.to_i
-      when 1
-        result += Auction.durations[0][:duration]
-      when 2
-        result += Auction.durations[1][:duration]
-      when 3
-        result += Auction.durations[2][:duration]
-      when 4
-        result += Auction.durations[3][:duration]
-      else
-        puts 'Incorrect auction duration.'
-        result += Auction.durations[0][:duration]
+    when 1
+      result += Auction.durations[0][:duration]
+    when 2
+      result += Auction.durations[1][:duration]
+    when 3
+      result += Auction.durations[2][:duration]
+    when 4
+      result += Auction.durations[3][:duration]
+    else
+      puts 'Incorrect auction duration.'
+      result += Auction.durations[0][:duration]
     end
 
     result

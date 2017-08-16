@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveSubcategoryFromAuctions < ActiveRecord::Migration
   def up
     remove_column :auctions, :mechanism_subcategory_id

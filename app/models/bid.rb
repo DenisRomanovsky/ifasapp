@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Bid < ActiveRecord::Base
   belongs_to :user
   belongs_to :mechanism
   belongs_to :auction
 
-  enum status: [ :active, :archived ]
+  enum status: %i[active archived]
 
   self.per_page = 10
 

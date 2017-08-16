@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveUnp < ActiveRecord::Migration
   def up
     remove_column :user_infos, :unp

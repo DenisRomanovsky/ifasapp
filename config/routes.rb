@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'resque_web'
 
 Rails.application.routes.draw do
-  
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   authenticate :admin_user do
@@ -13,12 +14,11 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resources :user_infos, only: [:update, :show]
+  resources :user_infos, only: %i[update show]
   get 'user_info/edit' => 'user_infos#edit', as: 'edit_profile'
 
   get 'opportunities' => 'auctions#opportunities_index'
   get 'opportunities/:id' => 'auctions#show_opportunity', as: 'show_opportunity'
-
 
   # Dynamic data on auction create form.
   post 'arenda/get_bidders_counter' => 'auctions#get_bidders_counter'
@@ -27,18 +27,18 @@ Rails.application.routes.draw do
   post '/update_subcategories' => 'auctions#update_subcategories'
 
   # Auction basic routes.
-  resources :auctions, except: [:edit, :update, :new]
+  resources :auctions, except: %i[edit update new]
   get 'arenda/:category_slug' => 'auctions#new', constraints: { category_slug: /(\w|-)+/ }, as: 'new_arenda'
 
   # Auctions for unregistered users.
   get 'bystraia-arenda/:category_slug' => 'auctions#new_unregistered', constraints: { category_slug: /(\w|-)+/ }, as: 'quick_new_arenda'
   post 'bystraia-arenda/' => 'auctions#create_unregistered'
 
-  resources :bids, only: [:create, :new]
+  resources :bids, only: %i[create new]
 
   resources :mechanisms
 
   get 'info/' => 'articles#index', as: 'infos_index'
 
-  resources :feedbacks, only: [:create, :new]
+  resources :feedbacks, only: %i[create new]
 end

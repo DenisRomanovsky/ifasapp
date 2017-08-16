@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MechanismsTable < ActiveRecord::Migration
   def change
     create_table :mechanisms do |t|
@@ -7,6 +9,6 @@ class MechanismsTable < ActiveRecord::Migration
       t.text :long_description
       t.timestamps
     end
-    add_index :mechanisms, [:mechanism_category_id, :mechanism_subcategory_id], name: 'by_category_subcategory'
+    add_index :mechanisms, %i[mechanism_category_id mechanism_subcategory_id], name: 'by_category_subcategory'
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -11,7 +13,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local = %w(1 true yes).include?(ENV['SHOW_ERRORS'])
+  config.consider_all_requests_local = %w[1 true yes].include?(ENV['SHOW_ERRORS'])
   config.action_controller.perform_caching = true
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
@@ -79,16 +81,16 @@ Rails.application.configure do
 
   # Some email notifications.
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = {:host => 'https://artel.by'}
+  config.action_mailer.default_url_options = { host: 'https://artel.by' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'smtp.gmail.com',
-      port: 587,
-      domain: 'gmail.com',
-      user_name: ENV.fetch('GMAIL_USERNAME'),
-      password: ENV.fetch('GMAIL_APP_SPECIFIC_PASSWORD'),
-      authentication: :login,
-      enable_starttls_auto: true
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'gmail.com',
+    user_name: ENV.fetch('GMAIL_USERNAME'),
+    password: ENV.fetch('GMAIL_APP_SPECIFIC_PASSWORD'),
+    authentication: :login,
+    enable_starttls_auto: true
   }
 
   config.consider_all_requests_local = false # Uncomment to allow error page display in prod.

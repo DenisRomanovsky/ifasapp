@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.feature 'Home page', :type => :feature do
+RSpec.feature 'Home page', type: :feature do
   let!(:category) { FactoryGirl.create(:mechanism_category) }
 
   it 'home page is available' do

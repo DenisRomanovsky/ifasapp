@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -33,7 +35,7 @@ group :development do
 end
 
 group :production do
-# Real web server
+  # Real web server
   gem 'puma'
 end
 
@@ -63,12 +65,12 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'will_paginate', '~> 3.1.1'
 
 group :test do
-  gem 'factory_girl_rails', '~> 4.0'
-  gem 'shoulda-matchers', '~> 3.1'
-  gem 'faker'
-  gem 'database_cleaner'
   gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'faker'
   gem 'poltergeist'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 # New relic guard is here!
@@ -76,6 +78,9 @@ gem 'newrelic_rpm'
 
 # Log entries.
 gem 'le'
+
+# Rubocop!
+gem 'rubocop', require: false
 
 # Specify ruby version to use dig for hashes.
 ruby '~> 2.3.1'

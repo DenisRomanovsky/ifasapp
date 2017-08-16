@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BidsTable < ActiveRecord::Migration
   def change
     create_table :bids do |t|

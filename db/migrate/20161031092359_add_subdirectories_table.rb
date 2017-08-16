@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddSubdirectoriesTable < ActiveRecord::Migration
   def change
     create_table :mechanism_subcategories do |t|

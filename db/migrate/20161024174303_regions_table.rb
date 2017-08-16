@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RegionsTable < ActiveRecord::Migration
   def change
     create_table :categories do |t|
