@@ -35,8 +35,10 @@ RSpec.describe AuctionFinalizerJob, type: :job do
     FactoryGirl.create(:bid, user: bidder_1, auction: auction_to_finish, mechanism: mechanism)
     FactoryGirl.create(:bid, user: bidder_2, auction: auction_to_finish, mechanism: mechanism)
 
-    allow(UserMailer).to receive_message_chain(:auction_finished_owner_email, :deliver_later) { triggered_owner_email += 1 }
-    allow(UserMailer).to receive_message_chain(:auction_finished_bidder_email, :deliver_later) { triggered_bidder_emails += 1 }
+    allow(UserMailer).to receive_message_chain(:auction_finished_owner_email,
+                                               :deliver_later) { triggered_owner_email += 1 }
+    allow(UserMailer).to receive_message_chain(:auction_finished_bidder_email,
+                                               :deliver_later) { triggered_bidder_emails += 1 }
 
     AuctionFinalizerJob.new.perform(auction_to_finish.id)
 
@@ -46,7 +48,8 @@ RSpec.describe AuctionFinalizerJob, type: :job do
 
   it 'sends email to quick auction owner' do
     triggered_owner_email = 0
-    allow(UserMailer).to receive_message_chain(:auction_finished_owner_email, :deliver_later) { triggered_owner_email += 1 }
+    allow(UserMailer).to receive_message_chain(:auction_finished_owner_email,
+                                               :deliver_later) { triggered_owner_email += 1 }
 
     AuctionFinalizerJob.new.perform(quick_auction_to_finish.id)
 

@@ -54,13 +54,3 @@ class BidsController < ApplicationController
     end
   end
 end
-
-module ApplicationHelper
-  def user_can_participate?
-    auction = Auction.active.where(id: params[:auction_id] || params[:id]).first
-    return false if auction.blank? || auction.user_id == current_user.id # Current user can not participate.
-
-    !(auction.mechanism_subcategory_ids & current_user.mechanisms.pluck(:mechanism_subcategory_id)).empty? ||
-      (auction.mechanism_subcategory_ids.nil? && current_user.mechanisms.pluck(:mechanism_category_id).include?(auction.mechanism_category_ids))
-  end
-end
