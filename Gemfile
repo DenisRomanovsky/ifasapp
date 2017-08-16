@@ -30,8 +30,15 @@ end
 group :development do
   # Catches email. See 1080 port to check em all.
   gem 'mailcatcher'
+
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+
+  # Rubocop!
+  gem 'rubocop', require: false
+
+  # Annotates
+  gem 'annotate', require: false
 end
 
 group :production do
@@ -78,9 +85,6 @@ gem 'newrelic_rpm'
 
 # Log entries.
 gem 'le'
-
-# Rubocop!
-gem 'rubocop', require: false
 
 # Specify ruby version to use dig for hashes.
 ruby '~> 2.3.1'

@@ -1,4 +1,23 @@
 # frozen_string_literal: true
+# == Schema Information
+#
+# Table name: auctions
+#
+#  id                    :integer          not null, primary key
+#  user_id               :integer
+#  start_time            :datetime
+#  end_time              :datetime
+#  description           :text
+#  created_at            :datetime
+#  updated_at            :datetime
+#  mechanism_category_id :integer
+#  status                :integer
+#  delivery_included     :boolean
+#  cash_payed            :boolean
+#  with_tax              :boolean
+#  user_email            :string
+#
+
 
 FactoryGirl.define do
   factory :auction do

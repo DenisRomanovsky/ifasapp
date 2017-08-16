@@ -1,4 +1,16 @@
 # frozen_string_literal: true
+# == Schema Information
+#
+# Table name: mechanism_categories
+#
+#  id               :integer          not null, primary key
+#  description      :text
+#  created_at       :datetime
+#  updated_at       :datetime
+#  home_description :text
+#  slug             :string
+#
+
 
 class MechanismCategory < ActiveRecord::Base
   has_many :mechanism_subcategories
