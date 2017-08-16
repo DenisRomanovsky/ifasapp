@@ -74,5 +74,8 @@ end
 # New relic guard is here!
 gem 'newrelic_rpm'
 
+# Log entries.
+gem 'le'
+
 # Specify ruby version to use dig for hashes.
 ruby '~> 2.3.1'

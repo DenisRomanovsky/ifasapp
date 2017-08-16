@@ -10,13 +10,13 @@ default: &default
   timeout: 5000
 
 development:
-  adapter: sqlite3
+  adapter: postgresql
   encoding: unicode
   pool: 5
-  username: dromanovsky
+  username: root
   password: 1
   host:     localhost
-  database: db/vpss_dev.sqlite3
+  database: ifasapp_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,13 +24,13 @@ development:
 test:
   <<: *default
   database: ifasapp_test
-  adapter: sqlite3
+  adapter: postgresql
   encoding: unicode
   pool: 5
-  username: dromanovsky
+  username: root
   password: 1
   host:     localhost
-  database: db/vpss_test.sqlite3
+  database: ifasapp_test
 
 production:
   <<: *default
