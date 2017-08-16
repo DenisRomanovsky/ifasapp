@@ -1,5 +1,14 @@
 .row
-  .col-sm-6
+  .col-sm-12
+  - if @time_left > 0
+    %h3
+      Время до окончания аукциона:
+    .timer{ 'data-seconds-left'=>@time_left }
+  - else
+    %h3
+      Аукцион окончен.
+.row
+  .col-sm-12
     %dl.dl-horizontal
       %dt
         Описание
@@ -37,14 +46,6 @@
     - if @time_left > 0
       %a.btn.btn-default.btn-custom{href: new_bid_path({auction_id: @opportunity.id}),role: "button"}
         Сделать ставку
-  .col-sm-6
-    - if @time_left > 0
-      %h3
-        Время до окончания аукциона:
-      .timer{ 'data-seconds-left'=>@time_left }
-    - else
-      %h3
-        Аукцион окончен.
 = javascript_include_tag('jquery_simple_timer')
 %script
   $('.timer').startTimer({onComplete: function(element){ element.addClass('is-complete'); }});
