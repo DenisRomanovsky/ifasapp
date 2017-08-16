@@ -4,9 +4,9 @@ class StatusSetterJob < ActiveJob::Base
   queue_as :default
 
   def perform
-    puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-    puts 'JOB STARTED ' + Time.now.to_s
-    puts '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    Rails.logger.fatal '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+    Rails.logger.fatal 'JOB STARTED ' + Time.now.to_s
+    Rails.logger.fatal '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
     Auction.includes(:owner).active.where('end_time < ?', Time.now.utc).each do |auction|
       auction.update_attribute(:status, :finished)
 
