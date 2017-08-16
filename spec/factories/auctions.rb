@@ -28,10 +28,9 @@ FactoryGirl.define do
     delivery_included true
     cash_payed true
     with_tax true
+    user_email { Faker::Internet.email }
 
     trait :with_subcats do
-      mechanism_category
-
       after :create do |auction|
         3.times do
           subcat = FactoryGirl.create(:mechanism_subcategory, mechanism_category: auction.mechanism_category)

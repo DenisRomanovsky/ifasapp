@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.9'
 # Use pg as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -36,6 +36,9 @@ group :development do
 
   # Rubocop!
   gem 'rubocop', require: false
+
+  # Reek
+  gem 'reek'
 
   # Annotates
   gem 'annotate', require: false
@@ -87,4 +90,4 @@ gem 'newrelic_rpm'
 gem 'le'
 
 # Specify ruby version to use dig for hashes.
-ruby '~> 2.3.1'
+ruby '~> 2.4.0'

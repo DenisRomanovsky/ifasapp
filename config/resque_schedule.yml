@@ -1,7 +1,7 @@
-set_statuses_to_finished_auctions:
+check_auctions_status:
   every:
     - "60s"
     - :first_in: '10s'
-  class: "StatusSetterJob"
-  queue: 'status_setter_queue'
-  description: "This job sets the status to finished for auctions with exceeded duration. Also sends emails."
+  class: "AuctionStatusCheckerJob"
+  queue: 'status_checker_queue'
+  description: "This job checks auctions end time and finalizes them."

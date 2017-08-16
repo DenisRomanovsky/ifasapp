@@ -31,7 +31,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.include FactoryGirl::Syntax::Methods
-  config.include MailerMacros, type: :feature
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
@@ -39,7 +38,6 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    reset_email
     DatabaseCleaner.start
   end
 
