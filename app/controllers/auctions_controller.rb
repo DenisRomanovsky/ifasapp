@@ -88,6 +88,7 @@ class AuctionsController < ApplicationController
           op
         end
       end
+
       opportunities = opportunities.compact.uniq
       @opportunities = Auction.paginate(:page => params[:page]).where(id: opportunities)
     end
