@@ -3,5 +3,5 @@ set_statuses_to_finished_auctions:
     - "60s"
     - :first_in: '10s'
   class: "StatusSetterJob"
-  queue: default
+  queue: 'status_setter_queue'
   description: "This job sets the status to finished for auctions with exceeded duration. Also sends emails."
