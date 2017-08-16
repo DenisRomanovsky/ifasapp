@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: mechanisms
@@ -12,7 +13,6 @@
 #  updated_at               :datetime
 #  user_id                  :integer
 #
-
 
 class Mechanism < ActiveRecord::Base
   belongs_to :user

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: auctions
@@ -17,7 +18,6 @@
 #  with_tax              :boolean
 #  user_email            :string
 #
-
 
 class Auction < ActiveRecord::Base
   belongs_to :owner, class_name: 'User', foreign_key: :user_id

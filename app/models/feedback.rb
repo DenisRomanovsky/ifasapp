@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: feedbacks
@@ -10,7 +11,6 @@
 #  updated_at    :datetime         not null
 #  email         :string
 #
-
 
 class Feedback < ActiveRecord::Base
   belongs_to :user

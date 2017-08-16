@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: auctions
@@ -17,7 +18,6 @@
 #  with_tax              :boolean
 #  user_email            :string
 #
-
 
 FactoryGirl.define do
   factory :auction do

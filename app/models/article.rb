@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: articles
@@ -9,7 +10,6 @@
 #  created_at            :datetime
 #  updated_at            :datetime
 #
-
 
 class Article < ActiveRecord::Base
   belongs_to :mechanism_category

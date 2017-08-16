@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuctionFinalizerJob < ActiveJob::Base
   queue_as :auction_finalizers_queue
 

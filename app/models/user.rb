@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -22,7 +23,6 @@
 #  updated_at             :datetime         not null
 #  user_info_id           :integer
 #
-
 
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,

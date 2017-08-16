@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: admin_users
@@ -17,7 +18,6 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-
 
 class AdminUser < ActiveRecord::Base
   # Include default devise modules. Others available are:

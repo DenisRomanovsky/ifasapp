@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: bids
@@ -13,7 +14,6 @@
 #  status       :integer          default(0)
 #  mechanism_id :integer
 #
-
 
 FactoryGirl.define do
   factory :bid do

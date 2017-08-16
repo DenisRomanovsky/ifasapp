@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: user_infos
@@ -14,7 +15,6 @@
 #  send_email        :boolean          default(TRUE)
 #  organization_name :string
 #
-
 
 FactoryGirl.define do
   factory :user_info do
