@@ -11,6 +11,7 @@
 #  updated_at            :datetime
 #
 
+# Articles about mech types. For SEO.
 class Article < ActiveRecord::Base
   belongs_to :mechanism_category
 

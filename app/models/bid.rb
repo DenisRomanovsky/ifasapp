@@ -15,6 +15,7 @@
 #  mechanism_id :integer
 #
 
+# Bid model
 class Bid < ActiveRecord::Base
   belongs_to :user
   belongs_to :mechanism

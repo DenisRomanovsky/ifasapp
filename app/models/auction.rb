@@ -109,9 +109,9 @@ class Auction < ActiveRecord::Base
     result
   end
 
-  def check_user_can_bid!(_user)
+  def check_user_can_bid!(user)
     raise ActionController::RoutingError, 'Страница не найдена' unless AuctionsRetriever
-                                                                       .user_opportunities(current_user)
+                                                                       .user_opportunities(user)
                                                                        .pluck(:id)
                                                                        .include?(id)
   end

@@ -16,6 +16,7 @@
 #  organization_name :string
 #
 
+# User personal information. For auction end mails.
 class UserInfo < ActiveRecord::Base
   has_one :user
   belongs_to :city

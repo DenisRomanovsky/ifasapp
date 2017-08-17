@@ -11,6 +11,7 @@
 #  updated_at            :datetime
 #
 
+# Subcategory of Mechs.
 class MechanismSubcategory < ActiveRecord::Base
   belongs_to :mechanism_category
 end

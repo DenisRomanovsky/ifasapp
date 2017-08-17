@@ -19,6 +19,7 @@
 #  updated_at             :datetime         not null
 #
 
+# Model for admins.
 class AdminUser < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -74,8 +74,8 @@ class AuctionsController < ApplicationController
   end
 
   def show_opportunity
-    @opportunity = Auction.find(id: params[:id])
-    @auction.check_user_can_bid!(current_user)
+    @opportunity = Auction.find(params[:id])
+    @opportunity.check_user_can_bid!(current_user)
 
     @current_bid = Bid.where(auction_id: params[:id], user_id: current_user.id).active.first
     @total_bids = Bid.where(auction_id: params[:id]).active.size

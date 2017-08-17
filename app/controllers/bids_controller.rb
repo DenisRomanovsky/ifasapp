@@ -35,11 +35,6 @@ class BidsController < ApplicationController
     end
   end
 
-  def edit
-    return if @auction.blank?
-    @auction.check_user_can_bid!(current_user)
-  end
-
   private
 
   def bid_params
