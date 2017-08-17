@@ -7,7 +7,7 @@ class BidsController < ApplicationController
 
   def new
     return if @auction.blank?
-    raise ActionController::RoutingError, 'Страница не найдена' unless user_can_participate?
+    @auction.check_user_can_bid!(current_user)
     @bid = Bid.new
     last_bid = Bid.where(auction_id: params[:auction_id], user_id: current_user.id).active.first
     if last_bid.present?
@@ -19,7 +19,7 @@ class BidsController < ApplicationController
 
   def create
     return if @auction.blank?
-    raise ActionController::RoutingError, 'Страница не найдена' unless user_can_participate?
+    @auction.check_user_can_bid!(current_user)
 
     last_bid = Bid.where(auction_id: params[:auction_id], user_id: current_user.id).active.first
     last_bid.update_attribute(:status, :archived) if last_bid.present?
@@ -37,7 +37,7 @@ class BidsController < ApplicationController
 
   def edit
     return if @auction.blank?
-    raise ActionController::RoutingError, 'Страница не найдена' unless user_can_participate?
+    @auction.check_user_can_bid!(current_user)
   end
 
   private

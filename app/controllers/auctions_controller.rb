@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Auctions controller. Needs to be separate from Opportunities.
 class AuctionsController < ApplicationController
   include ApplicationHelper
 
@@ -69,37 +70,16 @@ class AuctionsController < ApplicationController
   end
 
   def opportunities_index
-    @opportunies = []
-    mechanisms = current_user.mechanisms
-
-    if mechanisms.present?
-      # TODO: Cover this with tests and AFTER refactor to use one god damned SQL query.
-      opportunities = Auction
-                      .includes(:mechanism_category, :mechanism_subcategories)
-                      .active
-                      .where('auctions.mechanism_category_id in (?) AND user_id != ?', mechanisms.pluck(:mechanism_category_id), current_user.id)
-                      .order('id DESC')
-
-      opportunities = opportunities.map do |op|
-        next if op.user_id == current_user.id # check the owner
-
-        if op.mechanism_subcategories.present?
-          (op.mechanism_subcategories.pluck(:id).compact.uniq & mechanisms.pluck(:mechanism_subcategory_id).compact.uniq).any? ? op : nil
-        else
-          op
-        end
-      end
-
-      opportunities = opportunities.compact.uniq
-      @opportunities = Auction.paginate(page: params[:page]).where(id: opportunities)
-    end
+    @opportunities = AuctionsRetriever.user_opportunities(current_user).paginate(page: params[:page])
   end
 
   def show_opportunity
-    @opportunity = Auction.where(id: params[:id]).first
-    raise ActionController::RoutingError, 'Страница не найдена' if !user_can_participate? || @opportunity.blank?
+    @opportunity = Auction.find(id: params[:id])
+    @auction.check_user_can_bid!(current_user)
+
     @current_bid = Bid.where(auction_id: params[:id], user_id: current_user.id).active.first
     @total_bids = Bid.where(auction_id: params[:id]).active.size
+
     time_left = @opportunity.end_time.utc - Time.now.utc
     @time_left = time_left > 0 ? time_left : 0
   end
