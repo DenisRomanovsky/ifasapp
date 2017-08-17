@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Check the  auctions and trigger finalize jobs when required.
-class AuctionStatusCheckerJob < ActiveJob::Base
+class AuctionStatusCheckerJob < ApplicationJob
   queue_as :status_checker_queue
 
   def perform(*_args)

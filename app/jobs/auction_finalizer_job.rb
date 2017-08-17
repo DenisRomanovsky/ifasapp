@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Finalize Auction and send emails to owner and bidders.
-class AuctionFinalizerJob < ActiveJob::Base
+class AuctionFinalizerJob < ApplicationJob
   queue_as :auction_finalizers_queue
 
   def perform(auction_id)
