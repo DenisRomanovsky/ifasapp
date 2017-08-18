@@ -38,6 +38,6 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: Devise.email_regexp
 
   def has_info?
-    user_info.present?
+    user_info.present? && user_info.full_info?
   end
 end

@@ -22,4 +22,8 @@ class UserInfo < ActiveRecord::Base
   belongs_to :city
 
   validates_length_of :first_name, :last_name, :phone_number, :organization_name, maximum: 50
+
+  def full_info?
+    first_name.present? && last_name.present? && phone_number.present? && city_id.present?
+  end
 end
