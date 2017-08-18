@@ -22,7 +22,7 @@
   <th>
     Контакты участника
   </th>
-  <% if @auction.owner_id.present? %>
+  <% if @auction.owner.present? %>
       <th>
         Профиль участника
       </th>
@@ -30,7 +30,7 @@
   </thead>
   <tbody>
   <% bids = @auction.bids.active.includes(:user)%>
-  <% bids = bids.limit(3) if @auction.owner_id.nil?%>
+  <% bids = bids.limit(3) if @auction.owner.nil?%>
   <% bids.each do |bid| %>
       <tr>
         <td>
