@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Wrapper class for all jobs.
 class ApplicationJob < ActiveJob::Base
   before_perform do |job|
     ActiveRecord::Base.clear_active_connections!
