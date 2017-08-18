@@ -36,4 +36,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :user_info_id, allow_nil: true
 
   validates_format_of :email, with: Devise.email_regexp
+
+  def has_info?
+    user_info.present?
+  end
 end
