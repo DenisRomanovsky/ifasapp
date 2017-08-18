@@ -51,9 +51,9 @@
               %td
                 = bid.description
               %td
-                = link_to 'Участник', user_info_path(bid.user.user_info)
-              %td
                 = link_to bid.mechanism.description, mechanism_path(bid.mechanism.id)
+              %td
+                = link_to 'Участник', user_info_path(bid.user.user_info)
               %td
                 = "#{bid.price} руб."
 - else
