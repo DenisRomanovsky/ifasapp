@@ -1,17 +1,20 @@
-%dl.dl-horizontal
-  %dt
-    Описание
-  %dd
-    = @mechanism.description
-  %dt
-    Детали
-  %dd
-    = @mechanism.long_description
-  %dt
-    Категория
-  %dd
-    = @mechanism.mechanism_subcategory.description
-  %dt
-    Группа
-  %dd
-    = @mechanism.mechanism_category.description
+.row.well
+  .col-sm-2
+  .col-sm-8
+    %dl.dl-horizontal
+      %dt
+        Описание
+      %dd
+        = @mechanism.description
+      %dt
+        Детали
+      %dd
+        = @mechanism.long_description
+      %dt
+        Категория
+      %dd
+        = @mechanism.mechanism_subcategory.description
+      %dt
+        Группа
+      %dd
+        = @mechanism.mechanism_category.description
