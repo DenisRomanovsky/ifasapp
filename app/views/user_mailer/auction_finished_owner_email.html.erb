@@ -42,7 +42,7 @@
         <td>
           <%= bid.user.email %> <%= bid.user.try(:user_info).try(:phone_number) %>
         </td>
-        <% if @auction.owner_id.present? %>
+        <% if @auction.owner.present? %>
             <td>
               <%= link_to 'Участника', user_info_url(bid.user.user_info_id) %>
             </td>
