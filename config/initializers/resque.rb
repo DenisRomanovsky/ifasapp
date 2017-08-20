@@ -2,6 +2,7 @@ require 'resque/server'
 require 'resque_scheduler'
 require 'resque/scheduler'
 require 'active_scheduler'
+require 'resque/tasks'
 
 # frozen_string_literal: true
 
