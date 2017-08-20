@@ -26,4 +26,5 @@
         Организация
       %dd
         = @user_info.organization_name
+    = link_to 'Назад', redirect_back(fallback_location: root_path)
   .col-sm-4
