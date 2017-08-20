@@ -4,7 +4,7 @@ require 'resque/scheduler/tasks'
 require 'active_scheduler'
 
 namespace :resque do
-  task :setup do
+  task setup: :environment do
     require 'resque'
 
     Rails.logger.fatal '!!!!!!!!!!!!!!LOADING RESQUE!!!!!!!!!!!!!!!!'
@@ -15,6 +15,8 @@ namespace :resque do
 
   task :setup_schedule => :setup do
     require 'resque-scheduler'
+
+    Rails.logger.fatal '!!!!!!!!!!!!!!LOADING SCHEDULE!!!!!!!!!!!!!!!!'
 
     yaml_schedule    = YAML.load_file("#{Rails.root}/config/resque_schedule.yml") || {}
     wrapped_schedule = ActiveScheduler::ResqueWrapper.wrap yaml_schedule
