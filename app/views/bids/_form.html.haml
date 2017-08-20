@@ -1,6 +1,6 @@
 = bootstrap_form_for(@bid) do |f|
   = f.number_field :price, value: @price, label: 'Ставка', help: 'В белорусских рублях.'
   = f.text_area :description, value: @description, label: 'Комментарий'
-  = f.collection_select(:mechanism_id, current_user.mechanisms, :id, :description, selected: @mechanism, label: 'Техника')
+  = f.collection_select(:mechanism_id, current_user.mechanisms.where(mechanism_category_id: @auction.mechanism_category_id), :id, :description, selected: @mechanism, label: 'Техника')
   = hidden_field_tag(:auction_id, params[:auction_id])
   = f.submit "Сохранить", {class: 'btn btn-default btn-custom '}
