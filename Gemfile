@@ -71,10 +71,10 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'russian'
 
 # Some work to do on background.
-gem 'resque', '~> 1.24.1'
+gem 'resque', '~> 1.9'
 
 # Resuqe obey to schedule!
-gem 'resque-scheduler'
+gem 'resque-scheduler', '~> 4.3'
 
 # Schedule - obey to the ActiveJob.
 gem 'active_scheduler'
