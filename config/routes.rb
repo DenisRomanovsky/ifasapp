@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   authenticate :admin_user do
-    mount ResqueWeb::Engine => '/resque_web'
+    mount Resque::Server.new, :at => "/resque"
   end
 
   ActiveAdmin.routes(self)
