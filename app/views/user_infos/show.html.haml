@@ -26,5 +26,8 @@
         Организация
       %dd
         = @user_info.organization_name
-    = link_to 'Назад', redirect_back(fallback_location: root_path)
+
   .col-sm-4
+.row.well
+  .col-sm-12
+    = link_to 'Назад', redirect_back(fallback_location: root_path), role: 'button', class: 'btn btn-default btn-custom'

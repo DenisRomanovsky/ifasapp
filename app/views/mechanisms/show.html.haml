@@ -18,4 +18,6 @@
         Группа
       %dd
         = @mechanism.mechanism_category.description
-    = link_to 'Назад', redirect_back(fallback_location: root_path)
+.row.well
+  .col-sm-12
+    = link_to 'Назад', redirect_back(fallback_location: root_path), role: 'button', class: 'btn btn-default btn-custom'
