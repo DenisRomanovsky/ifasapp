@@ -51,26 +51,40 @@ end
 
 # TODO: Check rails 5 availability now and then.
 gem 'activeadmin', github: 'activeadmin'
+
 # Auth stuff.
 gem 'devise'
+
 # Some translations for devise
 gem 'devise-i18n'
+
 # haml
 gem 'haml'
+
 # Cool bootstrap forms.
 gem 'bootstrap_form'
+
 # Bootstrap itself.
 gem 'bootstrap-sass', '~> 3.3.6'
+
 # Russian bears, sluts and Vodka
 gem 'russian'
+
 # Some work to do on background.
 gem 'resque', '~> 1.24.1'
+
 # Resuqe obey to schedule!
 gem 'resque-scheduler'
+
+# Schedule - obey to the ActiveJob.
+gem 'active_scheduler'
+
 # Resque web interface. To make 'WTF O_o' less often.
 gem 'resque-web', require: 'resque_web'
+
 # Humanity for the URLs
 gem 'friendly_id', '~> 5.1.0'
+
 # Obey and paginate, motherfucker.
 gem 'will_paginate', '~> 3.1.1'
 
