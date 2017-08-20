@@ -5,11 +5,9 @@ require 'resque/server'
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  authenticate :admin_user do
-    mount Resque::Server.new, :at => "/resque"
-  end
-
   ActiveAdmin.routes(self)
+
+  mount Resque::Server.new, :at => "/resque_data"
 
   devise_for :users
 
