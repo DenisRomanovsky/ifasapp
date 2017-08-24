@@ -89,5 +89,8 @@ gem 'newrelic_rpm'
 # Log entries.
 gem 'le'
 
+# More emails for the god of emails!!!
+gem 'sendgrid-ruby'
+
 # Specify ruby version to use dig for hashes.
 ruby '~> 2.4.0'

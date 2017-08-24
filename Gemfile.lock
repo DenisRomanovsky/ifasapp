@@ -309,6 +309,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
+    ruby_http_client (3.1.0)
     rufus-scheduler (2.0.24)
       tzinfo (>= 0.3.22)
     russian (0.6.0)
@@ -327,6 +328,9 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sendgrid-ruby (5.0.0)
+      ruby_http_client (~> 3.0)
+      sinatra (>= 1.4.7, < 3)
     shoulda-matchers (3.1.2)
       activesupport (>= 4.0.0)
     sinatra (1.4.8)
@@ -426,6 +430,7 @@ DEPENDENCIES
   russian
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  sendgrid-ruby
   shoulda-matchers (~> 3.1)
   therubyracer
   uglifier (>= 1.3.0)
