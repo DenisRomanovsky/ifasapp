@@ -19,4 +19,19 @@ class MechanismCategory < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :description, use: :slugged
+
+  @@context_data = nil
+
+  def self.context_data
+    return @@context_data if @@context_data.present?
+    result = []
+    City.all.each do |city|
+      result << "аренда техники #{city.name} , аренда строительной техники #{city.name}"
+      MechanismCategory.all.each do |category|
+        result << "аренда #{ category.description } #{city.name} , аренда #{ category.description } в #{city.name}"
+      end
+    end
+
+    @@context_data ||= result.join(' , ')
+  end
 end
