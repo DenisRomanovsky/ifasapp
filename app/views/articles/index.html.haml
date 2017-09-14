@@ -10,8 +10,7 @@
   %br
   - @articles.each do |article|
     .col-md-3.col-sm-4.articles-modal-trigger.text-center
-      %button{type: "button", class: 'btn btn-lg btn-info-icon', 'data-toggle'=>"modal", 'data-target' => "##{article.mechanism_category.slug}"}
-        = image_tag("info-icons/#{article.mechanism_category.slug}.png", size: "128x128", alt: "#{article.mechanism_category.description}")
+      = link_to image_tag("info-icons/#{article.mechanism_category.slug}.png", size: "128x128", alt: "#{article.mechanism_category.description}"), "/#{link_prefix}/#{article.mechanism_category.slug}", class: 'btn btn-lg btn-info-icon'
       %h3
         = article.mechanism_category.description
     .modal.fade{id: "#{article.mechanism_category.slug}", role: "dialog"}
